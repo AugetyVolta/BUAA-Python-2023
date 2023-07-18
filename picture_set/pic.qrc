@@ -1,0 +1,13 @@
+<RCC>
+  <qresource prefix="/">
+    <file>background.png</file>
+    <file>delete.png</file>
+    <file>mustEat.jpg</file>
+    <file>error.png</file>
+    <file>like.png</file>
+    <file>home.png</file>
+    <file>haha.jpg</file>
+    <file>收藏.png</file>
+    <file>img.png</file>
+  </qresource>
+</RCC>
