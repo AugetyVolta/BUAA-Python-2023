@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/">
+    <file>haha.jpg</file>
     <file>background.png</file>
     <file>delete.png</file>
     <file>mustEat.jpg</file>

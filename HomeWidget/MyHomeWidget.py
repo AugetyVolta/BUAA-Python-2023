@@ -1,13 +1,13 @@
 import datetime
 import random
 
-from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidget
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QWidget, QDesktopWidget, QMessageBox
 from PyQt5.QtCore import Qt, QDate
+from PyQt5.QtGui import QIcon
 
 from Game.MyGame import Tetris
-from MainWindow.MyWindow_ui import Ui_MyWindow_ui
+from HomeWidget.MyHomeWidget_ui import Ui_MyHomeWidget_ui
 from other import MyQWight
 
 
@@ -16,19 +16,14 @@ def getTodayDate():
     return [int(item) for item in now.split('-')]
 
 
-class MyWindow(QMainWindow, Ui_MyWindow_ui):
-    def __init__(self):
-        super().__init__()
-        self.Mywidget = None
+class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent=parent)
         self.playGame = None
         self.setupUi(self)
-        self.statusBar().show()
-        # TODO:设置MainWindow的title和icon
-        self.setWindowTitle("The Taste Of BUAA")
-        self.setWindowIcon(QIcon("{}/../picture_set/img.png"))
-        # TODO:处理have a try
+        # 处理have a try
         self.setHaveATry()
-        # TODO:处理必吃榜
+        # 处理必吃榜
         self.setMustEatList()
         # 设置小游戏
         self.setGameButton()
@@ -37,10 +32,9 @@ class MyWindow(QMainWindow, Ui_MyWindow_ui):
 
     # 设置have a try
     def setHaveATry(self):
-        self.showLabel.setAlignment(Qt.AlignCenter)
+        self.MyHaveATryLabel.setAlignment(Qt.AlignCenter)
         self.tryButton.clicked.connect(self.haveATryClick)
 
-    # 设置必吃榜
     def setMustEatList(self):
         # 必吃榜设置排名数字Icon
         for i in range(self.MustEatList.count()):
@@ -62,7 +56,7 @@ class MyWindow(QMainWindow, Ui_MyWindow_ui):
     # have a try button处理函数
     def haveATryClick(self):
         s = str(random.randint(1, 1000))
-        self.showLabel.setText(s)
+        self.MyShowMealLabel.setText(s)
 
     # 设置小游戏
     def setGameButton(self):
