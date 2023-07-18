@@ -1,7 +1,11 @@
 # Py_Project
+
 > BUAA summer course.
+
 ## TO DO LIST
+
 ### 必做
+
 - 食堂：柜台：菜品，并支持对与这些元素进行增删改查，实现递归的操作
 - 对菜肴进行编目(早餐、饮料、主食)
 - 用户记录吃过的菜肴，并支持添加、删除、修改
@@ -10,12 +14,15 @@
 - 显示必吃排行榜，并根据用户购买菜肴的次数进行更新 √
 - 允许评论菜肴，并支持多个用户间的交流
 - 建立用户支持中心，支持注册、登录和个人信息管理
+
 ### 选做
+
 - 增加450道菜肴，共600道
 - 提供单词建议，搜索时会收到与单词相关的菜肴推荐
 - 其他功能
 
 ---
+
 ## 请注意git提交规范
 
 feat：提交新功能
@@ -34,4 +41,17 @@ test：添加或修改代码测试
 
 chore：对构建流程或辅助工具和依赖库（如文档生成等）的更改
 
+## 参考资料
+
+[PyQt中文教程](https://maicss.gitbook.io/pyqt-chinese-tutoral/pyqt5)
+
+[白月黑羽](https://www.byhy.net/tut/py/gui/qt_01/)
+
+[PyQt之旅](https://blog.csdn.net/enderman_xiaohei/category_10350207.html)
+
+[PyQt-Fluent-Widgets](https://pyqt-fluent-widgets.readthedocs.io/zh_CN/latest/quick-start.html)
+
+[PyQt 从零开始](https://www.zhihu.com/column/c_1463982456055959552)
+
+[阿里巴巴矢量图标库](https://www.iconfont.cn/?spm=a313x.7781069.1998910419.d4d0a486a)
 
