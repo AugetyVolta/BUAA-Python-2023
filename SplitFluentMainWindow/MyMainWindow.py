@@ -28,7 +28,6 @@ class MyMainWindow(SplitFluentWindow):
         # 居中显示
         self.center()
 
-
     # 窗口居中显示
     def center(self):
         qr = self.frameGeometry()

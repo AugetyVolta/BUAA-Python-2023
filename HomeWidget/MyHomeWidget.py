@@ -1,25 +1,40 @@
 import datetime
 import random
+import time
 
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QWidget, QDesktopWidget, QMessageBox
-from PyQt5.QtCore import Qt, QDate
-from PyQt5.QtGui import QIcon, QImage, QPixmap
+from PyQt5.QtCore import Qt, QDate, QObject, pyqtSignal, QThread
+from PyQt5.QtGui import QIcon, QImage, QPixmap, QTransform
 
 from Game.MyGame import Tetris
 from HomeWidget.MyHomeWidget_ui import Ui_MyHomeWidget_ui
-from other import MyQWight
 
 
+# 获得今天日期List[Year, Month, Day]
 def getTodayDate():
     now = datetime.datetime.now().strftime('%Y-%m-%d')
     return [int(item) for item in now.split('-')]
 
 
+class BackendThread(QObject):
+    # 通过类成员对象定义信号
+    update_date = pyqtSignal(int)
+
+    # 处理业务逻辑
+    def run(self):
+        while 1:
+            # 刷新展示页面1-3页
+            for i in range(3):
+                self.update_date.emit(i)
+                time.sleep(3)
+
+
 class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
     def __init__(self, parent=None):
         super().__init__(parent=parent)
-        self.rollIndex = 0
+        self.backend = None
+        self.thread = None
         self.playGame = None
         self.setupUi(self)
         # 处理have a try
@@ -30,10 +45,41 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         self.setGameButton()
         # 设置日历
         self.setCalendar()
+        # 设置展示界面的上下滚动展示效果
+        self.initScrollShow()
+
+    # 处理界面的上下滚动展示效果
+    def initScrollShow(self):
+        # 设置显示图片
+        self.initScrollShowPic()
+        # 创建线程
+        self.thread = QThread()
+        self.backend = BackendThread()
+        # 连接信号
+        self.backend.update_date.connect(self.handleScrollShowIndex)
+        self.backend.moveToThread(self.thread)
+        # 开始线程
+        self.thread.started.connect(self.backend.run)
+        self.thread.start()
+
+    # 滚动界面设置函数
+    def handleScrollShowIndex(self, index):
+        self.PopUpAniStackedWidget.setCurrentIndex(index)
+
+    def initScrollShowPic(self):
         # 设置菜的图片
-        pixmap = QPixmap("{}/../picture_set/haha_96x96.jpg")  # 按指定路径找到图片
-        self.ImageLabel.setPixmap(pixmap)
+        pixmap_1 = QPixmap("{}/../picture_set/Dishes_96x96/haha_96x96.jpg")  # 按指定路径找到图片
+        pixmap_2 = QPixmap("{}/../picture_set/Dishes_96x96/红烧坤_96x96.jpg")  # 按指定路径找到图片
+        pixmap_3 = QPixmap("{}/../picture_set/Dishes_96x96/九转大肠_96x96.jpg")  # 按指定路径找到图片
+        pixmap_4 = QPixmap("{}/../picture_set/Dishes_96x96/红烧肉_96x96.jpg")  # 按指定路径找到图片
+        self.ImageLabel.setPixmap(pixmap_1)
+        self.ImageLabel_4.setPixmap(pixmap_2)
+        self.ImageLabel_8.setPixmap(pixmap_3)
+        self.ImageLabel_17.setPixmap(pixmap_4)
         self.ImageLabel.setScaledContents(True)
+        self.ImageLabel_4.setScaledContents(True)
+        self.ImageLabel_8.setScaledContents(True)
+        self.ImageLabel_17.setScaledContents(True)
 
     # 设置have a try
     def setHaveATry(self):
@@ -55,11 +101,6 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
     def handleMustEatListSelectionChanged(self):
         currentItem = self.MustEatList.currentItem()
         print(currentItem.text())
-        self.rollIndex += 1
-        self.rollIndex %= 3
-        self.PopUpAniStackedWidget.setCurrentIndex(self.rollIndex)
-        # self.Mywidget = MyQWight.MyQWight()
-        # self.Mywidget.show()
 
     # have a try button处理函数
     def haveATryClick(self):
