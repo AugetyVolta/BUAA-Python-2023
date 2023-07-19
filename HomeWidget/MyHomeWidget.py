@@ -6,7 +6,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QWidget, QDesktopWidget, QMessageBox
 from PyQt5.QtCore import Qt, QDate, QObject, pyqtSignal, QThread
 from PyQt5.QtGui import QIcon, QImage, QPixmap, QTransform
-
+from qfluentwidgets import FluentIcon as FIF
 from Game.MyGame import Tetris
 from HomeWidget.MyHomeWidget_ui import Ui_MyHomeWidget_ui
 
@@ -109,7 +109,7 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
 
     # 设置小游戏
     def setGameButton(self):
-        self.relaxGameButton.setIcon(QIcon("{}/../picture_set/game.png"))
+        self.relaxGameButton.setIcon(FIF.GAME)
         self.relaxGameButton.clicked.connect(self.openGameWindow)
 
     # 打开游戏窗口

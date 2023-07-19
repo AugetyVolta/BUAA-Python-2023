@@ -1,32 +1,47 @@
+import qfluentwidgets
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox, QDesktopWidget
 from qfluentwidgets import SplitFluentWindow, NavigationWidget, NavigationItemPosition, Theme, NavigationDisplayMode, \
     NavigationAvatarWidget, setTheme
 from Game.MyGame import Tetris
 from HomeWidget.MyHomeWidget import MyHomeWidget
-from other.MyQWight import MyQWight
-from other.findMain import FindAndReplaceDlg
+from User.MyUser import MyUserWidget
+from qfluentwidgets import FluentIcon as FIF
 
 
 class MyMainWindow(SplitFluentWindow):
     def __init__(self):
         super().__init__()
+        # 设置最初的主题
+        self.curTheme = Theme.LIGHT
         self.setWindowTitle("The Taste Of BUAA")
         self.setWindowIcon(QIcon("{}/../picture_set/watermelon.png"))
         self.u = MyHomeWidget()
-        self.addSubInterface(self.u, QIcon("{}/../picture_set/home.png"), 'Home')
-        # self.win = FindAndReplaceDlg("1231415413")
-        # self.addSubInterface(self.win, QIcon("{}/../picture_set/like.png"), 'subHome')
+        self.addSubInterface(self.u, FIF.HOME, 'Home')
+
+        self.user = MyUserWidget()
+        self.addSubInterface(self.user, FIF.PEOPLE, 'User',
+                             position=NavigationItemPosition.BOTTOM)
         self.setFixedSize(1090, 680)
         self.navigationInterface.setExpandWidth(120)
-        # self.navigationInterface.addWidget(
-        #     routeKey='avatar',
-        #     widget=self.u,
-        #     position=NavigationItemPosition.BOTTOM
-        # )
-        # self.navigationInterface
+        self.navigationInterface.addItem(
+            routeKey='settingInterface',
+            icon=FIF.LEAF,
+            text='切换主题',
+            onClick=self.changeTheme,
+            position=NavigationItemPosition.BOTTOM,
+        )
         # 居中显示
         self.center()
+
+    # 切换主题
+    def changeTheme(self):
+        if self.curTheme == Theme.LIGHT:
+            setTheme(Theme.DARK)
+            self.curTheme = Theme.DARK
+        else:
+            setTheme(Theme.LIGHT)
+            self.curTheme = Theme.LIGHT
 
     # 窗口居中显示
     def center(self):
