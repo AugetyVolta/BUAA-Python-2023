@@ -1,7 +1,11 @@
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox, QDesktopWidget
-from qfluentwidgets import SplitFluentWindow
+from qfluentwidgets import SplitFluentWindow, NavigationWidget, NavigationItemPosition, Theme, NavigationDisplayMode, \
+    NavigationAvatarWidget, setTheme
+from Game.MyGame import Tetris
 from HomeWidget.MyHomeWidget import MyHomeWidget
+from other.MyQWight import MyQWight
+from other.findMain import FindAndReplaceDlg
 
 
 class MyMainWindow(SplitFluentWindow):
@@ -11,11 +15,19 @@ class MyMainWindow(SplitFluentWindow):
         self.setWindowIcon(QIcon("{}/../picture_set/watermelon.png"))
         self.u = MyHomeWidget()
         self.addSubInterface(self.u, QIcon("{}/../picture_set/home.png"), 'Home')
+        # self.win = FindAndReplaceDlg("1231415413")
+        # self.addSubInterface(self.win, QIcon("{}/../picture_set/like.png"), 'subHome')
         self.setFixedSize(1090, 680)
         self.navigationInterface.setExpandWidth(120)
-
+        # self.navigationInterface.addWidget(
+        #     routeKey='avatar',
+        #     widget=self.u,
+        #     position=NavigationItemPosition.BOTTOM
+        # )
+        # self.navigationInterface
         # 居中显示
         self.center()
+
 
     # 窗口居中显示
     def center(self):

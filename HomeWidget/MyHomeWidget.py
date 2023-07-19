@@ -4,7 +4,7 @@ import random
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QWidget, QDesktopWidget, QMessageBox
 from PyQt5.QtCore import Qt, QDate
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QImage, QPixmap
 
 from Game.MyGame import Tetris
 from HomeWidget.MyHomeWidget_ui import Ui_MyHomeWidget_ui
@@ -19,6 +19,7 @@ def getTodayDate():
 class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
     def __init__(self, parent=None):
         super().__init__(parent=parent)
+        self.rollIndex = 0
         self.playGame = None
         self.setupUi(self)
         # 处理have a try
@@ -29,6 +30,10 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         self.setGameButton()
         # 设置日历
         self.setCalendar()
+        # 设置菜的图片
+        pixmap = QPixmap("{}/../picture_set/haha_96x96.jpg")  # 按指定路径找到图片
+        self.ImageLabel.setPixmap(pixmap)
+        self.ImageLabel.setScaledContents(True)
 
     # 设置have a try
     def setHaveATry(self):
@@ -50,8 +55,11 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
     def handleMustEatListSelectionChanged(self):
         currentItem = self.MustEatList.currentItem()
         print(currentItem.text())
-        self.Mywidget = MyQWight.MyQWight()
-        self.Mywidget.show()
+        self.rollIndex += 1
+        self.rollIndex %= 3
+        self.PopUpAniStackedWidget.setCurrentIndex(self.rollIndex)
+        # self.Mywidget = MyQWight.MyQWight()
+        # self.Mywidget.show()
 
     # have a try button处理函数
     def haveATryClick(self):

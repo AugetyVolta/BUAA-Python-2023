@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MyHomeWidget_ui(object):
     def setupUi(self, MyHomeWidget_ui):
         MyHomeWidget_ui.setObjectName("MyHomeWidget_ui")
-        MyHomeWidget_ui.resize(1017, 680)
+        MyHomeWidget_ui.resize(1023, 716)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -26,487 +26,6 @@ class Ui_MyHomeWidget_ui(object):
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.gridLayout.addItem(spacerItem, 0, 1, 1, 2)
-        spacerItem1 = QtWidgets.QSpacerItem(10, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem1, 4, 1, 1, 2)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem2, 2, 3, 2, 1)
-        self.MyHaveATryWidget = CardWidget(MyHomeWidget_ui)
-        self.MyHaveATryWidget.setMinimumSize(QtCore.QSize(331, 261))
-        self.MyHaveATryWidget.setObjectName("MyHaveATryWidget")
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.MyHaveATryWidget)
-        self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem3 = QtWidgets.QSpacerItem(48, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem3)
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.verticalLayout = QtWidgets.QVBoxLayout()
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.MyHaveATryLabel = TitleLabel(self.MyHaveATryWidget)
-        self.MyHaveATryLabel.setStyleSheet("#MyHaveATryLabel{\n"
-"    font: 75 26pt \"微软雅黑\";\n"
-"}")
-        self.MyHaveATryLabel.setObjectName("MyHaveATryLabel")
-        self.verticalLayout.addWidget(self.MyHaveATryLabel)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.verticalLayout.addItem(spacerItem4)
-        self.verticalLayout_2.addLayout(self.verticalLayout)
-        self.tryButton = PrimaryPushButton(self.MyHaveATryWidget)
-        self.tryButton.setStyleSheet("PushButton, ToolButton, ToggleButton, ToggleToolButton {\n"
-"    color: black;\n"
-"    background: rgba(255, 255, 255, 0.7);\n"
-"    border: 1px solid rgba(0, 0, 0, 0.073);\n"
-"    border-bottom: 1px solid rgba(0, 0, 0, 0.183);\n"
-"    border-radius: 5px;\n"
-"    /* font: 14px \'Segoe UI\', \'Microsoft YaHei\'; */\n"
-"    padding: 5px 12px 6px 12px;\n"
-"    outline: none;\n"
-"}\n"
-"#tryButton {    \n"
-"    font: 15pt \"Terminal\";\n"
-"    color:rgb(170, 255, 255)\n"
-"}\n"
-"\n"
-"ToolButton {\n"
-"    padding: 5px 9px 6px 8px;\n"
-"}\n"
-"\n"
-"PushButton[hasIcon=false] {\n"
-"    padding: 5px 12px 6px 12px;\n"
-"}\n"
-"\n"
-"PushButton[hasIcon=true] {\n"
-"    padding: 5px 12px 6px 36px;\n"
-"}\n"
-"\n"
-"DropDownToolButton, PrimaryDropDownToolButton {\n"
-"    padding: 5px 31px 6px 8px;\n"
-"}\n"
-"\n"
-"DropDownPushButton[hasIcon=false],\n"
-"PrimaryDropDownPushButton[hasIcon=false] {\n"
-"    padding: 5px 31px 6px 12px;\n"
-"}\n"
-"\n"
-"DropDownPushButton[hasIcon=true],\n"
-"PrimaryDropDownPushButton[hasIcon=true] {\n"
-"    padding: 5px 31px 6px 36px;\n"
-"}\n"
-"\n"
-"PushButton:hover, ToolButton:hover, ToggleButton:hover, ToggleToolButton:hover {\n"
-"    background: rgba(249, 249, 249, 0.5);\n"
-"}\n"
-"\n"
-"PushButton:pressed, ToolButton:pressed, ToggleButton:pressed, ToggleToolButton:pressed {\n"
-"    color: rgba(0, 0, 0, 0.63);\n"
-"    background: rgba(249, 249, 249, 0.3);\n"
-"    border-bottom: 1px solid rgba(0, 0, 0, 0.073);\n"
-"}\n"
-"\n"
-"PushButton:disabled, ToolButton:disabled, ToggleButton:disabled, ToggleToolButton:disabled {\n"
-"    color: rgba(0, 0, 0, 0.36);\n"
-"    background: rgba(249, 249, 249, 0.3);\n"
-"    border: 1px solid rgba(0, 0, 0, 0.06);\n"
-"    border-bottom: 1px solid rgba(0, 0, 0, 0.06);\n"
-"}\n"
-"\n"
-"\n"
-"PrimaryPushButton,\n"
-"PrimaryToolButton,\n"
-"ToggleButton:checked,\n"
-"ToggleToolButton:checked {\n"
-"    color: white;\n"
-"    background-color: #009faa;\n"
-"    border: 1px solid #00a7b3;\n"
-"    border-bottom: 1px solid #007780;\n"
-"}\n"
-"\n"
-"PrimaryPushButton:hover,\n"
-"PrimaryToolButton:hover,\n"
-"ToggleButton:checked:hover,\n"
-"ToggleToolButton:checked:hover {\n"
-"    background-color: #00a7b3;\n"
-"    border: 1px solid #2daab3;\n"
-"    border-bottom: 1px solid #007780;\n"
-"}\n"
-"\n"
-"PrimaryPushButton:pressed,\n"
-"PrimaryToolButton:pressed,\n"
-"ToggleButton:checked:pressed,\n"
-"ToggleToolButton:checked:pressed {\n"
-"    color: rgba(255, 255, 255, 0.63);\n"
-"    background-color: #3eabb3;\n"
-"    border: 1px solid #3eabb3;\n"
-"}\n"
-"\n"
-"PrimaryPushButton:disabled,\n"
-"PrimaryToolButton:disabled,\n"
-"ToggleButton:checked:disabled,\n"
-"ToggleToolButton:checked:disabled {\n"
-"    color: rgba(255, 255, 255, 0.9);\n"
-"    background-color: rgb(205, 205, 205);\n"
-"    border: 1px solid rgb(205, 205, 205);\n"
-"}\n"
-"\n"
-"SplitDropButton,\n"
-"PrimarySplitDropButton {\n"
-"    border-left: none;\n"
-"    border-top-left-radius: 0;\n"
-"    border-bottom-left-radius: 0;\n"
-"}\n"
-"\n"
-"#splitPushButton,\n"
-"#splitToolButton,\n"
-"#primarySplitPushButton,\n"
-"#primarySplitToolButton {\n"
-"    border-top-right-radius: 0;\n"
-"    border-bottom-right-radius: 0;\n"
-"}\n"
-"\n"
-"#splitPushButton:pressed,\n"
-"#splitToolButton:pressed,\n"
-"SplitDropButton:pressed {\n"
-"    border-bottom: 1px solid rgba(0, 0, 0, 0.183);\n"
-"}\n"
-"\n"
-"PrimarySplitDropButton:pressed {\n"
-"    border-bottom: 1px solid #007780;\n"
-"}\n"
-"\n"
-"#primarySplitPushButton, #primarySplitToolButton {\n"
-"    border-right: 1px solid #3eabb3;\n"
-"}\n"
-"\n"
-"#primarySplitPushButton:pressed, #primarySplitToolButton:pressed {\n"
-"    border-bottom: 1px solid #007780;\n"
-"}\n"
-"\n"
-"HyperlinkButton {\n"
-"    /* font: 14px \'Segoe UI\', \'Microsoft YaHei\'; */\n"
-"    padding: 6px 12px 6px 12px;\n"
-"    color: #009faa;\n"
-"    border: none;\n"
-"    border-radius: 6px;\n"
-"    background-color: transparent;\n"
-"}\n"
-"\n"
-"HyperlinkButton:hover {\n"
-"    background-color: rgba(0, 0, 0, 15);\n"
-"}\n"
-"\n"
-"HyperlinkButton:pressed {\n"
-"    background-color: rgba(0, 0, 0, 7);\n"
-"}\n"
-"\n"
-"HyperlinkButton:disabled {\n"
-"    color: rgba(0, 0, 0, 0.43)\n"
-"}\n"
-"\n"
-"\n"
-"RadioButton {\n"
-"    min-height: 24px;\n"
-"    max-height: 24px;\n"
-"    background-color: transparent;\n"
-"    font: 14px \'Segoe UI\', \'Microsoft YaHei\', \'PingFang SC\';\n"
-"    color: black;\n"
-"}\n"
-"\n"
-"RadioButton::indicator {\n"
-"    width: 18px;\n"
-"    height: 18px;\n"
-"    border-radius: 11px;\n"
-"    border: 2px solid #999999;\n"
-"    background-color: rgba(0, 0, 0, 5);\n"
-"    margin-right: 4px;\n"
-"}\n"
-"\n"
-"RadioButton::indicator:hover {\n"
-"    background-color: rgba(0, 0, 0, 0);\n"
-"}\n"
-"\n"
-"RadioButton::indicator:pressed {\n"
-"    border: 2px solid #bbbbbb;\n"
-"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
-"            stop:0 rgb(255, 255, 255),\n"
-"            stop:0.5 rgb(255, 255, 255),\n"
-"            stop:0.6 rgb(225, 224, 223),\n"
-"            stop:1 rgb(225, 224, 223));\n"
-"}\n"
-"\n"
-"RadioButton::indicator:checked {\n"
-"    height: 22px;\n"
-"    width: 22px;\n"
-"    border: none;\n"
-"    border-radius: 11px;\n"
-"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
-"            stop:0 rgb(255, 255, 255),\n"
-"            stop:0.5 rgb(255, 255, 255),\n"
-"            stop:0.6 #009faa,\n"
-"            stop:1 #009faa);\n"
-"}\n"
-"\n"
-"RadioButton::indicator:checked:hover {\n"
-"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
-"            stop:0 rgb(255, 255, 255),\n"
-"            stop:0.6 rgb(255, 255, 255),\n"
-"            stop:0.7 #009faa,\n"
-"            stop:1 #009faa);\n"
-"}\n"
-"\n"
-"RadioButton::indicator:checked:pressed {\n"
-"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
-"            stop:0 rgb(255, 255, 255),\n"
-"            stop:0.5 rgb(255, 255, 255),\n"
-"            stop:0.6 #009faa,\n"
-"            stop:1 #009faa);\n"
-"}\n"
-"\n"
-"RadioButton:disabled {\n"
-"    color: rgba(0, 0, 0, 110);\n"
-"}\n"
-"\n"
-"RadioButton::indicator:disabled {\n"
-"    border: 2px solid #bbbbbb;\n"
-"    background-color: transparent;\n"
-"}\n"
-"\n"
-"RadioButton::indicator:disabled:checked {\n"
-"    border: none;\n"
-"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
-"            stop:0 rgb(255, 255, 255),\n"
-"            stop:0.5 rgb(255, 255, 255),\n"
-"            stop:0.6 rgba(0, 0, 0, 0.2169),\n"
-"            stop:1 rgba(0, 0, 0, 0.2169));\n"
-"}\n"
-"\n"
-"TransparentToolButton,\n"
-"TransparentToggleToolButton,\n"
-"TransparentDropDownToolButton,\n"
-"TransparentPushButton,\n"
-"TransparentDropDownPushButton,\n"
-"TransparentTogglePushButton {\n"
-"    background-color: transparent;\n"
-"    border: none;\n"
-"    border-radius: 5px;\n"
-"    margin: 0;\n"
-"}\n"
-"\n"
-"TransparentToolButton:hover,\n"
-"TransparentToggleToolButton:hover,\n"
-"TransparentDropDownToolButton:hover,\n"
-"TransparentPushButton:hover,\n"
-"TransparentDropDownPushButton:hover,\n"
-"TransparentTogglePushButton:hover {\n"
-"    background-color: rgba(0, 0, 0, 9);\n"
-"    border: none;\n"
-"}\n"
-"\n"
-"TransparentToolButton:pressed,\n"
-"TransparentToggleToolButton:pressed,\n"
-"TransparentDropDownToolButton:pressed,\n"
-"TransparentPushButton:pressed,\n"
-"TransparentDropDownPushButton:pressed,\n"
-"TransparentTogglePushButton:pressed {\n"
-"    background-color: rgba(0, 0, 0, 6);\n"
-"    border: none;\n"
-"}\n"
-"\n"
-"TransparentToolButton:disabled,\n"
-"TransparentToggleToolButton:disabled,\n"
-"TransparentDropDownToolButton:disabled,\n"
-"TransprentPushButton:disabled,\n"
-"TransparentDropDownPushButton:disabled,\n"
-"TransprentTogglePushButton:disabled {\n"
-"    background-color: transparent;\n"
-"    border: none;\n"
-"}\n"
-"\n"
-"\n"
-"PillPushButton,\n"
-"PillPushButton:hover,\n"
-"PillPushButton:pressed,\n"
-"PillPushButton:disabled,\n"
-"PillPushButton:checked,\n"
-"PillPushButton:checked:hover,\n"
-"PillPushButton:checked:pressed,\n"
-"PillPushButton:disabled:checked,\n"
-"PillToolButton,\n"
-"PillToolButton:hover,\n"
-"PillToolButton:pressed,\n"
-"PillToolButton:disabled,\n"
-"PillToolButton:checked,\n"
-"PillToolButton:checked:hover,\n"
-"PillToolButton:checked:pressed,\n"
-"PillToolButton:disabled:checked {\n"
-"    background-color: transparent;\n"
-"    border: none;\n"
-"}\n"
-"")
-        self.tryButton.setObjectName("tryButton")
-        self.verticalLayout_2.addWidget(self.tryButton)
-        self.MyShowMealLabel = DisplayLabel(self.MyHaveATryWidget)
-        self.MyShowMealLabel.setStyleSheet("#MyShowMealLabel{\n"
-"    font: 16pt \"Terminal\";\n"
-"}")
-        self.MyShowMealLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.MyShowMealLabel.setObjectName("MyShowMealLabel")
-        self.verticalLayout_2.addWidget(self.MyShowMealLabel)
-        self.horizontalLayout_2.addLayout(self.verticalLayout_2)
-        spacerItem5 = QtWidgets.QSpacerItem(48, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem5)
-        self.verticalLayout_3.addLayout(self.horizontalLayout_2)
-        self.gridLayout.addWidget(self.MyHaveATryWidget, 3, 2, 1, 1)
-        self.MustEatListWidget = CardWidget(MyHomeWidget_ui)
-        self.MustEatListWidget.setMinimumSize(QtCore.QSize(331, 261))
-        self.MustEatListWidget.setObjectName("MustEatListWidget")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.MustEatListWidget)
-        self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.SubtitleLabel = SubtitleLabel(self.MustEatListWidget)
-        self.SubtitleLabel.setStyleSheet("border-color: rgb(170, 170, 255);")
-        self.SubtitleLabel.setObjectName("SubtitleLabel")
-        self.verticalLayout_4.addWidget(self.SubtitleLabel)
-        self.MustEatList = ListWidget(self.MustEatListWidget)
-        self.MustEatList.setObjectName("MustEatList")
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        self.verticalLayout_4.addWidget(self.MustEatList)
-        self.gridLayout.addWidget(self.MustEatListWidget, 2, 2, 1, 1)
-        self.CardWidget = CardWidget(MyHomeWidget_ui)
-        self.CardWidget.setObjectName("CardWidget")
-        self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.CardWidget)
-        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
-        self.PopUpAniStackedWidget = PopUpAniStackedWidget(self.CardWidget)
-        self.PopUpAniStackedWidget.setObjectName("PopUpAniStackedWidget")
-        self.page_3 = QtWidgets.QWidget()
-        self.page_3.setObjectName("page_3")
-        self.CardWidget_3 = CardWidget(self.page_3)
-        self.CardWidget_3.setGeometry(QtCore.QRect(30, 20, 161, 211))
-        self.CardWidget_3.setObjectName("CardWidget_3")
-        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.CardWidget_3)
-        self.verticalLayout_10.setObjectName("verticalLayout_10")
-        self.ImageLabel = ImageLabel(self.CardWidget_3)
-        self.ImageLabel.setMaximumSize(QtCore.QSize(96, 96))
-        self.ImageLabel.setObjectName("ImageLabel")
-        self.verticalLayout_10.addWidget(self.ImageLabel)
-        self.BodyLabel = BodyLabel(self.CardWidget_3)
-        self.BodyLabel.setObjectName("BodyLabel")
-        self.verticalLayout_10.addWidget(self.BodyLabel)
-        self.PushButton = PushButton(self.CardWidget_3)
-        self.PushButton.setObjectName("PushButton")
-        self.verticalLayout_10.addWidget(self.PushButton)
-        self.CardWidget_4 = CardWidget(self.page_3)
-        self.CardWidget_4.setGeometry(QtCore.QRect(230, 20, 161, 211))
-        self.CardWidget_4.setObjectName("CardWidget_4")
-        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.CardWidget_4)
-        self.verticalLayout_9.setObjectName("verticalLayout_9")
-        self.ImageLabel_2 = ImageLabel(self.CardWidget_4)
-        self.ImageLabel_2.setMaximumSize(QtCore.QSize(96, 96))
-        self.ImageLabel_2.setObjectName("ImageLabel_2")
-        self.verticalLayout_9.addWidget(self.ImageLabel_2)
-        self.BodyLabel_2 = BodyLabel(self.CardWidget_4)
-        self.BodyLabel_2.setObjectName("BodyLabel_2")
-        self.verticalLayout_9.addWidget(self.BodyLabel_2)
-        self.PushButton_2 = PushButton(self.CardWidget_4)
-        self.PushButton_2.setObjectName("PushButton_2")
-        self.verticalLayout_9.addWidget(self.PushButton_2)
-        self.CardWidget_5 = CardWidget(self.page_3)
-        self.CardWidget_5.setGeometry(QtCore.QRect(430, 20, 161, 211))
-        self.CardWidget_5.setObjectName("CardWidget_5")
-        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.CardWidget_5)
-        self.verticalLayout_8.setObjectName("verticalLayout_8")
-        self.ImageLabel_3 = ImageLabel(self.CardWidget_5)
-        self.ImageLabel_3.setMaximumSize(QtCore.QSize(96, 96))
-        self.ImageLabel_3.setStyleSheet("color: rgb(170, 0, 255);")
-        self.ImageLabel_3.setObjectName("ImageLabel_3")
-        self.verticalLayout_8.addWidget(self.ImageLabel_3)
-        self.BodyLabel_3 = BodyLabel(self.CardWidget_5)
-        self.BodyLabel_3.setObjectName("BodyLabel_3")
-        self.verticalLayout_8.addWidget(self.BodyLabel_3)
-        self.PushButton_3 = PushButton(self.CardWidget_5)
-        self.PushButton_3.setObjectName("PushButton_3")
-        self.verticalLayout_8.addWidget(self.PushButton_3)
-        self.PopUpAniStackedWidget.addWidget(self.page_3)
-        self.page_2 = QtWidgets.QWidget()
-        self.page_2.setObjectName("page_2")
-        self.PopUpAniStackedWidget.addWidget(self.page_2)
-        self.page = QtWidgets.QWidget()
-        self.page.setObjectName("page")
-        self.PopUpAniStackedWidget.addWidget(self.page)
-        self.horizontalLayout_6.addWidget(self.PopUpAniStackedWidget)
-        self.gridLayout.addWidget(self.CardWidget, 2, 1, 1, 1)
         self.CardWidget_2 = CardWidget(MyHomeWidget_ui)
         self.CardWidget_2.setMinimumSize(QtCore.QSize(643, 261))
         self.CardWidget_2.setObjectName("CardWidget_2")
@@ -524,8 +43,8 @@ class Ui_MyHomeWidget_ui(object):
         self.MyHomeLable.setStyleSheet("font: 36pt \"华文彩云\";")
         self.MyHomeLable.setObjectName("MyHomeLable")
         self.horizontalLayout.addWidget(self.MyHomeLable)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem6)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
         self.relaxGameButton = PillToolButton(MyHomeWidget_ui)
         self.relaxGameButton.setStyleSheet("PushButton, ToolButton, ToggleButton, ToggleToolButton {\n"
 "    color: black;\n"
@@ -842,19 +361,682 @@ class Ui_MyHomeWidget_ui(object):
         self.line.setObjectName("line")
         self.verticalLayout_7.addWidget(self.line)
         self.gridLayout.addLayout(self.verticalLayout_7, 1, 1, 1, 2)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.gridLayout.addItem(spacerItem1, 0, 1, 1, 2)
+        self.MyHaveATryWidget = CardWidget(MyHomeWidget_ui)
+        self.MyHaveATryWidget.setMinimumSize(QtCore.QSize(331, 261))
+        self.MyHaveATryWidget.setObjectName("MyHaveATryWidget")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.MyHaveATryWidget)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        spacerItem2 = QtWidgets.QSpacerItem(48, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem2)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.MyHaveATryLabel = TitleLabel(self.MyHaveATryWidget)
+        self.MyHaveATryLabel.setStyleSheet("#MyHaveATryLabel{\n"
+"    font: 75 26pt \"微软雅黑\";\n"
+"}")
+        self.MyHaveATryLabel.setObjectName("MyHaveATryLabel")
+        self.verticalLayout.addWidget(self.MyHaveATryLabel)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout.addItem(spacerItem3)
+        self.verticalLayout_2.addLayout(self.verticalLayout)
+        self.tryButton = PrimaryPushButton(self.MyHaveATryWidget)
+        self.tryButton.setStyleSheet("PushButton, ToolButton, ToggleButton, ToggleToolButton {\n"
+"    color: black;\n"
+"    background: rgba(255, 255, 255, 0.7);\n"
+"    border: 1px solid rgba(0, 0, 0, 0.073);\n"
+"    border-bottom: 1px solid rgba(0, 0, 0, 0.183);\n"
+"    border-radius: 5px;\n"
+"    /* font: 14px \'Segoe UI\', \'Microsoft YaHei\'; */\n"
+"    padding: 5px 12px 6px 12px;\n"
+"    outline: none;\n"
+"}\n"
+"#tryButton {    \n"
+"    font: 15pt \"Terminal\";\n"
+"    color:rgb(170, 255, 255)\n"
+"}\n"
+"\n"
+"ToolButton {\n"
+"    padding: 5px 9px 6px 8px;\n"
+"}\n"
+"\n"
+"PushButton[hasIcon=false] {\n"
+"    padding: 5px 12px 6px 12px;\n"
+"}\n"
+"\n"
+"PushButton[hasIcon=true] {\n"
+"    padding: 5px 12px 6px 36px;\n"
+"}\n"
+"\n"
+"DropDownToolButton, PrimaryDropDownToolButton {\n"
+"    padding: 5px 31px 6px 8px;\n"
+"}\n"
+"\n"
+"DropDownPushButton[hasIcon=false],\n"
+"PrimaryDropDownPushButton[hasIcon=false] {\n"
+"    padding: 5px 31px 6px 12px;\n"
+"}\n"
+"\n"
+"DropDownPushButton[hasIcon=true],\n"
+"PrimaryDropDownPushButton[hasIcon=true] {\n"
+"    padding: 5px 31px 6px 36px;\n"
+"}\n"
+"\n"
+"PushButton:hover, ToolButton:hover, ToggleButton:hover, ToggleToolButton:hover {\n"
+"    background: rgba(249, 249, 249, 0.5);\n"
+"}\n"
+"\n"
+"PushButton:pressed, ToolButton:pressed, ToggleButton:pressed, ToggleToolButton:pressed {\n"
+"    color: rgba(0, 0, 0, 0.63);\n"
+"    background: rgba(249, 249, 249, 0.3);\n"
+"    border-bottom: 1px solid rgba(0, 0, 0, 0.073);\n"
+"}\n"
+"\n"
+"PushButton:disabled, ToolButton:disabled, ToggleButton:disabled, ToggleToolButton:disabled {\n"
+"    color: rgba(0, 0, 0, 0.36);\n"
+"    background: rgba(249, 249, 249, 0.3);\n"
+"    border: 1px solid rgba(0, 0, 0, 0.06);\n"
+"    border-bottom: 1px solid rgba(0, 0, 0, 0.06);\n"
+"}\n"
+"\n"
+"\n"
+"PrimaryPushButton,\n"
+"PrimaryToolButton,\n"
+"ToggleButton:checked,\n"
+"ToggleToolButton:checked {\n"
+"    color: white;\n"
+"    background-color: #009faa;\n"
+"    border: 1px solid #00a7b3;\n"
+"    border-bottom: 1px solid #007780;\n"
+"}\n"
+"\n"
+"PrimaryPushButton:hover,\n"
+"PrimaryToolButton:hover,\n"
+"ToggleButton:checked:hover,\n"
+"ToggleToolButton:checked:hover {\n"
+"    background-color: #00a7b3;\n"
+"    border: 1px solid #2daab3;\n"
+"    border-bottom: 1px solid #007780;\n"
+"}\n"
+"\n"
+"PrimaryPushButton:pressed,\n"
+"PrimaryToolButton:pressed,\n"
+"ToggleButton:checked:pressed,\n"
+"ToggleToolButton:checked:pressed {\n"
+"    color: rgba(255, 255, 255, 0.63);\n"
+"    background-color: #3eabb3;\n"
+"    border: 1px solid #3eabb3;\n"
+"}\n"
+"\n"
+"PrimaryPushButton:disabled,\n"
+"PrimaryToolButton:disabled,\n"
+"ToggleButton:checked:disabled,\n"
+"ToggleToolButton:checked:disabled {\n"
+"    color: rgba(255, 255, 255, 0.9);\n"
+"    background-color: rgb(205, 205, 205);\n"
+"    border: 1px solid rgb(205, 205, 205);\n"
+"}\n"
+"\n"
+"SplitDropButton,\n"
+"PrimarySplitDropButton {\n"
+"    border-left: none;\n"
+"    border-top-left-radius: 0;\n"
+"    border-bottom-left-radius: 0;\n"
+"}\n"
+"\n"
+"#splitPushButton,\n"
+"#splitToolButton,\n"
+"#primarySplitPushButton,\n"
+"#primarySplitToolButton {\n"
+"    border-top-right-radius: 0;\n"
+"    border-bottom-right-radius: 0;\n"
+"}\n"
+"\n"
+"#splitPushButton:pressed,\n"
+"#splitToolButton:pressed,\n"
+"SplitDropButton:pressed {\n"
+"    border-bottom: 1px solid rgba(0, 0, 0, 0.183);\n"
+"}\n"
+"\n"
+"PrimarySplitDropButton:pressed {\n"
+"    border-bottom: 1px solid #007780;\n"
+"}\n"
+"\n"
+"#primarySplitPushButton, #primarySplitToolButton {\n"
+"    border-right: 1px solid #3eabb3;\n"
+"}\n"
+"\n"
+"#primarySplitPushButton:pressed, #primarySplitToolButton:pressed {\n"
+"    border-bottom: 1px solid #007780;\n"
+"}\n"
+"\n"
+"HyperlinkButton {\n"
+"    /* font: 14px \'Segoe UI\', \'Microsoft YaHei\'; */\n"
+"    padding: 6px 12px 6px 12px;\n"
+"    color: #009faa;\n"
+"    border: none;\n"
+"    border-radius: 6px;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"HyperlinkButton:hover {\n"
+"    background-color: rgba(0, 0, 0, 15);\n"
+"}\n"
+"\n"
+"HyperlinkButton:pressed {\n"
+"    background-color: rgba(0, 0, 0, 7);\n"
+"}\n"
+"\n"
+"HyperlinkButton:disabled {\n"
+"    color: rgba(0, 0, 0, 0.43)\n"
+"}\n"
+"\n"
+"\n"
+"RadioButton {\n"
+"    min-height: 24px;\n"
+"    max-height: 24px;\n"
+"    background-color: transparent;\n"
+"    font: 14px \'Segoe UI\', \'Microsoft YaHei\', \'PingFang SC\';\n"
+"    color: black;\n"
+"}\n"
+"\n"
+"RadioButton::indicator {\n"
+"    width: 18px;\n"
+"    height: 18px;\n"
+"    border-radius: 11px;\n"
+"    border: 2px solid #999999;\n"
+"    background-color: rgba(0, 0, 0, 5);\n"
+"    margin-right: 4px;\n"
+"}\n"
+"\n"
+"RadioButton::indicator:hover {\n"
+"    background-color: rgba(0, 0, 0, 0);\n"
+"}\n"
+"\n"
+"RadioButton::indicator:pressed {\n"
+"    border: 2px solid #bbbbbb;\n"
+"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
+"            stop:0 rgb(255, 255, 255),\n"
+"            stop:0.5 rgb(255, 255, 255),\n"
+"            stop:0.6 rgb(225, 224, 223),\n"
+"            stop:1 rgb(225, 224, 223));\n"
+"}\n"
+"\n"
+"RadioButton::indicator:checked {\n"
+"    height: 22px;\n"
+"    width: 22px;\n"
+"    border: none;\n"
+"    border-radius: 11px;\n"
+"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
+"            stop:0 rgb(255, 255, 255),\n"
+"            stop:0.5 rgb(255, 255, 255),\n"
+"            stop:0.6 #009faa,\n"
+"            stop:1 #009faa);\n"
+"}\n"
+"\n"
+"RadioButton::indicator:checked:hover {\n"
+"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
+"            stop:0 rgb(255, 255, 255),\n"
+"            stop:0.6 rgb(255, 255, 255),\n"
+"            stop:0.7 #009faa,\n"
+"            stop:1 #009faa);\n"
+"}\n"
+"\n"
+"RadioButton::indicator:checked:pressed {\n"
+"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
+"            stop:0 rgb(255, 255, 255),\n"
+"            stop:0.5 rgb(255, 255, 255),\n"
+"            stop:0.6 #009faa,\n"
+"            stop:1 #009faa);\n"
+"}\n"
+"\n"
+"RadioButton:disabled {\n"
+"    color: rgba(0, 0, 0, 110);\n"
+"}\n"
+"\n"
+"RadioButton::indicator:disabled {\n"
+"    border: 2px solid #bbbbbb;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"RadioButton::indicator:disabled:checked {\n"
+"    border: none;\n"
+"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
+"            stop:0 rgb(255, 255, 255),\n"
+"            stop:0.5 rgb(255, 255, 255),\n"
+"            stop:0.6 rgba(0, 0, 0, 0.2169),\n"
+"            stop:1 rgba(0, 0, 0, 0.2169));\n"
+"}\n"
+"\n"
+"TransparentToolButton,\n"
+"TransparentToggleToolButton,\n"
+"TransparentDropDownToolButton,\n"
+"TransparentPushButton,\n"
+"TransparentDropDownPushButton,\n"
+"TransparentTogglePushButton {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    margin: 0;\n"
+"}\n"
+"\n"
+"TransparentToolButton:hover,\n"
+"TransparentToggleToolButton:hover,\n"
+"TransparentDropDownToolButton:hover,\n"
+"TransparentPushButton:hover,\n"
+"TransparentDropDownPushButton:hover,\n"
+"TransparentTogglePushButton:hover {\n"
+"    background-color: rgba(0, 0, 0, 9);\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"TransparentToolButton:pressed,\n"
+"TransparentToggleToolButton:pressed,\n"
+"TransparentDropDownToolButton:pressed,\n"
+"TransparentPushButton:pressed,\n"
+"TransparentDropDownPushButton:pressed,\n"
+"TransparentTogglePushButton:pressed {\n"
+"    background-color: rgba(0, 0, 0, 6);\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"TransparentToolButton:disabled,\n"
+"TransparentToggleToolButton:disabled,\n"
+"TransparentDropDownToolButton:disabled,\n"
+"TransprentPushButton:disabled,\n"
+"TransparentDropDownPushButton:disabled,\n"
+"TransprentTogglePushButton:disabled {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"\n"
+"PillPushButton,\n"
+"PillPushButton:hover,\n"
+"PillPushButton:pressed,\n"
+"PillPushButton:disabled,\n"
+"PillPushButton:checked,\n"
+"PillPushButton:checked:hover,\n"
+"PillPushButton:checked:pressed,\n"
+"PillPushButton:disabled:checked,\n"
+"PillToolButton,\n"
+"PillToolButton:hover,\n"
+"PillToolButton:pressed,\n"
+"PillToolButton:disabled,\n"
+"PillToolButton:checked,\n"
+"PillToolButton:checked:hover,\n"
+"PillToolButton:checked:pressed,\n"
+"PillToolButton:disabled:checked {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"}\n"
+"")
+        self.tryButton.setObjectName("tryButton")
+        self.verticalLayout_2.addWidget(self.tryButton)
+        self.MyShowMealLabel = DisplayLabel(self.MyHaveATryWidget)
+        self.MyShowMealLabel.setStyleSheet("#MyShowMealLabel{\n"
+"    font: 16pt \"Terminal\";\n"
+"}")
+        self.MyShowMealLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.MyShowMealLabel.setObjectName("MyShowMealLabel")
+        self.verticalLayout_2.addWidget(self.MyShowMealLabel)
+        self.horizontalLayout_2.addLayout(self.verticalLayout_2)
+        spacerItem4 = QtWidgets.QSpacerItem(48, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem4)
+        self.verticalLayout_3.addLayout(self.horizontalLayout_2)
+        self.gridLayout.addWidget(self.MyHaveATryWidget, 3, 2, 1, 1)
+        spacerItem5 = QtWidgets.QSpacerItem(10, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout.addItem(spacerItem5, 4, 1, 1, 2)
+        self.CardWidget = CardWidget(MyHomeWidget_ui)
+        self.CardWidget.setObjectName("CardWidget")
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.CardWidget)
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.PopUpAniStackedWidget = PopUpAniStackedWidget(self.CardWidget)
+        self.PopUpAniStackedWidget.setObjectName("PopUpAniStackedWidget")
+        self.page_3 = QtWidgets.QWidget()
+        self.page_3.setObjectName("page_3")
+        self.CardWidget_3 = CardWidget(self.page_3)
+        self.CardWidget_3.setGeometry(QtCore.QRect(30, 20, 161, 211))
+        self.CardWidget_3.setObjectName("CardWidget_3")
+        self.ImageLabel = ImageLabel(self.CardWidget_3)
+        self.ImageLabel.setGeometry(QtCore.QRect(31, 1, 96, 96))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.ImageLabel.sizePolicy().hasHeightForWidth())
+        self.ImageLabel.setSizePolicy(sizePolicy)
+        self.ImageLabel.setMinimumSize(QtCore.QSize(96, 96))
+        self.ImageLabel.setMaximumSize(QtCore.QSize(96, 96))
+        self.ImageLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.ImageLabel.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.ImageLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.ImageLabel.setObjectName("ImageLabel")
+        self.BodyLabel = BodyLabel(self.CardWidget_3)
+        self.BodyLabel.setGeometry(QtCore.QRect(25, 109, 111, 41))
+        self.BodyLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.BodyLabel.setObjectName("BodyLabel")
+        self.PushButton = PushButton(self.CardWidget_3)
+        self.PushButton.setGeometry(QtCore.QRect(21, 160, 121, 32))
+        self.PushButton.setObjectName("PushButton")
+        self.CardWidget_4 = CardWidget(self.page_3)
+        self.CardWidget_4.setGeometry(QtCore.QRect(230, 20, 161, 211))
+        self.CardWidget_4.setObjectName("CardWidget_4")
+        self.ImageLabel_2 = ImageLabel(self.CardWidget_4)
+        self.ImageLabel_2.setGeometry(QtCore.QRect(31, 1, 96, 96))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.ImageLabel_2.sizePolicy().hasHeightForWidth())
+        self.ImageLabel_2.setSizePolicy(sizePolicy)
+        self.ImageLabel_2.setMinimumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_2.setMaximumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_2.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.ImageLabel_2.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.ImageLabel_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.ImageLabel_2.setObjectName("ImageLabel_2")
+        self.BodyLabel_2 = BodyLabel(self.CardWidget_4)
+        self.BodyLabel_2.setGeometry(QtCore.QRect(25, 109, 111, 41))
+        self.BodyLabel_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.BodyLabel_2.setObjectName("BodyLabel_2")
+        self.PushButton_2 = PushButton(self.CardWidget_4)
+        self.PushButton_2.setGeometry(QtCore.QRect(21, 160, 121, 32))
+        self.PushButton_2.setObjectName("PushButton_2")
+        self.CardWidget_5 = CardWidget(self.page_3)
+        self.CardWidget_5.setGeometry(QtCore.QRect(430, 20, 161, 211))
+        self.CardWidget_5.setObjectName("CardWidget_5")
+        self.ImageLabel_3 = ImageLabel(self.CardWidget_5)
+        self.ImageLabel_3.setGeometry(QtCore.QRect(31, 1, 96, 96))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.ImageLabel_3.sizePolicy().hasHeightForWidth())
+        self.ImageLabel_3.setSizePolicy(sizePolicy)
+        self.ImageLabel_3.setMinimumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_3.setMaximumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_3.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.ImageLabel_3.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.ImageLabel_3.setAlignment(QtCore.Qt.AlignCenter)
+        self.ImageLabel_3.setObjectName("ImageLabel_3")
+        self.BodyLabel_3 = BodyLabel(self.CardWidget_5)
+        self.BodyLabel_3.setGeometry(QtCore.QRect(25, 109, 111, 41))
+        self.BodyLabel_3.setAlignment(QtCore.Qt.AlignCenter)
+        self.BodyLabel_3.setObjectName("BodyLabel_3")
+        self.PushButton_3 = PushButton(self.CardWidget_5)
+        self.PushButton_3.setGeometry(QtCore.QRect(21, 160, 121, 32))
+        self.PushButton_3.setObjectName("PushButton_3")
+        self.PopUpAniStackedWidget.addWidget(self.page_3)
+        self.page_2 = QtWidgets.QWidget()
+        self.page_2.setObjectName("page_2")
+        self.CardWidget_6 = CardWidget(self.page_2)
+        self.CardWidget_6.setGeometry(QtCore.QRect(30, 20, 161, 211))
+        self.CardWidget_6.setObjectName("CardWidget_6")
+        self.ImageLabel_4 = ImageLabel(self.CardWidget_6)
+        self.ImageLabel_4.setGeometry(QtCore.QRect(31, 1, 96, 96))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.ImageLabel_4.sizePolicy().hasHeightForWidth())
+        self.ImageLabel_4.setSizePolicy(sizePolicy)
+        self.ImageLabel_4.setMinimumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_4.setMaximumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_4.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.ImageLabel_4.setStyleSheet("background-image: url(:/haha_96x96.jpg);")
+        self.ImageLabel_4.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.ImageLabel_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.ImageLabel_4.setObjectName("ImageLabel_4")
+        self.BodyLabel_4 = BodyLabel(self.CardWidget_6)
+        self.BodyLabel_4.setGeometry(QtCore.QRect(25, 109, 111, 41))
+        self.BodyLabel_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.BodyLabel_4.setObjectName("BodyLabel_4")
+        self.PushButton_4 = PushButton(self.CardWidget_6)
+        self.PushButton_4.setGeometry(QtCore.QRect(21, 160, 121, 32))
+        self.PushButton_4.setObjectName("PushButton_4")
+        self.CardWidget_19 = CardWidget(self.page_2)
+        self.CardWidget_19.setGeometry(QtCore.QRect(230, 20, 161, 211))
+        self.CardWidget_19.setObjectName("CardWidget_19")
+        self.ImageLabel_17 = ImageLabel(self.CardWidget_19)
+        self.ImageLabel_17.setGeometry(QtCore.QRect(31, 1, 96, 96))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.ImageLabel_17.sizePolicy().hasHeightForWidth())
+        self.ImageLabel_17.setSizePolicy(sizePolicy)
+        self.ImageLabel_17.setMinimumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_17.setMaximumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_17.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.ImageLabel_17.setStyleSheet("image: url(:/haha_96x96.jpg);")
+        self.ImageLabel_17.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.ImageLabel_17.setAlignment(QtCore.Qt.AlignCenter)
+        self.ImageLabel_17.setObjectName("ImageLabel_17")
+        self.BodyLabel_17 = BodyLabel(self.CardWidget_19)
+        self.BodyLabel_17.setGeometry(QtCore.QRect(25, 109, 111, 41))
+        self.BodyLabel_17.setAlignment(QtCore.Qt.AlignCenter)
+        self.BodyLabel_17.setObjectName("BodyLabel_17")
+        self.PushButton_17 = PushButton(self.CardWidget_19)
+        self.PushButton_17.setGeometry(QtCore.QRect(21, 160, 121, 32))
+        self.PushButton_17.setObjectName("PushButton_17")
+        self.CardWidget_8 = CardWidget(self.page_2)
+        self.CardWidget_8.setGeometry(QtCore.QRect(430, 20, 161, 211))
+        self.CardWidget_8.setObjectName("CardWidget_8")
+        self.ImageLabel_6 = ImageLabel(self.CardWidget_8)
+        self.ImageLabel_6.setGeometry(QtCore.QRect(31, 1, 96, 96))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.ImageLabel_6.sizePolicy().hasHeightForWidth())
+        self.ImageLabel_6.setSizePolicy(sizePolicy)
+        self.ImageLabel_6.setMinimumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_6.setMaximumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_6.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.ImageLabel_6.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.ImageLabel_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.ImageLabel_6.setObjectName("ImageLabel_6")
+        self.BodyLabel_6 = BodyLabel(self.CardWidget_8)
+        self.BodyLabel_6.setGeometry(QtCore.QRect(25, 109, 111, 41))
+        self.BodyLabel_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.BodyLabel_6.setObjectName("BodyLabel_6")
+        self.PushButton_6 = PushButton(self.CardWidget_8)
+        self.PushButton_6.setGeometry(QtCore.QRect(21, 160, 121, 32))
+        self.PushButton_6.setObjectName("PushButton_6")
+        self.PopUpAniStackedWidget.addWidget(self.page_2)
+        self.page = QtWidgets.QWidget()
+        self.page.setObjectName("page")
+        self.CardWidget_9 = CardWidget(self.page)
+        self.CardWidget_9.setGeometry(QtCore.QRect(30, 20, 161, 211))
+        self.CardWidget_9.setObjectName("CardWidget_9")
+        self.ImageLabel_7 = ImageLabel(self.CardWidget_9)
+        self.ImageLabel_7.setGeometry(QtCore.QRect(31, 1, 96, 96))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.ImageLabel_7.sizePolicy().hasHeightForWidth())
+        self.ImageLabel_7.setSizePolicy(sizePolicy)
+        self.ImageLabel_7.setMinimumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_7.setMaximumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_7.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.ImageLabel_7.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.ImageLabel_7.setAlignment(QtCore.Qt.AlignCenter)
+        self.ImageLabel_7.setObjectName("ImageLabel_7")
+        self.BodyLabel_7 = BodyLabel(self.CardWidget_9)
+        self.BodyLabel_7.setGeometry(QtCore.QRect(25, 109, 111, 41))
+        self.BodyLabel_7.setAlignment(QtCore.Qt.AlignCenter)
+        self.BodyLabel_7.setObjectName("BodyLabel_7")
+        self.PushButton_7 = PushButton(self.CardWidget_9)
+        self.PushButton_7.setGeometry(QtCore.QRect(21, 160, 121, 32))
+        self.PushButton_7.setObjectName("PushButton_7")
+        self.CardWidget_10 = CardWidget(self.page)
+        self.CardWidget_10.setGeometry(QtCore.QRect(230, 20, 161, 211))
+        self.CardWidget_10.setObjectName("CardWidget_10")
+        self.ImageLabel_8 = ImageLabel(self.CardWidget_10)
+        self.ImageLabel_8.setGeometry(QtCore.QRect(31, 1, 96, 96))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.ImageLabel_8.sizePolicy().hasHeightForWidth())
+        self.ImageLabel_8.setSizePolicy(sizePolicy)
+        self.ImageLabel_8.setMinimumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_8.setMaximumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_8.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.ImageLabel_8.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.ImageLabel_8.setAlignment(QtCore.Qt.AlignCenter)
+        self.ImageLabel_8.setObjectName("ImageLabel_8")
+        self.BodyLabel_8 = BodyLabel(self.CardWidget_10)
+        self.BodyLabel_8.setGeometry(QtCore.QRect(25, 109, 111, 41))
+        self.BodyLabel_8.setAlignment(QtCore.Qt.AlignCenter)
+        self.BodyLabel_8.setObjectName("BodyLabel_8")
+        self.PushButton_8 = PushButton(self.CardWidget_10)
+        self.PushButton_8.setGeometry(QtCore.QRect(21, 160, 121, 32))
+        self.PushButton_8.setObjectName("PushButton_8")
+        self.CardWidget_11 = CardWidget(self.page)
+        self.CardWidget_11.setGeometry(QtCore.QRect(430, 20, 161, 211))
+        self.CardWidget_11.setObjectName("CardWidget_11")
+        self.ImageLabel_9 = ImageLabel(self.CardWidget_11)
+        self.ImageLabel_9.setGeometry(QtCore.QRect(31, 1, 96, 96))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.ImageLabel_9.sizePolicy().hasHeightForWidth())
+        self.ImageLabel_9.setSizePolicy(sizePolicy)
+        self.ImageLabel_9.setMinimumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_9.setMaximumSize(QtCore.QSize(96, 96))
+        self.ImageLabel_9.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.ImageLabel_9.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.ImageLabel_9.setAlignment(QtCore.Qt.AlignCenter)
+        self.ImageLabel_9.setObjectName("ImageLabel_9")
+        self.BodyLabel_9 = BodyLabel(self.CardWidget_11)
+        self.BodyLabel_9.setGeometry(QtCore.QRect(25, 109, 111, 41))
+        self.BodyLabel_9.setAlignment(QtCore.Qt.AlignCenter)
+        self.BodyLabel_9.setObjectName("BodyLabel_9")
+        self.PushButton_9 = PushButton(self.CardWidget_11)
+        self.PushButton_9.setGeometry(QtCore.QRect(21, 160, 121, 32))
+        self.PushButton_9.setObjectName("PushButton_9")
+        self.PopUpAniStackedWidget.addWidget(self.page)
+        self.horizontalLayout_6.addWidget(self.PopUpAniStackedWidget)
+        self.gridLayout.addWidget(self.CardWidget, 2, 1, 1, 1)
+        self.MustEatListWidget = CardWidget(MyHomeWidget_ui)
+        self.MustEatListWidget.setMinimumSize(QtCore.QSize(331, 261))
+        self.MustEatListWidget.setObjectName("MustEatListWidget")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.MustEatListWidget)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.SubtitleLabel = SubtitleLabel(self.MustEatListWidget)
+        self.SubtitleLabel.setStyleSheet("border-color: rgb(170, 170, 255);")
+        self.SubtitleLabel.setObjectName("SubtitleLabel")
+        self.verticalLayout_4.addWidget(self.SubtitleLabel)
+        self.MustEatList = ListWidget(self.MustEatListWidget)
+        self.MustEatList.setObjectName("MustEatList")
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        self.verticalLayout_4.addWidget(self.MustEatList)
+        self.gridLayout.addWidget(self.MustEatListWidget, 2, 2, 1, 1)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem6, 2, 3, 2, 1)
         self.horizontalLayout_4.addLayout(self.gridLayout)
         self.MyHaveATryLabel.setBuddy(self.tryButton)
 
         self.retranslateUi(MyHomeWidget_ui)
-        self.PopUpAniStackedWidget.setCurrentIndex(0)
+        self.PopUpAniStackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MyHomeWidget_ui)
 
     def retranslateUi(self, MyHomeWidget_ui):
         _translate = QtCore.QCoreApplication.translate
         MyHomeWidget_ui.setWindowTitle(_translate("MyHomeWidget_ui", "Form"))
+        self.MyHomeLable.setText(_translate("MyHomeWidget_ui", "The Taste Of BUAA"))
         self.MyHaveATryLabel.setText(_translate("MyHomeWidget_ui", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt; font-weight:600; color:#55aaff;\">没想好吃什么?</span></p><p align=\"center\"><span style=\" font-size:18pt; font-weight:600; color:#55aaff;\">我来帮你(●\'◡\'●)</span></p></body></html>"))
         self.tryButton.setText(_translate("MyHomeWidget_ui", "Have a try"))
         self.MyShowMealLabel.setText(_translate("MyHomeWidget_ui", "Have a nice day!"))
+        self.BodyLabel.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_2.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_2.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_3.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_3.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_4.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_4.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_17.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_17.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_6.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_6.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_7.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_7.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_8.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_8.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_9.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_9.setText(_translate("MyHomeWidget_ui", "Push button"))
         self.SubtitleLabel.setText(_translate("MyHomeWidget_ui", "Foodie Bucket List"))
         __sortingEnabled = self.MustEatList.isSortingEnabled()
         self.MustEatList.setSortingEnabled(False)
@@ -877,13 +1059,5 @@ class Ui_MyHomeWidget_ui(object):
         item = self.MustEatList.item(8)
         item.setText(_translate("MyHomeWidget_ui", "9"))
         self.MustEatList.setSortingEnabled(__sortingEnabled)
-        self.BodyLabel.setText(_translate("MyHomeWidget_ui", "Body label"))
-        self.PushButton.setText(_translate("MyHomeWidget_ui", "Push button"))
-        self.BodyLabel_2.setText(_translate("MyHomeWidget_ui", "Body label"))
-        self.PushButton_2.setText(_translate("MyHomeWidget_ui", "Push button"))
-        self.ImageLabel_3.setText(_translate("MyHomeWidget_ui", "<html><head/><body><p><br/></p></body></html>"))
-        self.BodyLabel_3.setText(_translate("MyHomeWidget_ui", "Body label"))
-        self.PushButton_3.setText(_translate("MyHomeWidget_ui", "Push button"))
-        self.MyHomeLable.setText(_translate("MyHomeWidget_ui", "The Taste Of BUAA"))
 from qfluentwidgets import BodyLabel, CalendarPicker, CardWidget, DisplayLabel, ImageLabel, ListWidget, PillToolButton, PopUpAniStackedWidget, PrimaryPushButton, PushButton, SearchLineEdit, SubtitleLabel, TitleLabel
 from picture_set import pic_rc

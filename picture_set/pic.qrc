@@ -1,9 +1,9 @@
 <RCC>
   <qresource prefix="/">
+    <file>haha_96x96.jpg</file>
     <file>haha.jpg</file>
     <file>background.png</file>
     <file>delete.png</file>
-    <file>mustEat.jpg</file>
     <file>error.png</file>
     <file>like.png</file>
     <file>home.png</file>
