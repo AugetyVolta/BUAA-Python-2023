@@ -55,3 +55,7 @@ chore：对构建流程或辅助工具和依赖库（如文档生成等）的更
 
 [阿里巴巴矢量图标库](https://www.iconfont.cn/?spm=a313x.7781069.1998910419.d4d0a486a)
 
+[pyqt显示图片的两种方法](https://blog.csdn.net/weixin_46180132/article/details/118178229)
+
+[PyQt5 实时刷新数据](https://blog.csdn.net/qq_27694835/article/details/111866698)
+
