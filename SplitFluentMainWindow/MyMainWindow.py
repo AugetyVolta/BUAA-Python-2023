@@ -27,7 +27,7 @@ class MyMainWindow(SplitFluentWindow):
         self.navigationInterface.addItem(
             routeKey='settingInterface',
             icon=FIF.LEAF,
-            text='切换主题',
+            text='Theme',
             onClick=self.changeTheme,
             position=NavigationItemPosition.BOTTOM,
         )
