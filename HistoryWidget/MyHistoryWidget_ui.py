@@ -15,6 +15,27 @@ class Ui_MyHistoryWidget(object):
     def setupUi(self, MyHistoryWidget):
         MyHistoryWidget.setObjectName("MyHistoryWidget")
         MyHistoryWidget.resize(1032, 665)
+        self.layoutWidget = QtWidgets.QWidget(MyHistoryWidget)
+        self.layoutWidget.setGeometry(QtCore.QRect(20, 50, 979, 58))
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        spacerItem = QtWidgets.QSpacerItem(838, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.TitleLabel = TitleLabel(self.layoutWidget)
+        self.TitleLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.TitleLabel.setProperty("pixelFontSize", 32)
+        self.TitleLabel.setObjectName("TitleLabel")
+        self.horizontalLayout.addWidget(self.TitleLabel)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.line = QtWidgets.QFrame(self.layoutWidget)
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.verticalLayout.addWidget(self.line)
 
         self.retranslateUi(MyHistoryWidget)
         QtCore.QMetaObject.connectSlotsByName(MyHistoryWidget)
@@ -22,3 +43,5 @@ class Ui_MyHistoryWidget(object):
     def retranslateUi(self, MyHistoryWidget):
         _translate = QtCore.QCoreApplication.translate
         MyHistoryWidget.setWindowTitle(_translate("MyHistoryWidget", "Form"))
+        self.TitleLabel.setText(_translate("MyHistoryWidget", "美食记录"))
+from qfluentwidgets import TitleLabel
