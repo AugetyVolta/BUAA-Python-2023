@@ -25,12 +25,13 @@ class MyMainWindow(SplitFluentWindow):
         self.setFixedSize(1090, 680)
         self.navigationInterface.setExpandWidth(120)
         self.navigationInterface.addItem(
-            routeKey='settingInterface',
-            icon=FIF.LEAF,
+            routeKey='changeTheme',
+            icon=FIF.CONSTRACT,
             text='Theme',
             onClick=self.changeTheme,
             position=NavigationItemPosition.BOTTOM,
         )
+
         # 居中显示
         self.center()
 
