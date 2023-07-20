@@ -18,7 +18,7 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
         self.ProgressRing.setValue(50)
         self.ProgressRing.setTextVisible(True)
 
-        print(self.stackedWidget.count())
+        # print(self.stackedWidget.count())
 
     # 初始化个人信息
     def initUserInfo(self):

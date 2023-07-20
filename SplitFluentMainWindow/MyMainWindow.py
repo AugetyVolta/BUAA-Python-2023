@@ -3,7 +3,10 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox, QDesktopWidget
 from qfluentwidgets import SplitFluentWindow, NavigationWidget, NavigationItemPosition, Theme, NavigationDisplayMode, \
     NavigationAvatarWidget, setTheme
+
+from FavouriteWidget.MyFavourite import MyFavouriteWidget
 from Game.MyGame import Tetris
+from HistoryWidget.MyHistory import MyHistoryWidget
 from HomeWidget.MyHomeWidget import MyHomeWidget
 from User.MyUser import MyUserWidget
 from qfluentwidgets import FluentIcon as FIF
@@ -22,6 +25,12 @@ class MyMainWindow(SplitFluentWindow):
         self.user = MyUserWidget()
         self.addSubInterface(self.user, FIF.PEOPLE, 'User',
                              position=NavigationItemPosition.BOTTOM)
+
+        self.favourite = MyFavouriteWidget()
+        self.addSubInterface(self.favourite, FIF.HEART, 'Favorite')
+
+        self.history = MyHistoryWidget()
+        self.addSubInterface(self.history, FIF.HISTORY, 'History')
         self.setFixedSize(1090, 680)
         self.navigationInterface.setExpandWidth(120)
         self.navigationInterface.addItem(
