@@ -236,9 +236,9 @@ class DishDetailWindow(QMainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     # 在这里传入菜肴信息
-    window = DishDetailWindow(dish_name='鱼香肉丝',
+    window = DishDetailWindow(dish_name='九转大肠',
                               dish_type='中餐',
-                              restaurant_name='蔡廷贵餐厅',
-                              counter_name='蔡廷贵台')
+                              restaurant_name='小胖餐厅',
+                              counter_name='保留原味柜台')
     window.show()
     sys.exit(app.exec_())
