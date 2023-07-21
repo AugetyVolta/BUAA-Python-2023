@@ -1,9 +1,10 @@
 import sys
 
-from PyQt5 import QtCore
+from PyQt5 import QtGui
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QScrollArea
-from qfluentwidgets import ScrollArea, PushButton, CardWidget
+from qfluentwidgets import PushButton, ScrollArea, CardWidget
 
 
 class DishItem(QWidget):
@@ -22,7 +23,7 @@ class DishItem(QWidget):
         # 菜品图像
         self.dish_image_label = QLabel(self)
         # 设置菜品图像，您可以根据实际情况设置菜品图片
-        pixmap = QPixmap('../picture_set/BUAA.jpg')
+        pixmap = QPixmap('{}/../picture_set/BUAA.jpg')
         self.dish_image_label.setPixmap(pixmap)  # 设置菜品图片
         self.dish_image_label.setFixedSize(128, 128)
         self.dish_image_label.setScaledContents(True)
@@ -34,16 +35,45 @@ class DishItem(QWidget):
                                  f'类型：{self.dish_type}\n'
                                  f'餐厅：{self.restaurant_name}\n'
                                  f'柜台：{self.counter_name}')
-        dish_info_label.setStyleSheet("font-size: 14px;")
+        # 设置菜品标签样式
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        dish_info_label.setFont(font)
+
         layout.addWidget(dish_info_label)
 
-        # 收藏按钮
-        self.favorite_button = PushButton('收藏', self)
-        self.favorite_button.setStyleSheet(
-            "font-size: 14px; background-color: #E0C240; color: white; border: none; border-radius: 5px; padding: 5px 10px;")
-        layout.addWidget(self.favorite_button, alignment=QtCore.Qt.AlignRight)
+        # 取消收藏按钮
+        self.unfavorite_button = PushButton('取消收藏', self)
+        self.unfavorite_button.setStyleSheet(
+            "font-size: 16px; background-color: #FF4500; color: white; border: none; border-radius: 5px; padding: 5px 10px;")
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.unfavorite_button.setFont(font)
+        layout.addWidget(self.unfavorite_button, alignment=Qt.AlignmentFlag.AlignRight)
 
         self.setLayout(layout)
+
+        # 设置背景色样式
+        self.setStyleSheet("""
+            QWidget {
+                background-color: #f8f8f8;
+                border: 0px solid #ccc;
+                border-radius: 5px;
+            }
+        """)
+
+        # 连接取消收藏按钮点击事件
+        self.unfavorite_button.clicked.connect(self.on_unfavorite)
+
+    def on_unfavorite(self):
+        # Emit a signal to inform the parent widget to remove this item
+        self.deleteLater()  # Delete the widget itself
 
 
 class DishCollectionUI(QWidget):
@@ -71,7 +101,7 @@ class DishCollectionUI(QWidget):
 
         # 示例：添加三个菜品项
         for i in range(10):
-            dish_item = DishItem(dish_name=f'菜品{i + 1}',
+            dish_item = DishItem(dish_name=f'鱼香肉丝{i + 1}',
                                  dish_type='类型A',
                                  restaurant_name='餐厅A',
                                  counter_name='柜台A')
