@@ -4,16 +4,30 @@ import ast
 
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import QDateTime
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QTextEdit, QPushButton, QWidget, \
     QScrollArea, QHBoxLayout, QDesktopWidget
 from qfluentwidgets import TextEdit, CaptionLabel, StrongBodyLabel, PrimaryPushButton, PushButton, BodyLabel, \
-    ScrollArea, ImageLabel
+    ScrollArea, ImageLabel, SplitTitleBar, SubtitleLabel
+from qframelesswindow import AcrylicWindow
+from picture_set import pic_rc
 
 
-class DishDetailWindow(QMainWindow):
+class DishDetailWindow(AcrylicWindow):
     def __init__(self, dish_name, dish_type, restaurant_name, counter_name):
         super().__init__()
+        self.setTitleBar(SplitTitleBar(self))
+        self.titleBar.raise_()
+        self.setWindowIcon(QIcon(":/login.png"))
+        self.windowEffect.setMicaEffect(self.winId(), isDarkMode=False)
+        self.titleBar.titleLabel.setStyleSheet("""
+                            QLabel{
+                                background: transparent;
+                                font: 18px '微软雅黑';
+                                padding: 0 4px;
+                                color: black
+                            }
+                """)
         self.dish_name = dish_name
         self.dish_type = dish_type
         self.restaurant_name = restaurant_name
@@ -57,11 +71,21 @@ class DishDetailWindow(QMainWindow):
         # 收藏和吃过的按钮
         self.favorite_button = PushButton('收藏')
         self.favorite_button.setFixedSize(90, 45)
-        self.favorite_button.setStyleSheet("font-size: 20px; background-color: #E0C240;")  # Updated color
+        self.favorite_button.setStyleSheet(
+            "font-size: 20px; "
+            "background-color: #47e0ff; "
+            "color: white; border: none; "
+            "border-radius: 5px; "
+            "padding: 10px 20px;")
 
         self.eaten_button = PushButton('吃过')
         self.eaten_button.setFixedSize(90, 45)
-        self.eaten_button.setStyleSheet("font-size: 20px; background-color: #7CB957;")  # Updated color
+        self.eaten_button.setStyleSheet(
+            "font-size: 20px; "
+            "background-color: #ffc6c1; "
+            "color: white; border: none; "
+            "border-radius: 5px; "
+            "padding: 10px 20px;")
 
         # 收藏和吃过按钮布局
         self.favorite_eaten_layout = QVBoxLayout()
@@ -94,7 +118,12 @@ class DishDetailWindow(QMainWindow):
         self.comment_edit.setPlaceholderText('在这里输入您的评论...')
         self.comment_edit.setStyleSheet("font-size: 20px;")
         self.submit_button = PushButton('提交评论')
-        self.submit_button.setStyleSheet("font-size: 20px;")
+        self.submit_button.setStyleSheet(
+            "font-size: 20px; "
+            "background-color: #5baf4c; "
+            "color: white; border: none; "
+            "border-radius: 5px; "
+            "padding: 10px 20px;")
         self.clear_button = PushButton('清空评论')
         self.clear_button.setStyleSheet(
             "font-size: 20px; "
@@ -106,6 +135,7 @@ class DishDetailWindow(QMainWindow):
         # 安排布局
         layout = QVBoxLayout()
         layout_for_button = QHBoxLayout()
+        layout.addItem(QtWidgets.QSpacerItem(20, 60))
         layout.addLayout(self.dish_infoAndButton_layout)
         layout.addLayout(self.favorite_eaten_layout)
         layout.addWidget(self.comment_label)
@@ -117,7 +147,7 @@ class DishDetailWindow(QMainWindow):
 
         central_widget = QWidget()
         central_widget.setLayout(layout)
-        self.setCentralWidget(central_widget)
+        self.setLayout(layout)
         # 连接按钮的点击事件
         self.submit_button.clicked.connect(self.on_submit)
         self.clear_button.clicked.connect(self.on_clear)
@@ -133,7 +163,7 @@ class DishDetailWindow(QMainWindow):
         self.update_comments()
 
         self.setStyleSheet("""
-                    PushButton {
+                    QPushButton {
                         background-color: #4CAF50;
                         color: white;
                         border: none;
@@ -142,12 +172,12 @@ class DishDetailWindow(QMainWindow):
                         font-size: 20px;
                     }
 
-                    PushButton:hover {
+                    QPushButton:hover {
                         background-color: #45a049;
                         cursor: pointer;
                     }
 
-                    TextEdit {
+                    QTextEdit {
                         border: 1px solid gray;
                         padding: 5px;
                     }
