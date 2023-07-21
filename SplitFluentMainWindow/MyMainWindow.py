@@ -3,7 +3,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox, QDesktopWidget
 from qfluentwidgets import SplitFluentWindow, NavigationWidget, NavigationItemPosition, Theme, NavigationDisplayMode, \
     NavigationAvatarWidget, setTheme
-
+from picture_set import pic_rc
 from FavouriteWidget.MyFavourite import MyFavouriteWidget
 from Game.MyGame import Tetris
 from HistoryWidget.MyHistory import MyHistoryWidget
@@ -18,7 +18,7 @@ class MyMainWindow(SplitFluentWindow):
         # 设置最初的主题
         self.curTheme = Theme.LIGHT
         self.setWindowTitle("The Taste Of BUAA")
-        self.setWindowIcon(QIcon("{}/../picture_set/watermelon.png"))
+        self.setWindowIcon(QIcon(":/login.png"))
         self.u = MyHomeWidget()
         self.addSubInterface(self.u, FIF.HOME, 'Home')
 

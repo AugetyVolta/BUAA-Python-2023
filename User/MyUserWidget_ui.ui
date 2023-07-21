@@ -626,7 +626,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page_3">
        <widget class="QWidget" name="layoutWidget_3">
@@ -1120,6 +1120,9 @@
            <property name="text">
             <string>xzcXV</string>
            </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
         </layout>
@@ -1186,6 +1189,9 @@
            </property>
            <property name="text">
             <string>xzcXV</string>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -1257,7 +1263,14 @@
           </spacer>
          </item>
          <item>
-          <widget class="ComboBox" name="ComboBox"/>
+          <widget class="ComboBox" name="ComboBox">
+           <property name="autoRepeat">
+            <bool>false</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>false</bool>
+           </property>
+          </widget>
          </item>
          <item>
           <spacer name="horizontalSpacer_25">
@@ -1492,6 +1505,9 @@
            </property>
            <property name="text">
             <string>xzcXV</string>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
