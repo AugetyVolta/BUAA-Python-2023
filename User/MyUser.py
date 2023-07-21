@@ -1,9 +1,23 @@
+import random
+
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QWidget, QDesktopWidget, QMessageBox, QFileDialog
 from PyQt5.QtCore import Qt, QDate, QObject, pyqtSignal, QThread
 from PyQt5.QtGui import QIcon, QImage, QPixmap, QTransform
 
 from User.MyUserWidget_ui import Ui_MyUserWidget
+
+humorous_sentences = [
+    "吃什么？这问题比高考题还难，我都快需要用大数据分析来解决了！",
+    "每次问我吃什么，我都开始怀疑人生，感觉选择餐厅比选择伴侣还要艰难啊！",
+    "和我决定今晚吃什么，简直是斗智斗勇，我都怀疑自己是不是餐厅选择困难症患者了。",
+    "吃饭这事，你得认真对待，毕竟这可能是影响你人生的一道重要选择啊！",
+    "有的人信命，有的人信缘，而我只信菜单，因为上面写着我要吃的一切美味！",
+    "我对吃的选择有个原则：今天吃什么，得保证我明天还想吃！",
+    "人生苦短，我要吃我想吃的，这不叫贪嘴，叫对味道有追求！",
+    "有人说吃是为了活着，我觉得我活着就是为了吃！",
+    "关于吃什么，这得好好想一想"
+]
 
 
 class MyUserWidget(Ui_MyUserWidget, QWidget):
@@ -14,10 +28,8 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
         self.setProfilePhoto()
         # 初始化用户信息
         self.initUserInfo()
-
-        self.ProgressRing_1.setValue(50)
-        self.ProgressRing_1.setTextVisible(True)
-
+        # 初始化signature
+        self.signatureLable.setText(humorous_sentences[random.randint(0, len(humorous_sentences) - 1)])
         # 初始化性别选框
         self.initGenderComBox()
         # 初始化年龄选框

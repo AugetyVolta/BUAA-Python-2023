@@ -10,8 +10,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-import picture_set
-
 
 class Ui_MyHomeWidget_ui(object):
     def setupUi(self, MyHomeWidget_ui):
@@ -24,19 +22,12 @@ class Ui_MyHomeWidget_ui(object):
         MyHomeWidget_ui.setSizePolicy(sizePolicy)
         MyHomeWidget_ui.setMinimumSize(QtCore.QSize(0, 0))
         MyHomeWidget_ui.setBaseSize(QtCore.QSize(1000, 663))
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(MyHomeWidget_ui)
-        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout(MyHomeWidget_ui)
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
-        self.CardWidget_2 = CardWidget(MyHomeWidget_ui)
-        self.CardWidget_2.setMinimumSize(QtCore.QSize(643, 261))
-        self.CardWidget_2.setObjectName("CardWidget_2")
-        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.CardWidget_2)
-        self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.ListWidget_2 = ListWidget(self.CardWidget_2)
-        self.ListWidget_2.setObjectName("ListWidget_2")
-        self.verticalLayout_5.addWidget(self.ListWidget_2)
-        self.gridLayout.addWidget(self.CardWidget_2, 3, 1, 1, 1)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.gridLayout.addItem(spacerItem, 0, 1, 1, 2)
         self.verticalLayout_7 = QtWidgets.QVBoxLayout()
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -45,8 +36,8 @@ class Ui_MyHomeWidget_ui(object):
         self.MyHomeLable.setStyleSheet("font: 36pt \"华文彩云\";")
         self.MyHomeLable.setObjectName("MyHomeLable")
         self.horizontalLayout.addWidget(self.MyHomeLable)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem1)
         self.relaxGameButton = ToolButton(MyHomeWidget_ui)
         self.relaxGameButton.setObjectName("relaxGameButton")
         self.horizontalLayout.addWidget(self.relaxGameButton)
@@ -73,8 +64,93 @@ class Ui_MyHomeWidget_ui(object):
         self.line.setObjectName("line")
         self.verticalLayout_7.addWidget(self.line)
         self.gridLayout.addLayout(self.verticalLayout_7, 1, 1, 1, 2)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.gridLayout.addItem(spacerItem1, 0, 1, 1, 2)
+        self.MustEatListWidget = CardWidget(MyHomeWidget_ui)
+        self.MustEatListWidget.setMinimumSize(QtCore.QSize(331, 261))
+        self.MustEatListWidget.setObjectName("MustEatListWidget")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.MustEatListWidget)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.SubtitleLabel = SubtitleLabel(self.MustEatListWidget)
+        self.SubtitleLabel.setStyleSheet("border-color: rgb(170, 170, 255);")
+        self.SubtitleLabel.setObjectName("SubtitleLabel")
+        self.verticalLayout_4.addWidget(self.SubtitleLabel)
+        self.MustEatList = ListWidget(self.MustEatListWidget)
+        self.MustEatList.setObjectName("MustEatList")
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.MustEatList.addItem(item)
+        self.verticalLayout_4.addWidget(self.MustEatList)
+        self.gridLayout.addWidget(self.MustEatListWidget, 2, 2, 1, 1)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem2, 2, 3, 2, 1)
         self.MyHaveATryWidget = CardWidget(MyHomeWidget_ui)
         self.MyHaveATryWidget.setMinimumSize(QtCore.QSize(331, 261))
         self.MyHaveATryWidget.setObjectName("MyHaveATryWidget")
@@ -82,332 +158,341 @@ class Ui_MyHomeWidget_ui(object):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(48, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem2)
+        spacerItem3 = QtWidgets.QSpacerItem(48, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem3)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.MyHaveATryLabel = TitleLabel(self.MyHaveATryWidget)
         self.MyHaveATryLabel.setStyleSheet("#MyHaveATryLabel{\n"
-                                           "    font: 75 26pt \"微软雅黑\";\n"
-                                           "}")
+"    font: 75 26pt \"微软雅黑\";\n"
+"}")
         self.MyHaveATryLabel.setObjectName("MyHaveATryLabel")
         self.verticalLayout.addWidget(self.MyHaveATryLabel)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.verticalLayout.addItem(spacerItem3)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout.addItem(spacerItem4)
         self.verticalLayout_2.addLayout(self.verticalLayout)
         self.tryButton = PrimaryPushButton(self.MyHaveATryWidget)
         self.tryButton.setStyleSheet("PushButton, ToolButton, ToggleButton, ToggleToolButton {\n"
-                                     "    color: black;\n"
-                                     "    background: rgba(255, 255, 255, 0.7);\n"
-                                     "    border: 1px solid rgba(0, 0, 0, 0.073);\n"
-                                     "    border-bottom: 1px solid rgba(0, 0, 0, 0.183);\n"
-                                     "    border-radius: 5px;\n"
-                                     "    /* font: 14px \'Segoe UI\', \'Microsoft YaHei\'; */\n"
-                                     "    padding: 5px 12px 6px 12px;\n"
-                                     "    outline: none;\n"
-                                     "}\n"
-                                     "#tryButton {    \n"
-                                     "    font: 15pt \"Terminal\";\n"
-                                     "    color:rgb(170, 255, 255)\n"
-                                     "}\n"
-                                     "\n"
-                                     "ToolButton {\n"
-                                     "    padding: 5px 9px 6px 8px;\n"
-                                     "}\n"
-                                     "\n"
-                                     "PushButton[hasIcon=false] {\n"
-                                     "    padding: 5px 12px 6px 12px;\n"
-                                     "}\n"
-                                     "\n"
-                                     "PushButton[hasIcon=true] {\n"
-                                     "    padding: 5px 12px 6px 36px;\n"
-                                     "}\n"
-                                     "\n"
-                                     "DropDownToolButton, PrimaryDropDownToolButton {\n"
-                                     "    padding: 5px 31px 6px 8px;\n"
-                                     "}\n"
-                                     "\n"
-                                     "DropDownPushButton[hasIcon=false],\n"
-                                     "PrimaryDropDownPushButton[hasIcon=false] {\n"
-                                     "    padding: 5px 31px 6px 12px;\n"
-                                     "}\n"
-                                     "\n"
-                                     "DropDownPushButton[hasIcon=true],\n"
-                                     "PrimaryDropDownPushButton[hasIcon=true] {\n"
-                                     "    padding: 5px 31px 6px 36px;\n"
-                                     "}\n"
-                                     "\n"
-                                     "PushButton:hover, ToolButton:hover, ToggleButton:hover, ToggleToolButton:hover {\n"
-                                     "    background: rgba(249, 249, 249, 0.5);\n"
-                                     "}\n"
-                                     "\n"
-                                     "PushButton:pressed, ToolButton:pressed, ToggleButton:pressed, ToggleToolButton:pressed {\n"
-                                     "    color: rgba(0, 0, 0, 0.63);\n"
-                                     "    background: rgba(249, 249, 249, 0.3);\n"
-                                     "    border-bottom: 1px solid rgba(0, 0, 0, 0.073);\n"
-                                     "}\n"
-                                     "\n"
-                                     "PushButton:disabled, ToolButton:disabled, ToggleButton:disabled, ToggleToolButton:disabled {\n"
-                                     "    color: rgba(0, 0, 0, 0.36);\n"
-                                     "    background: rgba(249, 249, 249, 0.3);\n"
-                                     "    border: 1px solid rgba(0, 0, 0, 0.06);\n"
-                                     "    border-bottom: 1px solid rgba(0, 0, 0, 0.06);\n"
-                                     "}\n"
-                                     "\n"
-                                     "\n"
-                                     "PrimaryPushButton,\n"
-                                     "PrimaryToolButton,\n"
-                                     "ToggleButton:checked,\n"
-                                     "ToggleToolButton:checked {\n"
-                                     "    color: white;\n"
-                                     "    background-color: #009faa;\n"
-                                     "    border: 1px solid #00a7b3;\n"
-                                     "    border-bottom: 1px solid #007780;\n"
-                                     "}\n"
-                                     "\n"
-                                     "PrimaryPushButton:hover,\n"
-                                     "PrimaryToolButton:hover,\n"
-                                     "ToggleButton:checked:hover,\n"
-                                     "ToggleToolButton:checked:hover {\n"
-                                     "    background-color: #00a7b3;\n"
-                                     "    border: 1px solid #2daab3;\n"
-                                     "    border-bottom: 1px solid #007780;\n"
-                                     "}\n"
-                                     "\n"
-                                     "PrimaryPushButton:pressed,\n"
-                                     "PrimaryToolButton:pressed,\n"
-                                     "ToggleButton:checked:pressed,\n"
-                                     "ToggleToolButton:checked:pressed {\n"
-                                     "    color: rgba(255, 255, 255, 0.63);\n"
-                                     "    background-color: #3eabb3;\n"
-                                     "    border: 1px solid #3eabb3;\n"
-                                     "}\n"
-                                     "\n"
-                                     "PrimaryPushButton:disabled,\n"
-                                     "PrimaryToolButton:disabled,\n"
-                                     "ToggleButton:checked:disabled,\n"
-                                     "ToggleToolButton:checked:disabled {\n"
-                                     "    color: rgba(255, 255, 255, 0.9);\n"
-                                     "    background-color: rgb(205, 205, 205);\n"
-                                     "    border: 1px solid rgb(205, 205, 205);\n"
-                                     "}\n"
-                                     "\n"
-                                     "SplitDropButton,\n"
-                                     "PrimarySplitDropButton {\n"
-                                     "    border-left: none;\n"
-                                     "    border-top-left-radius: 0;\n"
-                                     "    border-bottom-left-radius: 0;\n"
-                                     "}\n"
-                                     "\n"
-                                     "#splitPushButton,\n"
-                                     "#splitToolButton,\n"
-                                     "#primarySplitPushButton,\n"
-                                     "#primarySplitToolButton {\n"
-                                     "    border-top-right-radius: 0;\n"
-                                     "    border-bottom-right-radius: 0;\n"
-                                     "}\n"
-                                     "\n"
-                                     "#splitPushButton:pressed,\n"
-                                     "#splitToolButton:pressed,\n"
-                                     "SplitDropButton:pressed {\n"
-                                     "    border-bottom: 1px solid rgba(0, 0, 0, 0.183);\n"
-                                     "}\n"
-                                     "\n"
-                                     "PrimarySplitDropButton:pressed {\n"
-                                     "    border-bottom: 1px solid #007780;\n"
-                                     "}\n"
-                                     "\n"
-                                     "#primarySplitPushButton, #primarySplitToolButton {\n"
-                                     "    border-right: 1px solid #3eabb3;\n"
-                                     "}\n"
-                                     "\n"
-                                     "#primarySplitPushButton:pressed, #primarySplitToolButton:pressed {\n"
-                                     "    border-bottom: 1px solid #007780;\n"
-                                     "}\n"
-                                     "\n"
-                                     "HyperlinkButton {\n"
-                                     "    /* font: 14px \'Segoe UI\', \'Microsoft YaHei\'; */\n"
-                                     "    padding: 6px 12px 6px 12px;\n"
-                                     "    color: #009faa;\n"
-                                     "    border: none;\n"
-                                     "    border-radius: 6px;\n"
-                                     "    background-color: transparent;\n"
-                                     "}\n"
-                                     "\n"
-                                     "HyperlinkButton:hover {\n"
-                                     "    background-color: rgba(0, 0, 0, 15);\n"
-                                     "}\n"
-                                     "\n"
-                                     "HyperlinkButton:pressed {\n"
-                                     "    background-color: rgba(0, 0, 0, 7);\n"
-                                     "}\n"
-                                     "\n"
-                                     "HyperlinkButton:disabled {\n"
-                                     "    color: rgba(0, 0, 0, 0.43)\n"
-                                     "}\n"
-                                     "\n"
-                                     "\n"
-                                     "RadioButton {\n"
-                                     "    min-height: 24px;\n"
-                                     "    max-height: 24px;\n"
-                                     "    background-color: transparent;\n"
-                                     "    font: 14px \'Segoe UI\', \'Microsoft YaHei\', \'PingFang SC\';\n"
-                                     "    color: black;\n"
-                                     "}\n"
-                                     "\n"
-                                     "RadioButton::indicator {\n"
-                                     "    width: 18px;\n"
-                                     "    height: 18px;\n"
-                                     "    border-radius: 11px;\n"
-                                     "    border: 2px solid #999999;\n"
-                                     "    background-color: rgba(0, 0, 0, 5);\n"
-                                     "    margin-right: 4px;\n"
-                                     "}\n"
-                                     "\n"
-                                     "RadioButton::indicator:hover {\n"
-                                     "    background-color: rgba(0, 0, 0, 0);\n"
-                                     "}\n"
-                                     "\n"
-                                     "RadioButton::indicator:pressed {\n"
-                                     "    border: 2px solid #bbbbbb;\n"
-                                     "    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
-                                     "            stop:0 rgb(255, 255, 255),\n"
-                                     "            stop:0.5 rgb(255, 255, 255),\n"
-                                     "            stop:0.6 rgb(225, 224, 223),\n"
-                                     "            stop:1 rgb(225, 224, 223));\n"
-                                     "}\n"
-                                     "\n"
-                                     "RadioButton::indicator:checked {\n"
-                                     "    height: 22px;\n"
-                                     "    width: 22px;\n"
-                                     "    border: none;\n"
-                                     "    border-radius: 11px;\n"
-                                     "    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
-                                     "            stop:0 rgb(255, 255, 255),\n"
-                                     "            stop:0.5 rgb(255, 255, 255),\n"
-                                     "            stop:0.6 #009faa,\n"
-                                     "            stop:1 #009faa);\n"
-                                     "}\n"
-                                     "\n"
-                                     "RadioButton::indicator:checked:hover {\n"
-                                     "    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
-                                     "            stop:0 rgb(255, 255, 255),\n"
-                                     "            stop:0.6 rgb(255, 255, 255),\n"
-                                     "            stop:0.7 #009faa,\n"
-                                     "            stop:1 #009faa);\n"
-                                     "}\n"
-                                     "\n"
-                                     "RadioButton::indicator:checked:pressed {\n"
-                                     "    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
-                                     "            stop:0 rgb(255, 255, 255),\n"
-                                     "            stop:0.5 rgb(255, 255, 255),\n"
-                                     "            stop:0.6 #009faa,\n"
-                                     "            stop:1 #009faa);\n"
-                                     "}\n"
-                                     "\n"
-                                     "RadioButton:disabled {\n"
-                                     "    color: rgba(0, 0, 0, 110);\n"
-                                     "}\n"
-                                     "\n"
-                                     "RadioButton::indicator:disabled {\n"
-                                     "    border: 2px solid #bbbbbb;\n"
-                                     "    background-color: transparent;\n"
-                                     "}\n"
-                                     "\n"
-                                     "RadioButton::indicator:disabled:checked {\n"
-                                     "    border: none;\n"
-                                     "    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
-                                     "            stop:0 rgb(255, 255, 255),\n"
-                                     "            stop:0.5 rgb(255, 255, 255),\n"
-                                     "            stop:0.6 rgba(0, 0, 0, 0.2169),\n"
-                                     "            stop:1 rgba(0, 0, 0, 0.2169));\n"
-                                     "}\n"
-                                     "\n"
-                                     "TransparentToolButton,\n"
-                                     "TransparentToggleToolButton,\n"
-                                     "TransparentDropDownToolButton,\n"
-                                     "TransparentPushButton,\n"
-                                     "TransparentDropDownPushButton,\n"
-                                     "TransparentTogglePushButton {\n"
-                                     "    background-color: transparent;\n"
-                                     "    border: none;\n"
-                                     "    border-radius: 5px;\n"
-                                     "    margin: 0;\n"
-                                     "}\n"
-                                     "\n"
-                                     "TransparentToolButton:hover,\n"
-                                     "TransparentToggleToolButton:hover,\n"
-                                     "TransparentDropDownToolButton:hover,\n"
-                                     "TransparentPushButton:hover,\n"
-                                     "TransparentDropDownPushButton:hover,\n"
-                                     "TransparentTogglePushButton:hover {\n"
-                                     "    background-color: rgba(0, 0, 0, 9);\n"
-                                     "    border: none;\n"
-                                     "}\n"
-                                     "\n"
-                                     "TransparentToolButton:pressed,\n"
-                                     "TransparentToggleToolButton:pressed,\n"
-                                     "TransparentDropDownToolButton:pressed,\n"
-                                     "TransparentPushButton:pressed,\n"
-                                     "TransparentDropDownPushButton:pressed,\n"
-                                     "TransparentTogglePushButton:pressed {\n"
-                                     "    background-color: rgba(0, 0, 0, 6);\n"
-                                     "    border: none;\n"
-                                     "}\n"
-                                     "\n"
-                                     "TransparentToolButton:disabled,\n"
-                                     "TransparentToggleToolButton:disabled,\n"
-                                     "TransparentDropDownToolButton:disabled,\n"
-                                     "TransprentPushButton:disabled,\n"
-                                     "TransparentDropDownPushButton:disabled,\n"
-                                     "TransprentTogglePushButton:disabled {\n"
-                                     "    background-color: transparent;\n"
-                                     "    border: none;\n"
-                                     "}\n"
-                                     "\n"
-                                     "\n"
-                                     "PillPushButton,\n"
-                                     "PillPushButton:hover,\n"
-                                     "PillPushButton:pressed,\n"
-                                     "PillPushButton:disabled,\n"
-                                     "PillPushButton:checked,\n"
-                                     "PillPushButton:checked:hover,\n"
-                                     "PillPushButton:checked:pressed,\n"
-                                     "PillPushButton:disabled:checked,\n"
-                                     "PillToolButton,\n"
-                                     "PillToolButton:hover,\n"
-                                     "PillToolButton:pressed,\n"
-                                     "PillToolButton:disabled,\n"
-                                     "PillToolButton:checked,\n"
-                                     "PillToolButton:checked:hover,\n"
-                                     "PillToolButton:checked:pressed,\n"
-                                     "PillToolButton:disabled:checked {\n"
-                                     "    background-color: transparent;\n"
-                                     "    border: none;\n"
-                                     "}\n"
-                                     "")
+"    color: black;\n"
+"    background: rgba(255, 255, 255, 0.7);\n"
+"    border: 1px solid rgba(0, 0, 0, 0.073);\n"
+"    border-bottom: 1px solid rgba(0, 0, 0, 0.183);\n"
+"    border-radius: 5px;\n"
+"    /* font: 14px \'Segoe UI\', \'Microsoft YaHei\'; */\n"
+"    padding: 5px 12px 6px 12px;\n"
+"    outline: none;\n"
+"}\n"
+"#tryButton {    \n"
+"    font: 15pt \"Terminal\";\n"
+"    color:rgb(170, 255, 255)\n"
+"}\n"
+"\n"
+"ToolButton {\n"
+"    padding: 5px 9px 6px 8px;\n"
+"}\n"
+"\n"
+"PushButton[hasIcon=false] {\n"
+"    padding: 5px 12px 6px 12px;\n"
+"}\n"
+"\n"
+"PushButton[hasIcon=true] {\n"
+"    padding: 5px 12px 6px 36px;\n"
+"}\n"
+"\n"
+"DropDownToolButton, PrimaryDropDownToolButton {\n"
+"    padding: 5px 31px 6px 8px;\n"
+"}\n"
+"\n"
+"DropDownPushButton[hasIcon=false],\n"
+"PrimaryDropDownPushButton[hasIcon=false] {\n"
+"    padding: 5px 31px 6px 12px;\n"
+"}\n"
+"\n"
+"DropDownPushButton[hasIcon=true],\n"
+"PrimaryDropDownPushButton[hasIcon=true] {\n"
+"    padding: 5px 31px 6px 36px;\n"
+"}\n"
+"\n"
+"PushButton:hover, ToolButton:hover, ToggleButton:hover, ToggleToolButton:hover {\n"
+"    background: rgba(249, 249, 249, 0.5);\n"
+"}\n"
+"\n"
+"PushButton:pressed, ToolButton:pressed, ToggleButton:pressed, ToggleToolButton:pressed {\n"
+"    color: rgba(0, 0, 0, 0.63);\n"
+"    background: rgba(249, 249, 249, 0.3);\n"
+"    border-bottom: 1px solid rgba(0, 0, 0, 0.073);\n"
+"}\n"
+"\n"
+"PushButton:disabled, ToolButton:disabled, ToggleButton:disabled, ToggleToolButton:disabled {\n"
+"    color: rgba(0, 0, 0, 0.36);\n"
+"    background: rgba(249, 249, 249, 0.3);\n"
+"    border: 1px solid rgba(0, 0, 0, 0.06);\n"
+"    border-bottom: 1px solid rgba(0, 0, 0, 0.06);\n"
+"}\n"
+"\n"
+"\n"
+"PrimaryPushButton,\n"
+"PrimaryToolButton,\n"
+"ToggleButton:checked,\n"
+"ToggleToolButton:checked {\n"
+"    color: white;\n"
+"    background-color: #009faa;\n"
+"    border: 1px solid #00a7b3;\n"
+"    border-bottom: 1px solid #007780;\n"
+"}\n"
+"\n"
+"PrimaryPushButton:hover,\n"
+"PrimaryToolButton:hover,\n"
+"ToggleButton:checked:hover,\n"
+"ToggleToolButton:checked:hover {\n"
+"    background-color: #00a7b3;\n"
+"    border: 1px solid #2daab3;\n"
+"    border-bottom: 1px solid #007780;\n"
+"}\n"
+"\n"
+"PrimaryPushButton:pressed,\n"
+"PrimaryToolButton:pressed,\n"
+"ToggleButton:checked:pressed,\n"
+"ToggleToolButton:checked:pressed {\n"
+"    color: rgba(255, 255, 255, 0.63);\n"
+"    background-color: #3eabb3;\n"
+"    border: 1px solid #3eabb3;\n"
+"}\n"
+"\n"
+"PrimaryPushButton:disabled,\n"
+"PrimaryToolButton:disabled,\n"
+"ToggleButton:checked:disabled,\n"
+"ToggleToolButton:checked:disabled {\n"
+"    color: rgba(255, 255, 255, 0.9);\n"
+"    background-color: rgb(205, 205, 205);\n"
+"    border: 1px solid rgb(205, 205, 205);\n"
+"}\n"
+"\n"
+"SplitDropButton,\n"
+"PrimarySplitDropButton {\n"
+"    border-left: none;\n"
+"    border-top-left-radius: 0;\n"
+"    border-bottom-left-radius: 0;\n"
+"}\n"
+"\n"
+"#splitPushButton,\n"
+"#splitToolButton,\n"
+"#primarySplitPushButton,\n"
+"#primarySplitToolButton {\n"
+"    border-top-right-radius: 0;\n"
+"    border-bottom-right-radius: 0;\n"
+"}\n"
+"\n"
+"#splitPushButton:pressed,\n"
+"#splitToolButton:pressed,\n"
+"SplitDropButton:pressed {\n"
+"    border-bottom: 1px solid rgba(0, 0, 0, 0.183);\n"
+"}\n"
+"\n"
+"PrimarySplitDropButton:pressed {\n"
+"    border-bottom: 1px solid #007780;\n"
+"}\n"
+"\n"
+"#primarySplitPushButton, #primarySplitToolButton {\n"
+"    border-right: 1px solid #3eabb3;\n"
+"}\n"
+"\n"
+"#primarySplitPushButton:pressed, #primarySplitToolButton:pressed {\n"
+"    border-bottom: 1px solid #007780;\n"
+"}\n"
+"\n"
+"HyperlinkButton {\n"
+"    /* font: 14px \'Segoe UI\', \'Microsoft YaHei\'; */\n"
+"    padding: 6px 12px 6px 12px;\n"
+"    color: #009faa;\n"
+"    border: none;\n"
+"    border-radius: 6px;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"HyperlinkButton:hover {\n"
+"    background-color: rgba(0, 0, 0, 15);\n"
+"}\n"
+"\n"
+"HyperlinkButton:pressed {\n"
+"    background-color: rgba(0, 0, 0, 7);\n"
+"}\n"
+"\n"
+"HyperlinkButton:disabled {\n"
+"    color: rgba(0, 0, 0, 0.43)\n"
+"}\n"
+"\n"
+"\n"
+"RadioButton {\n"
+"    min-height: 24px;\n"
+"    max-height: 24px;\n"
+"    background-color: transparent;\n"
+"    font: 14px \'Segoe UI\', \'Microsoft YaHei\', \'PingFang SC\';\n"
+"    color: black;\n"
+"}\n"
+"\n"
+"RadioButton::indicator {\n"
+"    width: 18px;\n"
+"    height: 18px;\n"
+"    border-radius: 11px;\n"
+"    border: 2px solid #999999;\n"
+"    background-color: rgba(0, 0, 0, 5);\n"
+"    margin-right: 4px;\n"
+"}\n"
+"\n"
+"RadioButton::indicator:hover {\n"
+"    background-color: rgba(0, 0, 0, 0);\n"
+"}\n"
+"\n"
+"RadioButton::indicator:pressed {\n"
+"    border: 2px solid #bbbbbb;\n"
+"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
+"            stop:0 rgb(255, 255, 255),\n"
+"            stop:0.5 rgb(255, 255, 255),\n"
+"            stop:0.6 rgb(225, 224, 223),\n"
+"            stop:1 rgb(225, 224, 223));\n"
+"}\n"
+"\n"
+"RadioButton::indicator:checked {\n"
+"    height: 22px;\n"
+"    width: 22px;\n"
+"    border: none;\n"
+"    border-radius: 11px;\n"
+"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
+"            stop:0 rgb(255, 255, 255),\n"
+"            stop:0.5 rgb(255, 255, 255),\n"
+"            stop:0.6 #009faa,\n"
+"            stop:1 #009faa);\n"
+"}\n"
+"\n"
+"RadioButton::indicator:checked:hover {\n"
+"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
+"            stop:0 rgb(255, 255, 255),\n"
+"            stop:0.6 rgb(255, 255, 255),\n"
+"            stop:0.7 #009faa,\n"
+"            stop:1 #009faa);\n"
+"}\n"
+"\n"
+"RadioButton::indicator:checked:pressed {\n"
+"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
+"            stop:0 rgb(255, 255, 255),\n"
+"            stop:0.5 rgb(255, 255, 255),\n"
+"            stop:0.6 #009faa,\n"
+"            stop:1 #009faa);\n"
+"}\n"
+"\n"
+"RadioButton:disabled {\n"
+"    color: rgba(0, 0, 0, 110);\n"
+"}\n"
+"\n"
+"RadioButton::indicator:disabled {\n"
+"    border: 2px solid #bbbbbb;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"RadioButton::indicator:disabled:checked {\n"
+"    border: none;\n"
+"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5,\n"
+"            stop:0 rgb(255, 255, 255),\n"
+"            stop:0.5 rgb(255, 255, 255),\n"
+"            stop:0.6 rgba(0, 0, 0, 0.2169),\n"
+"            stop:1 rgba(0, 0, 0, 0.2169));\n"
+"}\n"
+"\n"
+"TransparentToolButton,\n"
+"TransparentToggleToolButton,\n"
+"TransparentDropDownToolButton,\n"
+"TransparentPushButton,\n"
+"TransparentDropDownPushButton,\n"
+"TransparentTogglePushButton {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    margin: 0;\n"
+"}\n"
+"\n"
+"TransparentToolButton:hover,\n"
+"TransparentToggleToolButton:hover,\n"
+"TransparentDropDownToolButton:hover,\n"
+"TransparentPushButton:hover,\n"
+"TransparentDropDownPushButton:hover,\n"
+"TransparentTogglePushButton:hover {\n"
+"    background-color: rgba(0, 0, 0, 9);\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"TransparentToolButton:pressed,\n"
+"TransparentToggleToolButton:pressed,\n"
+"TransparentDropDownToolButton:pressed,\n"
+"TransparentPushButton:pressed,\n"
+"TransparentDropDownPushButton:pressed,\n"
+"TransparentTogglePushButton:pressed {\n"
+"    background-color: rgba(0, 0, 0, 6);\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"TransparentToolButton:disabled,\n"
+"TransparentToggleToolButton:disabled,\n"
+"TransparentDropDownToolButton:disabled,\n"
+"TransprentPushButton:disabled,\n"
+"TransparentDropDownPushButton:disabled,\n"
+"TransprentTogglePushButton:disabled {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"\n"
+"PillPushButton,\n"
+"PillPushButton:hover,\n"
+"PillPushButton:pressed,\n"
+"PillPushButton:disabled,\n"
+"PillPushButton:checked,\n"
+"PillPushButton:checked:hover,\n"
+"PillPushButton:checked:pressed,\n"
+"PillPushButton:disabled:checked,\n"
+"PillToolButton,\n"
+"PillToolButton:hover,\n"
+"PillToolButton:pressed,\n"
+"PillToolButton:disabled,\n"
+"PillToolButton:checked,\n"
+"PillToolButton:checked:hover,\n"
+"PillToolButton:checked:pressed,\n"
+"PillToolButton:disabled:checked {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"}\n"
+"")
         self.tryButton.setObjectName("tryButton")
         self.verticalLayout_2.addWidget(self.tryButton)
         self.MyShowMealLabel = DisplayLabel(self.MyHaveATryWidget)
         self.MyShowMealLabel.setStyleSheet("#MyShowMealLabel{\n"
-                                           "    font: 16pt \"Terminal\";\n"
-                                           "}")
+"    font: 16pt \"Terminal\";\n"
+"}")
         self.MyShowMealLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.MyShowMealLabel.setObjectName("MyShowMealLabel")
         self.verticalLayout_2.addWidget(self.MyShowMealLabel)
         self.horizontalLayout_2.addLayout(self.verticalLayout_2)
-        spacerItem4 = QtWidgets.QSpacerItem(48, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem4)
+        spacerItem5 = QtWidgets.QSpacerItem(48, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem5)
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
         self.gridLayout.addWidget(self.MyHaveATryWidget, 3, 2, 1, 1)
-        spacerItem5 = QtWidgets.QSpacerItem(10, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem5, 4, 1, 1, 2)
+        spacerItem6 = QtWidgets.QSpacerItem(10, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout.addItem(spacerItem6, 4, 1, 1, 2)
+        self.CardWidget_2 = CardWidget(MyHomeWidget_ui)
+        self.CardWidget_2.setMinimumSize(QtCore.QSize(643, 261))
+        self.CardWidget_2.setObjectName("CardWidget_2")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.CardWidget_2)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.ListWidget_2 = ListWidget(self.CardWidget_2)
+        self.ListWidget_2.setObjectName("ListWidget_2")
+        self.verticalLayout_5.addWidget(self.ListWidget_2)
+        self.gridLayout.addWidget(self.CardWidget_2, 3, 1, 1, 1)
         self.CardWidget = CardWidget(MyHomeWidget_ui)
         self.CardWidget.setObjectName("CardWidget")
-        self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.CardWidget)
-        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.CardWidget)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.PopUpAniStackedWidget = PopUpAniStackedWidget(self.CardWidget)
         self.PopUpAniStackedWidget.setObjectName("PopUpAniStackedWidget")
         self.page_3 = QtWidgets.QWidget()
@@ -628,128 +713,19 @@ class Ui_MyHomeWidget_ui(object):
         self.PushButton_9.setGeometry(QtCore.QRect(21, 160, 121, 32))
         self.PushButton_9.setObjectName("PushButton_9")
         self.PopUpAniStackedWidget.addWidget(self.page)
-        self.horizontalLayout_6.addWidget(self.PopUpAniStackedWidget)
+        self.verticalLayout_6.addWidget(self.PopUpAniStackedWidget)
         self.gridLayout.addWidget(self.CardWidget, 2, 1, 1, 1)
-        self.MustEatListWidget = CardWidget(MyHomeWidget_ui)
-        self.MustEatListWidget.setMinimumSize(QtCore.QSize(331, 261))
-        self.MustEatListWidget.setObjectName("MustEatListWidget")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.MustEatListWidget)
-        self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.SubtitleLabel = SubtitleLabel(self.MustEatListWidget)
-        self.SubtitleLabel.setStyleSheet("border-color: rgb(170, 170, 255);")
-        self.SubtitleLabel.setObjectName("SubtitleLabel")
-        self.verticalLayout_4.addWidget(self.SubtitleLabel)
-        self.MustEatList = ListWidget(self.MustEatListWidget)
-        self.MustEatList.setObjectName("MustEatList")
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        self.MustEatList.addItem(item)
-        self.verticalLayout_4.addWidget(self.MustEatList)
-        self.gridLayout.addWidget(self.MustEatListWidget, 2, 2, 1, 1)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem6, 2, 3, 2, 1)
-        self.horizontalLayout_4.addLayout(self.gridLayout)
+        self.verticalLayout_8.addLayout(self.gridLayout)
         self.MyHaveATryLabel.setBuddy(self.tryButton)
 
         self.retranslateUi(MyHomeWidget_ui)
-        self.PopUpAniStackedWidget.setCurrentIndex(1)
+        self.PopUpAniStackedWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MyHomeWidget_ui)
 
     def retranslateUi(self, MyHomeWidget_ui):
         _translate = QtCore.QCoreApplication.translate
         MyHomeWidget_ui.setWindowTitle(_translate("MyHomeWidget_ui", "Form"))
         self.MyHomeLable.setText(_translate("MyHomeWidget_ui", "The Taste Of BUAA"))
-        self.MyHaveATryLabel.setText(_translate("MyHomeWidget_ui",
-                                                "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt; font-weight:600; color:#55aaff;\">没想好吃什么?</span></p><p align=\"center\"><span style=\" font-size:18pt; font-weight:600; color:#55aaff;\">我来帮你(●\'◡\'●)</span></p></body></html>"))
-        self.tryButton.setText(_translate("MyHomeWidget_ui", "Have a try"))
-        self.MyShowMealLabel.setText(_translate("MyHomeWidget_ui", "Have a nice day!"))
-        self.BodyLabel.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PushButton.setText(_translate("MyHomeWidget_ui", "Push button"))
-        self.BodyLabel_2.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PushButton_2.setText(_translate("MyHomeWidget_ui", "Push button"))
-        self.BodyLabel_3.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PushButton_3.setText(_translate("MyHomeWidget_ui", "Push button"))
-        self.BodyLabel_4.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PushButton_4.setText(_translate("MyHomeWidget_ui", "Push button"))
-        self.BodyLabel_17.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PushButton_17.setText(_translate("MyHomeWidget_ui", "Push button"))
-        self.BodyLabel_6.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PushButton_6.setText(_translate("MyHomeWidget_ui", "Push button"))
-        self.BodyLabel_7.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PushButton_7.setText(_translate("MyHomeWidget_ui", "Push button"))
-        self.BodyLabel_8.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PushButton_8.setText(_translate("MyHomeWidget_ui", "Push button"))
-        self.BodyLabel_9.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PushButton_9.setText(_translate("MyHomeWidget_ui", "Push button"))
         self.SubtitleLabel.setText(_translate("MyHomeWidget_ui", "Foodie Bucket List"))
         __sortingEnabled = self.MustEatList.isSortingEnabled()
         self.MustEatList.setSortingEnabled(False)
@@ -772,8 +748,26 @@ class Ui_MyHomeWidget_ui(object):
         item = self.MustEatList.item(8)
         item.setText(_translate("MyHomeWidget_ui", "9"))
         self.MustEatList.setSortingEnabled(__sortingEnabled)
-
-
-from qfluentwidgets import BodyLabel, CalendarPicker, CardWidget, DisplayLabel, ImageLabel, ListWidget, \
-    PopUpAniStackedWidget, PrimaryPushButton, PushButton, SearchLineEdit, SubtitleLabel, TitleLabel, ToolButton
-from picture_set import pic_rc
+        self.MyHaveATryLabel.setText(_translate("MyHomeWidget_ui", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt; font-weight:600; color:#55aaff;\">没想好吃什么?</span></p><p align=\"center\"><span style=\" font-size:18pt; font-weight:600; color:#55aaff;\">我来帮你(●\'◡\'●)</span></p></body></html>"))
+        self.tryButton.setText(_translate("MyHomeWidget_ui", "Have a try"))
+        self.MyShowMealLabel.setText(_translate("MyHomeWidget_ui", "Have a nice day!"))
+        self.BodyLabel.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_2.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_2.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_3.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_3.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_4.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_4.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_17.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_17.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_6.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_6.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_7.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_7.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_8.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_8.setText(_translate("MyHomeWidget_ui", "Push button"))
+        self.BodyLabel_9.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
+        self.PushButton_9.setText(_translate("MyHomeWidget_ui", "Push button"))
+from qfluentwidgets import BodyLabel, CalendarPicker, CardWidget, DisplayLabel, ImageLabel, ListWidget, PopUpAniStackedWidget, PrimaryPushButton, PushButton, SearchLineEdit, SubtitleLabel, TitleLabel, ToolButton
+# import pic_rc
