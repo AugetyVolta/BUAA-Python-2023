@@ -172,7 +172,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="BodyLabel" name="FavouriteNum">
+             <widget class="BodyLabel" name="favouriteNum">
               <property name="text">
                <string>1001</string>
               </property>
@@ -225,7 +225,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="BodyLabel" name="EatenNum">
+             <widget class="BodyLabel" name="eatenNum">
               <property name="text">
                <string>666</string>
               </property>
@@ -288,7 +288,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="CaptionLabel" name="SignatureLable">
+         <widget class="CaptionLabel" name="signatureLable">
           <property name="text">
            <string>关于吃什么，还得好好想一想</string>
           </property>
@@ -355,7 +355,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
-          <widget class="ProgressRing" name="ProgressRing">
+          <widget class="ProgressRing" name="ProgressRing_1">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -626,7 +626,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_3">
        <widget class="QWidget" name="layoutWidget_3">
@@ -682,7 +682,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="CardWidget" name="CardWidget_6">
+          <widget class="CardWidget" name="nickNameShow">
            <property name="minimumSize">
             <size>
              <width>251</width>
@@ -792,9 +792,9 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_11">
             <item>
-             <widget class="BodyLabel" name="BodyLabel_6">
+             <widget class="BodyLabel" name="birthdayShow">
               <property name="text">
-               <string>2000-01-01</string>
+               <string>Not Edited Yet</string>
               </property>
               <property name="pixelFontSize" stdset="0">
                <number>18</number>
@@ -893,7 +893,7 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_8">
             <item>
-             <widget class="BodyLabel" name="BodyLabel_2">
+             <widget class="BodyLabel" name="userNameShow">
               <property name="text">
                <string>This is the only indentity</string>
               </property>
@@ -988,9 +988,9 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_10">
             <item>
-             <widget class="BodyLabel" name="BodyLabel_5">
+             <widget class="BodyLabel" name="genderShow">
               <property name="text">
-               <string>男</string>
+               <string>Not Edited Yet</string>
               </property>
               <property name="pixelFontSize" stdset="0">
                <number>18</number>
@@ -1017,11 +1017,11 @@
        </widget>
       </widget>
       <widget class="QWidget" name="page_4">
-       <widget class="PushButton" name="PushButton">
+       <widget class="PushButton" name="saveButton">
         <property name="geometry">
          <rect>
           <x>541</x>
-          <y>230</y>
+          <y>270</y>
           <width>91</width>
           <height>31</height>
          </rect>
@@ -1035,26 +1035,6 @@
         </property>
         <property name="text">
          <string>保存</string>
-        </property>
-       </widget>
-       <widget class="PushButton" name="PushButton_2">
-        <property name="geometry">
-         <rect>
-          <x>541</x>
-          <y>280</y>
-          <width>91</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>14</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>重置</string>
         </property>
        </widget>
        <widget class="QWidget" name="layoutWidget_16">
@@ -1110,7 +1090,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="LineEdit" name="LineEdit_3">
+          <widget class="LineEdit" name="passwordEdit_old">
            <property name="font">
             <font>
              <weight>50</weight>
@@ -1118,7 +1098,10 @@
             </font>
            </property>
            <property name="text">
-            <string>xzcXV</string>
+            <string/>
+           </property>
+           <property name="placeholderText">
+            <string>••••••••••••</string>
            </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>
@@ -1180,7 +1163,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="LineEdit" name="LineEdit">
+          <widget class="LineEdit" name="nickNameEdit">
            <property name="font">
             <font>
              <weight>50</weight>
@@ -1188,7 +1171,7 @@
             </font>
            </property>
            <property name="text">
-            <string>xzcXV</string>
+            <string/>
            </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>
@@ -1263,7 +1246,13 @@
           </spacer>
          </item>
          <item>
-          <widget class="ComboBox" name="ComboBox">
+          <widget class="ComboBox" name="genderComboBox">
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
            <property name="autoRepeat">
             <bool>false</bool>
            </property>
@@ -1340,7 +1329,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="LineEdit" name="LineEdit_2">
+          <widget class="LineEdit" name="userNameEdit">
            <property name="font">
             <font>
              <weight>50</weight>
@@ -1348,7 +1337,10 @@
             </font>
            </property>
            <property name="text">
-            <string>xzcXV</string>
+            <string/>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -1420,13 +1412,13 @@
           </spacer>
          </item>
          <item>
-          <widget class="ComboBox" name="ComboBox_3"/>
+          <widget class="ComboBox" name="birthday_year"/>
          </item>
          <item>
-          <widget class="ComboBox" name="ComboBox_4"/>
+          <widget class="ComboBox" name="birthday_month"/>
          </item>
          <item>
-          <widget class="ComboBox" name="ComboBox_5"/>
+          <widget class="ComboBox" name="birthday_day"/>
          </item>
          <item>
           <spacer name="horizontalSpacer_35">
@@ -1496,7 +1488,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="LineEdit" name="LineEdit_4">
+          <widget class="LineEdit" name="passwordEdit_new">
            <property name="font">
             <font>
              <weight>50</weight>
@@ -1504,7 +1496,10 @@
             </font>
            </property>
            <property name="text">
-            <string>xzcXV</string>
+            <string/>
+           </property>
+           <property name="placeholderText">
+            <string>••••••••••••</string>
            </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>

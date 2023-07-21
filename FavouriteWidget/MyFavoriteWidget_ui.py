@@ -36,6 +36,26 @@ class Ui_MyFavoriteWidget(object):
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.verticalLayout.addWidget(self.line)
+        self.CardWidget = CardWidget(MyFavoriteWidget)
+        self.CardWidget.setGeometry(QtCore.QRect(20, 120, 481, 521))
+        self.CardWidget.setObjectName("CardWidget")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.CardWidget)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.SubtitleLabel = SubtitleLabel(self.CardWidget)
+        self.SubtitleLabel.setObjectName("SubtitleLabel")
+        self.verticalLayout_2.addWidget(self.SubtitleLabel)
+        self.TreeWidget = TreeWidget(self.CardWidget)
+        self.TreeWidget.setObjectName("TreeWidget")
+        self.TreeWidget.headerItem().setText(0, "1")
+        self.verticalLayout_2.addWidget(self.TreeWidget)
+        self.CardWidget_3 = CardWidget(MyFavoriteWidget)
+        self.CardWidget_3.setGeometry(QtCore.QRect(520, 120, 481, 521))
+        self.CardWidget_3.setObjectName("CardWidget_3")
+        self.line_2 = QtWidgets.QFrame(MyFavoriteWidget)
+        self.line_2.setGeometry(QtCore.QRect(500, 120, 20, 521))
+        self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_2.setObjectName("line_2")
 
         self.retranslateUi(MyFavoriteWidget)
         QtCore.QMetaObject.connectSlotsByName(MyFavoriteWidget)
@@ -44,4 +64,5 @@ class Ui_MyFavoriteWidget(object):
         _translate = QtCore.QCoreApplication.translate
         MyFavoriteWidget.setWindowTitle(_translate("MyFavoriteWidget", "Form"))
         self.TitleLabel.setText(_translate("MyFavoriteWidget", "我的收藏"))
-from qfluentwidgets import TitleLabel
+        self.SubtitleLabel.setText(_translate("MyFavoriteWidget", "餐厅"))
+from qfluentwidgets import CardWidget, SubtitleLabel, TitleLabel, TreeWidget

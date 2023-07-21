@@ -15,10 +15,13 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
         # 初始化用户信息
         self.initUserInfo()
 
-        self.ProgressRing.setValue(50)
-        self.ProgressRing.setTextVisible(True)
+        self.ProgressRing_1.setValue(50)
+        self.ProgressRing_1.setTextVisible(True)
 
-        # print(self.stackedWidget.count())
+        # 初始化性别选框
+        self.initGenderComBox()
+        # 初始化年龄选框
+        self.initBirthdayComBox()
 
     # 初始化个人信息
     def initUserInfo(self):
@@ -51,3 +54,15 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
             # 在这里执行上传头像的逻辑，这里只是简单地显示选择的图像
             pixmap = QPixmap(file_path)
             self.ImageLabel.setPixmap(pixmap.scaled(self.ImageLabel.width(), self.ImageLabel.height()))
+
+    def initGenderComBox(self):
+        items = ['男', '女']
+        self.genderComboBox.addItems(items)
+
+    def initBirthdayComBox(self):
+        items_year = [str(i) for i in range(1952, 2100)]
+        items_month = [str(i) for i in range(1, 13)]
+        items_day = [str(i) for i in range(1, 32)]
+        self.birthday_year.addItems(items_year)
+        self.birthday_month.addItems(items_month)
+        self.birthday_day.addItems(items_day)
