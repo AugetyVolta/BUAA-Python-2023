@@ -1,15 +1,24 @@
 import os
 import sys
 import ast
+
+from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import QDateTime
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QTextEdit, QPushButton, QWidget, \
     QScrollArea, QHBoxLayout, QDesktopWidget
-from qfluentwidgets import TextEdit, CaptionLabel, StrongBodyLabel, PrimaryPushButton, PushButton, BodyLabel, ScrollArea
+from qfluentwidgets import TextEdit, CaptionLabel, StrongBodyLabel, PrimaryPushButton, PushButton, BodyLabel, \
+    ScrollArea, ImageLabel
 
 
 class DishDetailWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, dish_name, dish_type, restaurant_name, counter_name):
         super().__init__()
+        self.dish_name = dish_name
+        self.dish_type = dish_type
+        self.restaurant_name = restaurant_name
+        self.counter_name = counter_name
+
         if not os.path.exists("list") or os.path.getsize("list") == 0:
             self.comments = []
         else:
@@ -21,12 +30,50 @@ class DishDetailWindow(QMainWindow):
 
     def initUI(self):
         self.setWindowTitle('菜品详情页面')
-        self.setGeometry(100, 100, 300, 900)
+        self.setGeometry(100, 100, 600, 900)
         self.center()
 
         # 菜品详情显示区域
-        self.dish_detail_label = QLabel('菜品名称：鱼香肉丝\n菜品简介：这是一道经典的川菜，口味鲜美，适合大众口味。')
-        self.dish_detail_label.setStyleSheet("font-size: 24px;")
+        # 设置菜品图像 必须是128*128的图片
+        self.dish_image_lable = ImageLabel(None)
+        self.dish_image_lable.setGeometry(QtCore.QRect(190, 170, 128, 128))
+        pixmap = QPixmap("../picture_set/tmp/九转大肠.jpg")
+        self.dish_image_lable.setPixmap(pixmap)
+        self.dish_image_lable.setScaledContents(True)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.dish_image_lable.sizePolicy().hasHeightForWidth())
+        self.dish_image_lable.setSizePolicy(sizePolicy)
+        self.dish_image_lable.setMinimumSize(QtCore.QSize(128, 128))
+        self.dish_image_lable.setMaximumSize(QtCore.QSize(128, 128))
+        # 设置菜品详细信息
+        dish_info_label = QLabel(f'菜名：{self.dish_name}\n'
+                                 f'类型：{self.dish_type}\n'
+                                 f'餐厅：{self.restaurant_name}\n'
+                                 f'柜台：{self.counter_name}')
+        dish_info_label.setStyleSheet("font-size: 24px;")
+
+        # 收藏和吃过的按钮
+        self.favorite_button = PushButton('收藏')
+        self.favorite_button.setFixedSize(90, 45)
+        self.favorite_button.setStyleSheet("font-size: 20px; background-color: #E0C240;")  # Updated color
+
+        self.eaten_button = PushButton('吃过')
+        self.eaten_button.setFixedSize(90, 45)
+        self.eaten_button.setStyleSheet("font-size: 20px; background-color: #7CB957;")  # Updated color
+
+        # 收藏和吃过按钮布局
+        self.favorite_eaten_layout = QVBoxLayout()
+        self.favorite_eaten_layout.addWidget(self.favorite_button)
+        self.favorite_eaten_layout.addWidget(self.eaten_button)
+        self.favorite_eaten_layout.setSpacing(5)  # 设置按钮之间的间距
+
+        # 菜品图片，菜品信息，收藏和吃过按钮的布局
+        self.dish_infoAndButton_layout = QHBoxLayout()
+        self.dish_infoAndButton_layout.addWidget(self.dish_image_lable)
+        self.dish_infoAndButton_layout.addWidget(dish_info_label)
+        self.dish_infoAndButton_layout.addLayout(self.favorite_eaten_layout)
 
         # 创建QScrollArea用于显示评论
         self.scroll_area = ScrollArea()
@@ -49,12 +96,18 @@ class DishDetailWindow(QMainWindow):
         self.submit_button = PushButton('提交评论')
         self.submit_button.setStyleSheet("font-size: 20px;")
         self.clear_button = PushButton('清空评论')
-        self.clear_button.setStyleSheet("font-size: 20px;")
+        self.clear_button.setStyleSheet(
+            "font-size: 20px; "
+            "background-color: #f44336; "
+            "color: white; border: none; "
+            "border-radius: 5px; "
+            "padding: 10px 20px;")
 
         # 安排布局
         layout = QVBoxLayout()
         layout_for_button = QHBoxLayout()
-        layout.addWidget(self.dish_detail_label)
+        layout.addLayout(self.dish_infoAndButton_layout)
+        layout.addLayout(self.favorite_eaten_layout)
         layout.addWidget(self.comment_label)
         layout.addWidget(self.comment_edit)
         layout_for_button.addWidget(self.submit_button)
@@ -130,6 +183,9 @@ class DishDetailWindow(QMainWindow):
     def on_clear(self):
         # 清空输入框
         self.comment_edit.clear()
+        # 重置被回复用户信息
+        self.reply_to_user = None
+        self.comment_edit.setPlaceholderText('在这里输入您的评论...')
 
     def reply_to_comment(self, reply_user):
         # 设置回复框可见，并显示被回复用户的信息
@@ -179,6 +235,10 @@ class DishDetailWindow(QMainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = DishDetailWindow()
+    # 在这里传入菜肴信息
+    window = DishDetailWindow(dish_name='鱼香肉丝',
+                              dish_type='中餐',
+                              restaurant_name='蔡廷贵餐厅',
+                              counter_name='蔡廷贵台')
     window.show()
     sys.exit(app.exec_())
