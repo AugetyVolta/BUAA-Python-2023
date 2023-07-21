@@ -12,7 +12,7 @@ class MyFavouriteWidget(Ui_MyFavoriteWidget, QWidget):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        Lay = QVBoxLayout()
+        Layout_for_favouriteList = QVBoxLayout()
         favouriteListTitle = SubtitleLabel(self)
         favouriteListTitle.setText("收藏夹")
         font = QtGui.QFont()
@@ -21,9 +21,9 @@ class MyFavouriteWidget(Ui_MyFavoriteWidget, QWidget):
         font.setBold(True)
         font.setWeight(75)
         favouriteListTitle.setFont(font)
-        Lay.addWidget(favouriteListTitle)
-        Lay.addWidget(DishCollectionUI())
-        self.CardWidget_3.setLayout(Lay)
+        Layout_for_favouriteList.addWidget(favouriteListTitle)
+        Layout_for_favouriteList.addWidget(DishCollectionUI())
+        self.CardWidget_3.setLayout(Layout_for_favouriteList)
 
 
 if __name__ == '__main__':
