@@ -7,6 +7,8 @@ from qfluentwidgets import SplitTitleBar, setThemeColor
 from qframelesswindow import AcrylicWindow
 
 from Login.LoginWindow_ui import Ui_LoginWidget
+from Register.RegisterWindow import MyRegister
+from SplitFluentMainWindow.MyMainWindow import MyMainWindow
 
 
 class MyLogin(Ui_LoginWidget, AcrylicWindow):
@@ -31,8 +33,26 @@ class MyLogin(Ui_LoginWidget, AcrylicWindow):
                         color: white
                     }
         """)
-
+        # 设置登录跳转
+        self.setLoginButton()
+        # 设置注册跳转
+        self.setRegisterButton()
         self.center()
+
+    def setLoginButton(self):
+        self.LoginButton.clicked.connect(self.go_to_mainWindow)
+
+    def setRegisterButton(self):
+        self.RegisterButton.clicked.connect(self.go_to_register)
+
+    def go_to_mainWindow(self):
+        MainWindow = MyMainWindow()
+        MainWindow.show()
+        self.close()
+
+    def go_to_register(self):
+        registerWindow = MyRegister()
+        registerWindow.show()
 
     def center(self):
         desktop = QApplication.desktop().availableGeometry()

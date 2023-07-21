@@ -2,13 +2,13 @@ import sys
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication
 
-from SplitFluentMainWindow.MyMainWindow import MyMainWindow
+from Login.LoginWindow import MyLogin
 
 if __name__ == '__main__':
     QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
     QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
     app = QApplication(sys.argv)
-    win = MyMainWindow()
+    win = MyLogin()
     win.show()
     sys.exit(app.exec_())
