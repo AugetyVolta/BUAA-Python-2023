@@ -71,6 +71,58 @@
      <height>521</height>
     </rect>
    </property>
+   <widget class="CardWidget" name="CardWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>461</width>
+      <height>245</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="SubtitleLabel" name="SubtitleLabel">
+         <property name="text">
+          <string>我收藏的餐厅</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ListWidget" name="favouriteRestaurant"/>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="CardWidget" name="CardWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>270</y>
+      <width>461</width>
+      <height>245</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_5">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="SubtitleLabel" name="SubtitleLabel_2">
+         <property name="text">
+          <string>我收藏的柜台</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ListWidget" name="favouriteCounter"/>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="CardWidget" name="CardWidget_3">
    <property name="geometry">
@@ -91,8 +143,18 @@
    <container>1</container>
   </customwidget>
   <customwidget>
+   <class>SubtitleLabel</class>
+   <extends>QLabel</extends>
+   <header>qfluentwidgets</header>
+  </customwidget>
+  <customwidget>
    <class>TitleLabel</class>
    <extends>QLabel</extends>
+   <header>qfluentwidgets</header>
+  </customwidget>
+  <customwidget>
+   <class>ListWidget</class>
+   <extends>QListWidget</extends>
    <header>qfluentwidgets</header>
   </customwidget>
  </customwidgets>
