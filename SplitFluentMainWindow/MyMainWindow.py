@@ -3,6 +3,8 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox, QDesktopWidget
 from qfluentwidgets import SplitFluentWindow, NavigationWidget, NavigationItemPosition, Theme, NavigationDisplayMode, \
     NavigationAvatarWidget, setTheme
+
+from ManagerWidget.Manager import MyManager
 from picture_set import pic_rc
 from FavouriteWidget.MyFavourite import MyFavouriteWidget
 from Game.MyGame import Tetris
@@ -40,9 +42,21 @@ class MyMainWindow(SplitFluentWindow):
             onClick=self.changeTheme,
             position=NavigationItemPosition.BOTTOM,
         )
+        # TODO:如果是管理员有这个功能
+        self.navigationInterface.addItem(
+            routeKey='manager',
+            icon=FIF.LEAF,
+            text='manager',
+            onClick=self.change,
+            position=NavigationItemPosition.BOTTOM,
+        )
 
         # 居中显示
         self.center()
+
+    def change(self):
+        self.manager = MyManager()
+        self.manager.show()
 
     # 切换主题
     def changeTheme(self):
