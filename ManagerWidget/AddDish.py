@@ -2,8 +2,8 @@ import sys
 import time
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtWidgets import QApplication, QWidget, QFileDialog
 from qfluentwidgets import SplitTitleBar, InfoBar, InfoBarPosition
 from qframelesswindow import AcrylicWindow
 
@@ -45,6 +45,8 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
         self.hotButton.toggled.connect(self.onRadioButtonClicked)
         self.coldButton.toggled.connect(self.onRadioButtonClicked)
         self.addDishButton.clicked.connect(self.on_commit)
+        # 图像
+        self.setDishImage()
 
     def onRadioButtonClicked(self):
         # 获取选中的单选按钮
@@ -119,11 +121,28 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
             parent=self
         )
 
+    def setDishImage(self):
+        pixmap = QPixmap(":/美食.png")
+        self.dishImageLabel.setScaledContents(True)
+        self.dishImageLabel.setPixmap(pixmap.scaled(self.dishImageLabel.width(), self.dishImageLabel.height()))
+        self.dishImageLabel.clicked.connect(self.uploadProfilePhoto)
+
+    # 更新头像
+    def uploadProfilePhoto(self):
+        file_dialog = QFileDialog()
+        file_dialog.setFileMode(QFileDialog.ExistingFile)
+        file_dialog.setNameFilter('Images (*.png *.xpm *.jpg *.bmp)')
+        if file_dialog.exec_():
+            file_path = file_dialog.selectedFiles()[0]
+            # 在这里执行上传头像的逻辑，这里只是简单地显示选择的图像
+            pixmap = QPixmap(file_path)
+            self.dishImageLabel.setScaledContents(True)
+            self.dishImageLabel.setPixmap(pixmap.scaled(self.dishImageLabel.width(), self.dishImageLabel.height()))
+
     def center(self):
         desktop = QApplication.desktop().availableGeometry()
         w, h = desktop.width(), desktop.height()
         self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
-
 
 # if __name__ == '__main__':
 #     app = QApplication(sys.argv)

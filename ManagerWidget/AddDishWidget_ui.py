@@ -30,6 +30,7 @@ class Ui_AddDishWidget(object):
         self.dishImageLabel.setSizePolicy(sizePolicy)
         self.dishImageLabel.setMinimumSize(QtCore.QSize(128, 128))
         self.dishImageLabel.setMaximumSize(QtCore.QSize(128, 128))
+        self.dishImageLabel.setPixmap(QtGui.QPixmap(":/美食.png"))
         self.dishImageLabel.setObjectName("dishImageLabel")
         self.addDishButton = PrimaryPushButton(self.CardWidget)
         self.addDishButton.setGeometry(QtCore.QRect(160, 410, 121, 31))
@@ -203,3 +204,4 @@ class Ui_AddDishWidget(object):
         self.hotButton.setText(_translate("AddDishWidget", "热"))
         self.BodyLabel_2.setText(_translate("AddDishWidget", "类型"))
 from qfluentwidgets import BodyLabel, CardWidget, CheckBox, ComboBox, ImageLabel, LineEdit, PrimaryPushButton, RadioButton
+from picture_set import pic_rc

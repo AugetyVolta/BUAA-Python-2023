@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="/">
     <file>haha.jpg</file>
+    <file>美食.png</file>
     <file>background.png</file>
     <file>login.png</file>
     <file>delete.png</file>
