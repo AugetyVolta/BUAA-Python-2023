@@ -149,16 +149,24 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
             if parent_item:
                 parent_parent_item = parent_item.parent()
                 if parent_parent_item:  # 说明就是直接是菜
-                    pass  # TODO
-                else:
+                    # 删除treeWidget中的项
                     parent_item.removeChild(selected_item)
-                    # TODO 将他的孩子(菜)也一块删除
+                    # 删除大字符串中的菜
+                    self.dic[parent_parent_item.text(0)][parent_item.text(0)].remove(selected_item.text(0))
+                    # TODO:删除总的菜单中的菜
+
+                else:  # 说明是柜台
+                    parent_item.removeChild(selected_item)
+                    # 删除大字符串中的柜台
+                    self.dic[parent_item.text(0)].pop(selected_item.text(0))
+                    # TODO 将他的孩子(菜)也一块删除,递归删除
+
             else:
                 index = self.resturantWidget.indexOfTopLevelItem(selected_item)
                 self.resturantWidget.takeTopLevelItem(index)
+                # 删除大字符串中的餐厅
+                self.dic.pop(selected_item.text(0))
                 # TODO:递归删除餐馆里所有的菜
-
-        print(self.resturantWidget.findItems('123', Qt.MatchExactly))
 
     def center(self):
         desktop = QApplication.desktop().availableGeometry()
