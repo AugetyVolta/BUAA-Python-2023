@@ -11,7 +11,7 @@ class PeopleTb:
         if len(exist) > 0:
             return False
         self.execute(
-            f"insert into people (name, nick, passwd, sex, birth, fav, ates) values ('{name}', '{nick}', '{passwd}', 0, '', 0, 0);")
+            f"insert into people (name, nick, passwd, sex, birth, fav, ates) values ({name}, '{nick}', '{passwd}', 0, '', 0, 0);")
         return True
 
     def update(self, name, field, value):

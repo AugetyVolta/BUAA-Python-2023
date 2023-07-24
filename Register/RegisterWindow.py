@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QApplication
 from qfluentwidgets import SplitTitleBar, InfoBarPosition, InfoBar
 from qframelesswindow import AcrylicWindow
 
+from DataBase.database import DBOperator
 from Register.RegisterWindow_ui import Ui_RegisterWidget
 
 
@@ -27,30 +28,36 @@ class MyRegister(Ui_RegisterWidget, AcrylicWindow):
         self.RegisterButton.clicked.connect(self.register_and_errorCatch)
 
     def register_and_errorCatch(self):
-        # TODO:重复注册处理，差数据库是否有这个用户名
-
-        # 信息不全处理
-        if self.userName.text() == '' or self.nickName.text() == '' or self.password.text() == '' or self.password_2.text() == '':
-            self.createErrorInfoBar('请补全信息')
-        # 两次密码输入不统一处理
-        elif self.password.text() != self.password_2.text():
-            self.createErrorInfoBar('请输入相同的密码')
-        # 成功注册
-        else:
-            # TODO:系统注册，上传服务器
-            userName = self.userName.text()
-            nickName = self.nickName.text()
-            password = self.password.text()
-            # 输出信息，恢复标签
-            self.createSuccessInfoBar('恭喜你，注册成功！')
-            self.userName.clear()
-            self.userName.setPlaceholderText('example@example.com')
-            self.nickName.clear()
-            self.nickName.setPlaceholderText('Free to yourself')
-            self.password.clear()
-            self.password.setPlaceholderText('••••••••••••')
-            self.password_2.clear()
-            self.password_2.setPlaceholderText('••••••••••••')
+        try:
+            database = DBOperator()
+            # 信息不全处理
+            if self.userName.text() == '' or self.nickName.text() == '' or self.password.text() == '' or self.password_2.text() == '':
+                self.createErrorInfoBar('请补全信息')
+            # 两次密码输入不统一处理
+            elif self.password.text() != self.password_2.text():
+                self.createErrorInfoBar('请输入相同的密码')
+            # 成功注册
+            else:
+                userName = self.userName.text()
+                nickName = self.nickName.text()
+                password = self.password.text()
+                ok = database.sign_up(userName, nickName, password)
+                # 重复注册处理，差数据库是否有这个用户名
+                if ok:
+                    # 输出信息，恢复标签
+                    self.createSuccessInfoBar('恭喜你，注册成功！')
+                    self.userName.clear()
+                    self.userName.setPlaceholderText('example@example.com')
+                    self.nickName.clear()
+                    self.nickName.setPlaceholderText('Free to yourself')
+                    self.password.clear()
+                    self.password.setPlaceholderText('••••••••••••')
+                    self.password_2.clear()
+                    self.password_2.setPlaceholderText('••••••••••••')
+                else:
+                    self.createErrorInfoBar('用户已存在')
+        except Exception as e:
+            print(e)
 
     def center(self):
         desktop = QApplication.desktop().availableGeometry()

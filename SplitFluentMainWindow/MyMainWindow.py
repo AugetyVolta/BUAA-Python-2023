@@ -1,6 +1,8 @@
+import sys
+
 import qfluentwidgets
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMessageBox, QDesktopWidget
+from PyQt5.QtWidgets import QMessageBox, QDesktopWidget, QApplication
 from qfluentwidgets import SplitFluentWindow, NavigationWidget, NavigationItemPosition, Theme, NavigationDisplayMode, \
     NavigationAvatarWidget, setTheme
 
@@ -15,42 +17,50 @@ from qfluentwidgets import FluentIcon as FIF
 
 
 class MyMainWindow(SplitFluentWindow):
-    def __init__(self):
+    def __init__(self, account):
         super().__init__()
+        # 设置大小
+        self.setFixedSize(1090, 680)
+        self.navigationInterface.setExpandWidth(120)
+        # 当前的账户
+        self.account = account
         self.ManagerAccount = ['pqy', 'zby', 'hyk', 'ygf']  # 管理员账户
+        manager_access = (self.account in self.ManagerAccount)
         # 设置最初的主题
         self.curTheme = Theme.LIGHT
         self.setWindowTitle("The Taste Of BUAA")
         self.setWindowIcon(QIcon(":/login.png"))
+        # 添加主界面
         self.u = MyHomeWidget()
         self.addSubInterface(self.u, FIF.HOME, 'Home')
-
-        self.user = MyUserWidget()
-        self.addSubInterface(self.user, FIF.PEOPLE, 'User',
+        # 添加用户界面
+        self.userWidget = MyUserWidget()
+        self.addSubInterface(self.userWidget, FIF.PEOPLE, 'User',
                              position=NavigationItemPosition.BOTTOM)
-
+        # 添加收藏界面
         self.favourite = MyFavouriteWidget()
         self.addSubInterface(self.favourite, FIF.HEART, 'Favorite')
-
+        # 添加历史记录界面
         self.history = MyHistoryWidget()
         self.addSubInterface(self.history, FIF.HISTORY, 'History')
-        self.setFixedSize(1090, 680)
-        self.navigationInterface.setExpandWidth(120)
+
         self.navigationInterface.addItem(
             routeKey='changeTheme',
             icon=FIF.CONSTRACT,
             text='Theme',
             onClick=self.changeTheme,
             position=NavigationItemPosition.BOTTOM,
+
         )
-        # TODO:如果是管理员有这个功能
-        self.navigationInterface.addItem(
-            routeKey='manager',
-            icon=FIF.LEAF,
-            text='manager',
-            onClick=self.open_manager_window,
-            position=NavigationItemPosition.BOTTOM,
-        )
+
+        if manager_access:
+            self.navigationInterface.addItem(
+                routeKey='manager',
+                icon=FIF.LEAF,
+                text='manager',
+                onClick=self.open_manager_window,
+                position=NavigationItemPosition.BOTTOM,
+            )
 
         # 居中显示
         self.center()
@@ -84,3 +94,10 @@ class MyMainWindow(SplitFluentWindow):
             event.accept()
         else:
             event.ignore()
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    win = MyMainWindow('pqy')
+    win.show()
+    sys.exit(app.exec_())
