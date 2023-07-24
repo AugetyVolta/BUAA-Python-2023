@@ -35,3 +35,7 @@ class DishesTb:
         else:
             self.execute(
                 f"update dishes set {field} = {value} where id = {dish_id};")
+
+    def get_id(self, dish, bar, hall):
+        return self.execute(
+            'select * from dishes where name = %s and bar = %s and hall = %s', (dish, bar, hall))[0][0]

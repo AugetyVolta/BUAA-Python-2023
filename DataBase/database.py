@@ -3,7 +3,7 @@ from people import PeopleTb
 from ates import AtesTb
 from dishes import DishesTb
 from fav import FavTb
-from PIL import Image
+from utils import get_recommandation, search_by_adj, search_by_name
 
 
 class DBOperator:
@@ -23,6 +23,10 @@ class DBOperator:
         self.atesOp = AtesTb(self.execute)
         self.dishOp = DishesTb(self.execute)
         self.favOp = FavTb(self.execute)
+        self.mapping = {
+            '温暖': 0b0000100000,
+            '凉': 0
+        }
 
     def execute(self, query, args=None):
         if args is None:
@@ -39,8 +43,8 @@ class DBOperator:
     def get_dish(self, dish_id: int):
         return self.dishOp.get(dish_id)
 
-    def add_dish(self, name: str, tp: int, heat: int, taste: int, bar: str, hall: str, img: str):
-        self.dishOp.add(name, tp, heat, taste, bar, hall, img)
+    def add_dish(self, dish: str, tp: int, heat: int, taste: int, bar: str, hall: str, img: str):
+        self.dishOp.add(dish, tp, heat, taste, bar, hall, img)
 
     def del_dish(self, dish_id: int):
         self.dishOp.delete(dish_id)
@@ -51,6 +55,10 @@ class DBOperator:
     # 评论：本质上是用新的评论内容替换原评论内容
     def comment(self, dish_id, content):
         self.update_dish(dish_id, 'com', content)
+
+    # 通过菜品获得id
+    def get_id(self, dish, bar, hall):
+        return self.dishOp.get_id(dish, bar, hall)
 
     ########## 已吃表相关函数 ##########
     def get_ates(self, name):
@@ -93,3 +101,17 @@ class DBOperator:
     def del_fav_hall(self, name, hall):
         self.favOp.delete(name, 'hall', hall)
     ###################################
+
+    ########## 其他函数 ##########
+    def recommand(self):
+        ate_record = self.execute('select * from ates;')
+        fav_record = self.execute('select * from fav_dish;')
+        return get_recommandation(ate_record, fav_record)
+
+    def search(self, k, tp):
+        d = self.execute('select * from dishes;')
+        if tp == 'name':
+            return search_by_name(k, d)
+        else:
+            return search_by_adj(k, d, self.mapping)
+    #############################
