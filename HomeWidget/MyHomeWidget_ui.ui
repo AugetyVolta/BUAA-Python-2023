@@ -774,7 +774,7 @@ PillToolButton:disabled:checked {
            <number>4</number>
           </property>
           <attribute name="horizontalHeaderVisible">
-           <bool>true</bool>
+           <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderCascadingSectionResizes">
            <bool>false</bool>
@@ -1640,6 +1640,27 @@ PillToolButton:disabled:checked {
  </widget>
  <customwidgets>
   <customwidget>
+   <class>TitleLabel</class>
+   <extends>QLabel</extends>
+   <header>qfluentwidgets</header>
+  </customwidget>
+  <customwidget>
+   <class>CardWidget</class>
+   <extends>QFrame</extends>
+   <header>qfluentwidgets</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SubtitleLabel</class>
+   <extends>QLabel</extends>
+   <header>qfluentwidgets</header>
+  </customwidget>
+  <customwidget>
+   <class>ListWidget</class>
+   <extends>QListWidget</extends>
+   <header>qfluentwidgets</header>
+  </customwidget>
+  <customwidget>
    <class>PushButton</class>
    <extends>QPushButton</extends>
    <header>qfluentwidgets</header>
@@ -1655,12 +1676,6 @@ PillToolButton:disabled:checked {
    <header>qfluentwidgets</header>
   </customwidget>
   <customwidget>
-   <class>CardWidget</class>
-   <extends>QFrame</extends>
-   <header>qfluentwidgets</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>PopUpAniStackedWidget</class>
    <extends>QStackedWidget</extends>
    <header>qfluentwidgets</header>
@@ -1673,16 +1688,6 @@ PillToolButton:disabled:checked {
   </customwidget>
   <customwidget>
    <class>BodyLabel</class>
-   <extends>QLabel</extends>
-   <header>qfluentwidgets</header>
-  </customwidget>
-  <customwidget>
-   <class>SubtitleLabel</class>
-   <extends>QLabel</extends>
-   <header>qfluentwidgets</header>
-  </customwidget>
-  <customwidget>
-   <class>TitleLabel</class>
    <extends>QLabel</extends>
    <header>qfluentwidgets</header>
   </customwidget>
@@ -1704,11 +1709,6 @@ PillToolButton:disabled:checked {
   <customwidget>
    <class>SearchLineEdit</class>
    <extends>LineEdit</extends>
-   <header>qfluentwidgets</header>
-  </customwidget>
-  <customwidget>
-   <class>ListWidget</class>
-   <extends>QListWidget</extends>
    <header>qfluentwidgets</header>
   </customwidget>
   <customwidget>
