@@ -24,8 +24,8 @@ class DBOperator:
         self.dishOp = DishesTb(self.execute)
         self.favOp = FavTb(self.execute)
         self.mapping = {
-            '温暖': 0b0000100000,
-            '凉': 0
+            '温暖': 0b0000_01_00000,
+            '凉': 0b0000_10_00000
         }
 
     def execute(self, query, args=None):
@@ -73,13 +73,16 @@ class DBOperator:
 
     ########## 人表有关函数 ##########
     def sign_in(self, name, passwd):
-        self.peopleOp.sign_in(name, passwd)
+        return self.peopleOp.sign_in(name, passwd)
 
     def sign_up(self, name, nick, passwd):
         self.peopleOp.sign_up(name, nick, passwd)
 
     def update_person(self, name, field, value):
         self.peopleOp.update(name, field, value)
+
+    def get_person(self, name):
+        return self.peopleOp.get(name)
     ###################################
 
     ########## 收藏表相关函数 ##########
@@ -88,30 +91,40 @@ class DBOperator:
 
     def del_fav_dish(self, name, dish):
         self.favOp.delete(name, 'dish', dish)
+    
+    def get_fav_dish(self, name):
+        return self.favOp.get(name, 'dish')
 
-    def add_fav_bar(self, name, bar, hall):
-        self.favOp.add(name, 'bar', bar + '-' + hall)
+    def add_fav_bar(self, name, bar):
+        self.favOp.add(name, 'bar', bar)
 
-    def del_fav_bar(self, name, bar, hall):
-        self.favOp.delete(name, 'bar', bar + '-' + hall)
+    def del_fav_bar(self, name, bar):
+        self.favOp.delete(name, 'bar', bar)
+    
+    def get_fav_bar(self, name):
+        return self.favOp.get(name, 'bar')
 
     def add_fav_hall(self, name, hall):
         self.favOp.add(name, 'hall', hall)
 
     def del_fav_hall(self, name, hall):
         self.favOp.delete(name, 'hall', hall)
+    
+    def get_fav_hall(self, name):
+        return self.favOp.get(name, 'hall')
     ###################################
 
     ########## 其他函数 ##########
     def recommand(self):
+        dishes = self.execute('select * from dishes;')
         ate_record = self.execute('select * from ates;')
         fav_record = self.execute('select * from fav_dish;')
-        return get_recommandation(ate_record, fav_record)
+        return get_recommandation(ate_record, fav_record, dishes)
 
-    def search(self, k, tp):
+    def search(self, k):
         d = self.execute('select * from dishes;')
-        if tp == 'name':
-            return search_by_name(k, d)
-        else:
-            return search_by_adj(k, d, self.mapping)
+        temp =  search_by_name(k, d)
+        if len(temp) == 0 and k in self.mapping:
+            temp = search_by_adj(k, d, self.mapping)
+        return temp
     #############################

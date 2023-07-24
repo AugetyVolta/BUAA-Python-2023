@@ -14,3 +14,7 @@ class PeopleTb:
             value = "'" + value + "'"
         self.execute(
             f"update people set {field} = {value} where name = '{name}';")
+    
+    def get(self, name):
+        name = "'" + name +"'"
+        return self.execute(f'select * from people where name = {name}')[0]

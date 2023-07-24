@@ -19,4 +19,5 @@ class AtesTb:
             f"update people set ates = {pre_ates - 1} where name = '{name}';")
 
     def get(self, name):
-        return self.execute(f"select * from ates where name = '{name}';")
+        temp = self.execute(f"select * from ates where name = '{name}';")
+        return [i[1:] for i in temp]
