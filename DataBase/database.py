@@ -76,7 +76,7 @@ class DBOperator:
         return self.peopleOp.sign_in(name, passwd)
 
     def sign_up(self, name, nick, passwd):
-        self.peopleOp.sign_up(name, nick, passwd)
+        return self.peopleOp.sign_up(name, nick, passwd)
 
     def update_person(self, name, field, value):
         self.peopleOp.update(name, field, value)
