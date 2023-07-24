@@ -17,8 +17,7 @@ from qfluentwidgets import FluentIcon as FIF
 class MyMainWindow(SplitFluentWindow):
     def __init__(self):
         super().__init__()
-        # 用户名，10个管理员
-        self.ManagerAccount = ['Manager_%d' % i for i in range(1, 11)]
+        self.ManagerAccount = ['pqy', 'zby', 'hyk', 'ygf']  # 管理员账户
         # 设置最初的主题
         self.curTheme = Theme.LIGHT
         self.setWindowTitle("The Taste Of BUAA")

@@ -38,7 +38,9 @@ class MyRegister(Ui_RegisterWidget, AcrylicWindow):
         # 成功注册
         else:
             # TODO:系统注册，上传服务器
-
+            userName = self.userName.text()
+            nickName = self.nickName.text()
+            password = self.password.text()
             # 输出信息，恢复标签
             self.createSuccessInfoBar('恭喜你，注册成功！')
             self.userName.clear()

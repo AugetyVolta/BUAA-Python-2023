@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QApplication, QWidget
 from qfluentwidgets import SplitTitleBar, setThemeColor, InfoBarPosition, InfoBar
 from qframelesswindow import AcrylicWindow
 
+from DataBase.database import DBOperator
 from Login.LoginWindow_ui import Ui_LoginWidget
 from Register.RegisterWindow import MyRegister
 from SplitFluentMainWindow.MyMainWindow import MyMainWindow
@@ -47,9 +48,18 @@ class MyLogin(Ui_LoginWidget, AcrylicWindow):
 
     def go_to_mainWindow(self):
         # TODO:需要检验用用户名密码是否正确
-        MainWindow = MyMainWindow()
-        MainWindow.show()
-        self.close()
+        account = self.userName.text()
+        password = self.password.text()
+        database = DBOperator()
+        ok = database.sign_in(account, password)
+        print(ok)
+        if ok:
+            MainWindow = MyMainWindow()
+            MainWindow.show()
+            self.close()
+        else:
+            self.createErrorInfoBar('用户名或密码错误')
+
 
     def go_to_register(self):
         registerWindow = MyRegister()
