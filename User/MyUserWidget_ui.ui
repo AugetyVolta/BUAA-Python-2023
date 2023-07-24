@@ -107,6 +107,12 @@
           <height>128</height>
          </size>
         </property>
+        <property name="pixmap">
+         <pixmap resource="../picture_set/pic.qrc">:/user.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
@@ -1592,6 +1598,8 @@
    <header>qfluentwidgets</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../picture_set/pic.qrc"/>
+ </resources>
  <connections/>
 </ui>

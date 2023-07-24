@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/">
+    <file>user.png</file>
     <file>Dishes_96x96/九转大肠_96x96.jpg</file>
     <file>number/5.png</file>
     <file>number/6.png</file>

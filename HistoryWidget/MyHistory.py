@@ -8,13 +8,15 @@ from qfluentwidgets import CardWidget, PushButton
 
 from HistoryWidget.HistoryItem import MyHistoryItem
 from HistoryWidget.MyHistoryWidget_ui import Ui_MyHistoryWidget
+from HistoryWidget.SearchForHistory import MySearchForHistory
 
 
 class MyHistoryWidget(Ui_MyHistoryWidget, QWidget):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-
+        # 设置一个专门的item_list
+        self.item_list = []
         # 创建一个QWidget用于放置菜品项
         self.dishes_widget = CardWidget()
         self.dishes_layout = QVBoxLayout()
@@ -29,10 +31,26 @@ class MyHistoryWidget(Ui_MyHistoryWidget, QWidget):
             dish_item = MyHistoryItem(dish_name='鱼香肉丝',
                                       dish_type='类型A',
                                       restaurant_name='餐厅A',
-                                      counter_name='柜台A')
-            # dish_id=None,
-            # pixmap=pixmap)  # TODO 根据dishID布置菜
+                                      counter_name='柜台A',
+                                      history_time='2023-07-23',
+                                      person_id=None,
+                                      pixmap=None)
+            # TODO 根据dishID布置菜
             self.dishes_layout.addWidget(dish_item)
+            # 加入item_list中
+            self.item_list.append(dish_item)
+
+        self.searchButton.clicked.connect(self.search_items)
+        self.clearButton.clicked.connect(self.clear_items)
+
+    def search_items(self):
+        self.search = MySearchForHistory(self.item_list)
+        self.search.show()
+
+    def clear_items(self):
+        for item in self.item_list:
+            item.delete_history()
+        self.item_list.clear()
 
 
 if __name__ == '__main__':

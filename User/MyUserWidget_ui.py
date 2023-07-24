@@ -26,7 +26,7 @@ class Ui_MyUserWidget(object):
         spacerItem = QtWidgets.QSpacerItem(838, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.TitleLabel = TitleLabel(self.layoutWidget)
-        self.TitleLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.TitleLabel.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.TitleLabel.setProperty("pixelFontSize", 32)
         self.TitleLabel.setObjectName("TitleLabel")
         self.horizontalLayout.addWidget(self.TitleLabel)
@@ -53,6 +53,8 @@ class Ui_MyUserWidget(object):
         self.ImageLabel.setSizePolicy(sizePolicy)
         self.ImageLabel.setMinimumSize(QtCore.QSize(128, 128))
         self.ImageLabel.setMaximumSize(QtCore.QSize(128, 128))
+        self.ImageLabel.setPixmap(QtGui.QPixmap(":/user.png"))
+        self.ImageLabel.setScaledContents(True)
         self.ImageLabel.setObjectName("ImageLabel")
         self.horizontalLayout_4.addWidget(self.ImageLabel)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -252,7 +254,7 @@ class Ui_MyUserWidget(object):
         self.horizontalLayout_6.addItem(spacerItem13)
         self.SegmentedWidget = SegmentedWidget(self.CardWidget_4)
         self.SegmentedWidget.setObjectName("SegmentedWidget")
-        self.horizontalLayout_6.addWidget(self.SegmentedWidget, 0, QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.horizontalLayout_6.addWidget(self.SegmentedWidget, 0, QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         spacerItem14 = QtWidgets.QSpacerItem(448, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_6.addItem(spacerItem14)
         self.verticalLayout_6.addLayout(self.horizontalLayout_6)
@@ -546,8 +548,8 @@ class Ui_MyUserWidget(object):
         self.eatenNum.setText(_translate("MyUserWidget", "666"))
         self.BodyLabel_4.setText(_translate("MyUserWidget", "吃过"))
         self.signatureLable.setText(_translate("MyUserWidget", "关于吃什么，还得好好想一想"))
-        self.SubtitleLabel.setText(_translate("MyUserWidget", "你的口味😝😝😝"))
-        self.SubtitleLabel_2.setText(_translate("MyUserWidget", "你的最爱💕"))
+        self.SubtitleLabel.setText(_translate("MyUserWidget", "你的口味"))
+        self.SubtitleLabel_2.setText(_translate("MyUserWidget", "你的最爱"))
         __sortingEnabled = self.FavouriteList.isSortingEnabled()
         self.FavouriteList.setSortingEnabled(False)
         item = self.FavouriteList.item(0)
@@ -576,4 +578,8 @@ class Ui_MyUserWidget(object):
         self.SubtitleLabel_8.setText(_translate("MyUserWidget", "生日"))
         self.SubtitleLabel_20.setText(_translate("MyUserWidget", "新密码"))
         self.passwordEdit_new.setPlaceholderText(_translate("MyUserWidget", "••••••••••••"))
-from qfluentwidgets import BodyLabel, CaptionLabel, CardWidget, ComboBox, ImageLabel, IndeterminateProgressRing, LineEdit, ListWidget, ProgressRing, PushButton, SegmentedWidget, SubtitleLabel, TitleLabel
+
+
+from qfluentwidgets import BodyLabel, CaptionLabel, CardWidget, ComboBox, ImageLabel, IndeterminateProgressRing, \
+    LineEdit, ListWidget, ProgressRing, PushButton, SegmentedWidget, SubtitleLabel, TitleLabel
+from picture_set import pic_rc
