@@ -700,7 +700,200 @@ PillToolButton:disabled:checked {
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
-         <widget class="ListWidget" name="ListWidget_2"/>
+         <widget class="SubtitleLabel" name="SubtitleLabel_2">
+          <property name="styleSheet">
+           <string notr="true">border-color: rgb(170, 170, 255);</string>
+          </property>
+          <property name="text">
+           <string>热门榜单</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="TableWidget" name="recommendTable">
+          <property name="font">
+           <font>
+            <family>微软雅黑</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::StrongFocus</enum>
+          </property>
+          <property name="acceptDrops">
+           <bool>true</bool>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAsNeeded</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAsNeeded</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustIgnored</enum>
+          </property>
+          <property name="autoScrollMargin">
+           <number>16</number>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::ExtendedSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="textElideMode">
+           <enum>Qt::ElideRight</enum>
+          </property>
+          <property name="verticalScrollMode">
+           <enum>QAbstractItemView::ScrollPerPixel</enum>
+          </property>
+          <property name="showGrid">
+           <bool>false</bool>
+          </property>
+          <property name="gridStyle">
+           <enum>Qt::CustomDashLine</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <property name="cornerButtonEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="rowCount">
+           <number>50</number>
+          </property>
+          <property name="columnCount">
+           <number>4</number>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderHighlightSections">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderMinimumSectionSize">
+           <number>23</number>
+          </attribute>
+          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderStretchLastSection">
+           <bool>false</bool>
+          </attribute>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <column>
+           <property name="text">
+            <string>菜品</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>餐厅</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>柜台</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>热度</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+          </column>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -711,19 +904,19 @@ PillToolButton:disabled:checked {
         <item>
          <widget class="PopUpAniStackedWidget" name="PopUpAniStackedWidget">
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_3">
-           <widget class="CardWidget" name="CardWidget_3">
+           <widget class="CardWidget" name="CardWidget_1">
             <property name="geometry">
              <rect>
               <x>30</x>
-              <y>20</y>
+              <y>10</y>
               <width>161</width>
               <height>211</height>
              </rect>
             </property>
-            <widget class="ImageLabel" name="ImageLabel">
+            <widget class="ImageLabel" name="ImageLabel_1">
              <property name="geometry">
               <rect>
                <x>31</x>
@@ -760,7 +953,7 @@ PillToolButton:disabled:checked {
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
-            <widget class="BodyLabel" name="BodyLabel">
+            <widget class="BodyLabel" name="dishNameLable_1">
              <property name="geometry">
               <rect>
                <x>25</x>
@@ -775,26 +968,29 @@ PillToolButton:disabled:checked {
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
+             <property name="pixelFontSize" stdset="0">
+              <number>15</number>
+             </property>
             </widget>
-            <widget class="PushButton" name="PushButton">
+            <widget class="PrimaryPushButton" name="PrimaryPushButton_1">
              <property name="geometry">
               <rect>
-               <x>21</x>
+               <x>20</x>
                <y>160</y>
                <width>121</width>
                <height>32</height>
               </rect>
              </property>
              <property name="text">
-              <string>Push button</string>
+              <string>看看去</string>
              </property>
             </widget>
            </widget>
-           <widget class="CardWidget" name="CardWidget_4">
+           <widget class="CardWidget" name="CardWidget_3">
             <property name="geometry">
              <rect>
               <x>230</x>
-              <y>20</y>
+              <y>10</y>
               <width>161</width>
               <height>211</height>
              </rect>
@@ -851,18 +1047,21 @@ PillToolButton:disabled:checked {
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
+             <property name="pixelFontSize" stdset="0">
+              <number>15</number>
+             </property>
             </widget>
-            <widget class="PushButton" name="PushButton_2">
+            <widget class="PrimaryPushButton" name="PrimaryPushButton_2">
              <property name="geometry">
               <rect>
-               <x>21</x>
+               <x>20</x>
                <y>160</y>
                <width>121</width>
                <height>32</height>
               </rect>
              </property>
              <property name="text">
-              <string>Push button</string>
+              <string>看看去</string>
              </property>
             </widget>
            </widget>
@@ -870,7 +1069,7 @@ PillToolButton:disabled:checked {
             <property name="geometry">
              <rect>
               <x>430</x>
-              <y>20</y>
+              <y>10</y>
               <width>161</width>
               <height>211</height>
              </rect>
@@ -927,18 +1126,21 @@ PillToolButton:disabled:checked {
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
+             <property name="pixelFontSize" stdset="0">
+              <number>15</number>
+             </property>
             </widget>
-            <widget class="PushButton" name="PushButton_3">
+            <widget class="PrimaryPushButton" name="PrimaryPushButton_3">
              <property name="geometry">
               <rect>
-               <x>21</x>
+               <x>20</x>
                <y>160</y>
                <width>121</width>
                <height>32</height>
               </rect>
              </property>
              <property name="text">
-              <string>Push button</string>
+              <string>看看去</string>
              </property>
             </widget>
            </widget>
@@ -948,7 +1150,7 @@ PillToolButton:disabled:checked {
             <property name="geometry">
              <rect>
               <x>30</x>
-              <y>20</y>
+              <y>10</y>
               <width>161</width>
               <height>211</height>
              </rect>
@@ -1008,18 +1210,21 @@ PillToolButton:disabled:checked {
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
+             <property name="pixelFontSize" stdset="0">
+              <number>15</number>
+             </property>
             </widget>
-            <widget class="PushButton" name="PushButton_4">
+            <widget class="PrimaryPushButton" name="PrimaryPushButton_4">
              <property name="geometry">
               <rect>
-               <x>21</x>
+               <x>20</x>
                <y>160</y>
                <width>121</width>
                <height>32</height>
               </rect>
              </property>
              <property name="text">
-              <string>Push button</string>
+              <string>看看去</string>
              </property>
             </widget>
            </widget>
@@ -1027,12 +1232,12 @@ PillToolButton:disabled:checked {
             <property name="geometry">
              <rect>
               <x>230</x>
-              <y>20</y>
+              <y>10</y>
               <width>161</width>
               <height>211</height>
              </rect>
             </property>
-            <widget class="ImageLabel" name="ImageLabel_17">
+            <widget class="ImageLabel" name="ImageLabel_5">
              <property name="geometry">
               <rect>
                <x>31</x>
@@ -1072,7 +1277,7 @@ PillToolButton:disabled:checked {
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
-            <widget class="BodyLabel" name="BodyLabel_17">
+            <widget class="BodyLabel" name="BodyLabel_5">
              <property name="geometry">
               <rect>
                <x>25</x>
@@ -1087,18 +1292,21 @@ PillToolButton:disabled:checked {
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
+             <property name="pixelFontSize" stdset="0">
+              <number>15</number>
+             </property>
             </widget>
-            <widget class="PushButton" name="PushButton_17">
+            <widget class="PrimaryPushButton" name="PrimaryPushButton_5">
              <property name="geometry">
               <rect>
-               <x>21</x>
+               <x>20</x>
                <y>160</y>
                <width>121</width>
                <height>32</height>
               </rect>
              </property>
              <property name="text">
-              <string>Push button</string>
+              <string>看看去</string>
              </property>
             </widget>
            </widget>
@@ -1106,7 +1314,7 @@ PillToolButton:disabled:checked {
             <property name="geometry">
              <rect>
               <x>430</x>
-              <y>20</y>
+              <y>10</y>
               <width>161</width>
               <height>211</height>
              </rect>
@@ -1163,18 +1371,21 @@ PillToolButton:disabled:checked {
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
+             <property name="pixelFontSize" stdset="0">
+              <number>15</number>
+             </property>
             </widget>
-            <widget class="PushButton" name="PushButton_6">
+            <widget class="PrimaryPushButton" name="PrimaryPushButton_6">
              <property name="geometry">
               <rect>
-               <x>21</x>
+               <x>20</x>
                <y>160</y>
                <width>121</width>
                <height>32</height>
               </rect>
              </property>
              <property name="text">
-              <string>Push button</string>
+              <string>看看去</string>
              </property>
             </widget>
            </widget>
@@ -1184,7 +1395,7 @@ PillToolButton:disabled:checked {
             <property name="geometry">
              <rect>
               <x>30</x>
-              <y>20</y>
+              <y>10</y>
               <width>161</width>
               <height>211</height>
              </rect>
@@ -1241,18 +1452,21 @@ PillToolButton:disabled:checked {
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
+             <property name="pixelFontSize" stdset="0">
+              <number>15</number>
+             </property>
             </widget>
-            <widget class="PushButton" name="PushButton_7">
+            <widget class="PrimaryPushButton" name="PrimaryPushButton_7">
              <property name="geometry">
               <rect>
-               <x>21</x>
+               <x>20</x>
                <y>160</y>
                <width>121</width>
                <height>32</height>
               </rect>
              </property>
              <property name="text">
-              <string>Push button</string>
+              <string>看看去</string>
              </property>
             </widget>
            </widget>
@@ -1260,7 +1474,7 @@ PillToolButton:disabled:checked {
             <property name="geometry">
              <rect>
               <x>230</x>
-              <y>20</y>
+              <y>10</y>
               <width>161</width>
               <height>211</height>
              </rect>
@@ -1317,18 +1531,21 @@ PillToolButton:disabled:checked {
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
+             <property name="pixelFontSize" stdset="0">
+              <number>15</number>
+             </property>
             </widget>
-            <widget class="PushButton" name="PushButton_8">
+            <widget class="PrimaryPushButton" name="PrimaryPushButton_8">
              <property name="geometry">
               <rect>
-               <x>21</x>
+               <x>20</x>
                <y>160</y>
                <width>121</width>
                <height>32</height>
               </rect>
              </property>
              <property name="text">
-              <string>Push button</string>
+              <string>看看去</string>
              </property>
             </widget>
            </widget>
@@ -1336,7 +1553,7 @@ PillToolButton:disabled:checked {
             <property name="geometry">
              <rect>
               <x>430</x>
-              <y>20</y>
+              <y>10</y>
               <width>161</width>
               <height>211</height>
              </rect>
@@ -1393,18 +1610,21 @@ PillToolButton:disabled:checked {
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
+             <property name="pixelFontSize" stdset="0">
+              <number>15</number>
+             </property>
             </widget>
-            <widget class="PushButton" name="PushButton_9">
+            <widget class="PrimaryPushButton" name="PrimaryPushButton_9">
              <property name="geometry">
               <rect>
-               <x>21</x>
+               <x>20</x>
                <y>160</y>
                <width>121</width>
                <height>32</height>
               </rect>
              </property>
              <property name="text">
-              <string>Push button</string>
+              <string>看看去</string>
              </property>
             </widget>
            </widget>
@@ -1489,6 +1709,11 @@ PillToolButton:disabled:checked {
   <customwidget>
    <class>ListWidget</class>
    <extends>QListWidget</extends>
+   <header>qfluentwidgets</header>
+  </customwidget>
+  <customwidget>
+   <class>TableWidget</class>
+   <extends>QTableWidget</extends>
    <header>qfluentwidgets</header>
   </customwidget>
  </customwidgets>

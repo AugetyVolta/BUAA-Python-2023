@@ -44,7 +44,6 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
         self.deleteButton.clicked.connect(self.deleteItem)
 
     def init_dish_graph(self):
-        print(1)
         if not os.path.exists("dict") or os.path.getsize("dict") == 0:
             self.dic = {}
         else:

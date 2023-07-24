@@ -1,5 +1,14 @@
 <RCC>
   <qresource prefix="/">
+    <file>number/5.png</file>
+    <file>number/6.png</file>
+    <file>number/1.png</file>
+    <file>number/2.png</file>
+    <file>number/3.png</file>
+    <file>number/4.png</file>
+    <file>number/7.png</file>
+    <file>number/8.png</file>
+    <file>number/9.png</file>
     <file>haha.jpg</file>
     <file>美食.png</file>
     <file>background.png</file>
