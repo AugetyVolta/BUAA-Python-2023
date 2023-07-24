@@ -1,3 +1,5 @@
+import ast
+import os
 import sys
 
 from PyQt5 import QtCore, QtWidgets
@@ -15,7 +17,10 @@ from picture_set import pic_rc
 class MyManager(Ui_ManagerWidget, AcrylicWindow):
     def __init__(self):
         super().__init__()
+        self.dic = None
         self.setupUi(self)
+        # 初始化图信息
+        self.init_dish_graph()
 
         self.setTitleBar(SplitTitleBar(self))
         self.titleBar.raise_()
@@ -38,6 +43,39 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
         self.addDishButton.clicked.connect(self.addDish)
         self.deleteButton.clicked.connect(self.deleteItem)
 
+    def init_dish_graph(self):
+        print(1)
+        if not os.path.exists("dict") or os.path.getsize("dict") == 0:
+            self.dic = {}
+        else:
+            f = open("dict", "r")
+            self.dic = dict(ast.literal_eval(f.readline()))
+            f.close()
+            for key in self.dic.keys():
+                restaurant_item = QtWidgets.QTreeWidgetItem(self.resturantWidget)
+                restaurant_item.setText(0, key)
+                for key_1 in self.dic[key].keys():
+                    counter_item = QtWidgets.QTreeWidgetItem(restaurant_item)
+                    counter_item.setText(0, key_1)
+                    for dish in self.dic[key][key_1]:
+                        dish_item = QtWidgets.QTreeWidgetItem(counter_item)
+                        dish_item.setText(0, dish)
+            self.resturantWidget.expandAll()
+
+    def addRestaurant_by_String(self, restaurant):
+        if not (restaurant in self.dic):
+            self.dic.setdefault(restaurant, {})
+
+    def addCounter_by_String(self, restaurant, counter):
+        self.addRestaurant_by_String(restaurant)
+        if not (counter in self.dic[restaurant]):
+            self.dic[restaurant].setdefault(counter, [])
+
+    def addDish_by_String(self, restaurant, counter, dish):
+        self.addCounter_by_String(restaurant, counter)
+        if not (dish in self.dic[restaurant][counter]):
+            self.dic[restaurant][counter].append(dish)
+
     def addRestaurant(self):
         restaurant_name, ok = QtWidgets.QInputDialog.getText(
             self.ManagerWidget, "Add Restaurant", "Enter the name of the restaurant:"
@@ -45,6 +83,7 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
         if ok and restaurant_name:
             restaurant_item = QtWidgets.QTreeWidgetItem(self.resturantWidget)
             restaurant_item.setText(0, restaurant_name)
+            self.addRestaurant_by_String(restaurant_name)
         self.resturantWidget.expandAll()
 
     def addCounter(self):
@@ -56,6 +95,7 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
             if ok and counter_name:
                 counter_item = QtWidgets.QTreeWidgetItem(selected_item)
                 counter_item.setText(0, counter_name)
+                self.addCounter_by_String(selected_item.text(0), counter_name)
         self.resturantWidget.expandAll()
 
     def addDish(self):
@@ -68,6 +108,7 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
             if ok and dish_name:
                 dish_item = QtWidgets.QTreeWidgetItem(selected_item)
                 dish_item.setText(0, dish_name)
+                self.addDish_by_String(selected_item.parent().text(0), selected_item.text(0), dish_name)
         else:
             # 如果没有指定餐厅，跳转增加菜的页面
             addDish = MyAddDish(self)
@@ -95,6 +136,7 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
             dish_item.setText(0, dishName)
         else:
             dish_item = found_items[0]
+        self.addDish_by_String(restaurant, counter, dishName)
         self.resturantWidget.expandAll()
 
     def searchSubItems(self, parent_item, search_text):
@@ -123,6 +165,10 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
         desktop = QApplication.desktop().availableGeometry()
         w, h = desktop.width(), desktop.height()
         self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
+
+    def closeEvent(self, event):
+        f = open('dict', 'w')
+        f.write(str(self.dic))
 
 
 if __name__ == '__main__':
