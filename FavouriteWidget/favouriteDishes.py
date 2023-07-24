@@ -8,8 +8,9 @@ from qfluentwidgets import PushButton, ScrollArea, CardWidget
 
 
 class DishItem(QWidget):
-    def __init__(self, dish_name, dish_type, restaurant_name, counter_name):
+    def __init__(self, dish_name, dish_type, restaurant_name, counter_name, dish_id):
         super().__init__()
+        self.dish_id = dish_id
         self.dish_name = dish_name
         self.dish_type = dish_type
         self.restaurant_name = restaurant_name
@@ -74,6 +75,7 @@ class DishItem(QWidget):
     def on_unfavorite(self):
         # Emit a signal to inform the parent widget to remove this item
         self.deleteLater()  # Delete the widget itself
+        # TODO:根据dish_id删除一个人所收藏的菜
 
 
 class DishCollectionUI(QWidget):
@@ -99,12 +101,13 @@ class DishCollectionUI(QWidget):
         # 将QWidget设置为滚动区域的小部件
         scroll_area.setWidget(self.dishes_widget)
 
-        # 示例：添加三个菜品项
+        # TODO:根据人的收藏添置widget
         for i in range(10):
             dish_item = DishItem(dish_name=f'鱼香肉丝{i + 1}',
                                  dish_type='类型A',
                                  restaurant_name='餐厅A',
-                                 counter_name='柜台A')
+                                 counter_name='柜台A',
+                                 dish_id=None)  # TODO 根据dishID布置菜
             self.dishes_layout.addWidget(dish_item)
 
         layout.addWidget(scroll_area)
