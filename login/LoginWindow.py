@@ -52,14 +52,12 @@ class MyLogin(Ui_LoginWidget, AcrylicWindow):
         password = self.password.text()
         database = DBOperator()
         ok = database.sign_in(account, password)
-        print(ok)
         if ok:
-            MainWindow = MyMainWindow()
+            MainWindow = MyMainWindow(account=account)
             MainWindow.show()
             self.close()
         else:
             self.createErrorInfoBar('用户名或密码错误')
-
 
     def go_to_register(self):
         registerWindow = MyRegister()

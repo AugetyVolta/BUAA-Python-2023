@@ -4,6 +4,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QWidget, QDesktopWidget, QMessageBox, QFileDialog
 from PyQt5.QtCore import Qt, QDate, QObject, pyqtSignal, QThread
 from PyQt5.QtGui import QIcon, QImage, QPixmap, QTransform
+from qfluentwidgets import InfoBar, InfoBarPosition
 
 from User.MyUserWidget_ui import Ui_MyUserWidget
 
@@ -21,8 +22,9 @@ humorous_sentences = [
 
 
 class MyUserWidget(Ui_MyUserWidget, QWidget):
-    def __init__(self):
+    def __init__(self, account):
         super().__init__()
+        self.account = account  # 设置账户
         self.setupUi(self)
         # 设置头像
         self.setProfilePhoto()
@@ -34,6 +36,8 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
         self.initGenderComBox()
         # 初始化年龄选框
         self.initBirthdayComBox()
+        # 设置修改个人信息按钮
+        self.saveButton.clicked.connect(self.saveChangeInfo)
 
     # 初始化个人信息
     def initUserInfo(self):
@@ -78,3 +82,30 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
         self.birthday_year.addItems(items_year)
         self.birthday_month.addItems(items_month)
         self.birthday_day.addItems(items_day)
+
+    def saveChangeInfo(self):
+        new_nickname = self.nickNameEdit.text() if self.nickNameEdit.text() != '' else ""
+        new_gender = self.genderComboBox.text() if self.genderComboBox.text() != '' else ""
+        new_birth = self.birthday_year.text() + "-" + self.birthday_month.text() + '-' + self.birthday_day.text() if self.birthday_year.text() != '' else ""
+        old_passwd = self.passwordEdit_old.text()
+        new_passwd = self.passwordEdit_new.text()
+        if old_passwd == '' and new_passwd == '':
+            pass  # 不修改密码
+        elif old_passwd != '' and new_passwd == '' or old_passwd == '' and new_passwd != '':
+            self.createErrorInfoBar('请补全密码信息')
+        else:
+            pass
+            # 首先验证原密码是否争取
+            # 然后修改
+        # TODO
+
+    def createErrorInfoBar(self, content):
+        InfoBar.error(
+            title='错误',
+            content=content,
+            orient=Qt.Horizontal,
+            isClosable=True,
+            position=InfoBarPosition.TOP_RIGHT,
+            # duration=-1,    # won't disappear automatically
+            parent=self
+        )

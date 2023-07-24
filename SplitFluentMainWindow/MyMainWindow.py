@@ -34,14 +34,14 @@ class MyMainWindow(SplitFluentWindow):
         self.u = MyHomeWidget()
         self.addSubInterface(self.u, FIF.HOME, 'Home')
         # 添加用户界面
-        self.userWidget = MyUserWidget()
+        self.userWidget = MyUserWidget(self.account)
         self.addSubInterface(self.userWidget, FIF.PEOPLE, 'User',
                              position=NavigationItemPosition.BOTTOM)
         # 添加收藏界面
-        self.favourite = MyFavouriteWidget()
+        self.favourite = MyFavouriteWidget(self.account)
         self.addSubInterface(self.favourite, FIF.HEART, 'Favorite')
         # 添加历史记录界面
-        self.history = MyHistoryWidget()
+        self.history = MyHistoryWidget(self.account)
         self.addSubInterface(self.history, FIF.HISTORY, 'History')
 
         self.navigationInterface.addItem(

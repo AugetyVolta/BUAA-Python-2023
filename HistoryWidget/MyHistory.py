@@ -12,8 +12,9 @@ from HistoryWidget.SearchForHistory import MySearchForHistory
 
 
 class MyHistoryWidget(Ui_MyHistoryWidget, QWidget):
-    def __init__(self):
+    def __init__(self, account):
         super().__init__()
+        self.account = account
         self.setupUi(self)
         # 设置一个专门的item_list
         self.item_list = []

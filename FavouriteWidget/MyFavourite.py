@@ -9,8 +9,9 @@ from FavouriteWidget.favouriteDishes import DishCollectionUI
 
 
 class MyFavouriteWidget(Ui_MyFavoriteWidget, QWidget):
-    def __init__(self):
+    def __init__(self, account):
         super().__init__()
+        self.account = account
         self.setupUi(self)
         # 获取person的收藏餐厅和柜台 TODO:从person的信息中获得
         self.restaurantList = [str(i) for i in range(1, 11)]
