@@ -4,6 +4,7 @@ from DataBase.ates import AtesTb
 from DataBase.dishes import DishesTb
 from DataBase.fav import FavTb
 from DataBase.people import PeopleTb
+from DataBase.utils import get_recommandation, search_by_name, search_by_adj
 
 
 class DBOperator:
