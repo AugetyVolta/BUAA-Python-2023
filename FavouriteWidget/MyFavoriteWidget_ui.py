@@ -78,6 +78,6 @@ class Ui_MyFavoriteWidget(object):
         _translate = QtCore.QCoreApplication.translate
         MyFavoriteWidget.setWindowTitle(_translate("MyFavoriteWidget", "Form"))
         self.TitleLabel.setText(_translate("MyFavoriteWidget", "我的收藏"))
-        self.SubtitleLabel.setText(_translate("MyFavoriteWidget", "我收藏的餐厅"))
-        self.SubtitleLabel_2.setText(_translate("MyFavoriteWidget", "我收藏的柜台"))
+        self.SubtitleLabel.setText(_translate("MyFavoriteWidget", "我收藏的餐厅💒💝"))
+        self.SubtitleLabel_2.setText(_translate("MyFavoriteWidget", "我收藏的柜台🛎️💓"))
 from qfluentwidgets import CardWidget, ListWidget, SubtitleLabel, TitleLabel

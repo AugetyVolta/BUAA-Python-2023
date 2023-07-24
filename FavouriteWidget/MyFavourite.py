@@ -22,7 +22,7 @@ class MyFavouriteWidget(Ui_MyFavoriteWidget, QWidget):
         # 设置布局
         Layout_for_favouriteList = QVBoxLayout()
         favouriteListTitle = SubtitleLabel(self)
-        favouriteListTitle.setText("收藏夹")
+        favouriteListTitle.setText("收藏夹🎐🎐")
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         font.setPointSize(16)
