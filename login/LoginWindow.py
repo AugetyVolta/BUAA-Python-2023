@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtWidgets import QApplication, QWidget
-from qfluentwidgets import SplitTitleBar, setThemeColor
+from qfluentwidgets import SplitTitleBar, setThemeColor, InfoBarPosition, InfoBar
 from qframelesswindow import AcrylicWindow
 
 from Login.LoginWindow_ui import Ui_LoginWidget
@@ -46,6 +46,7 @@ class MyLogin(Ui_LoginWidget, AcrylicWindow):
         self.RegisterButton.clicked.connect(self.go_to_register)
 
     def go_to_mainWindow(self):
+        # TODO:需要检验用用户名密码是否正确
         MainWindow = MyMainWindow()
         MainWindow.show()
         self.close()
@@ -58,6 +59,28 @@ class MyLogin(Ui_LoginWidget, AcrylicWindow):
         desktop = QApplication.desktop().availableGeometry()
         w, h = desktop.width(), desktop.height()
         self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
+
+    def createErrorInfoBar(self, content):
+        InfoBar.error(
+            title='错误',
+            content=content,
+            orient=Qt.Horizontal,
+            isClosable=True,
+            position=InfoBarPosition.TOP_RIGHT,
+            # duration=-1,    # won't disappear automatically
+            parent=self
+        )
+
+    def createSuccessInfoBar(self, content):
+        # convenient class mothod
+        InfoBar.success(
+            title='成功',
+            content=content,
+            orient=Qt.Horizontal,
+            isClosable=True,
+            position=InfoBarPosition.TOP_RIGHT,
+            parent=self
+        )
 
 
 if __name__ == '__main__':

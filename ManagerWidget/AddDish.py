@@ -24,7 +24,7 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
         self.counter = None
         self.feel = None  # 0 1
         self.flavour = None  # 五位2进制
-
+        self.imagePath = None
         self.setTitleBar(SplitTitleBar(self))
         self.titleBar.raise_()
         self.setWindowTitle('菜品添加')
@@ -105,7 +105,7 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
         self.CheckBox_4.setChecked(False)
         self.CheckBox_5.setChecked(False)
         self.createSuccessInfoBar('添加成功')
-        self.MyManager.addDish_From_AddDish(self.restaurant, self.counter, self.dishName)
+        self.MyManager.addDish_From_AddDish(self.restaurant, self.counter, self.dishName, self.imagePath)
 
     def getDishInfo(self):
         return self.dishInfo
@@ -134,7 +134,9 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
         file_dialog.setNameFilter('Images (*.png *.xpm *.jpg *.bmp)')
         if file_dialog.exec_():
             file_path = file_dialog.selectedFiles()[0]
+            self.imagePath = file_path
             # 在这里执行上传头像的逻辑，这里只是简单地显示选择的图像
+            # TODO:设置图像上传
             pixmap = QPixmap(file_path)
             self.dishImageLabel.setScaledContents(True)
             self.dishImageLabel.setPixmap(pixmap.scaled(self.dishImageLabel.width(), self.dishImageLabel.height()))

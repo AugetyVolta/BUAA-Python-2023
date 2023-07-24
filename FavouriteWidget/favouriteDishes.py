@@ -8,7 +8,7 @@ from qfluentwidgets import PushButton, ScrollArea, CardWidget
 
 
 class DishItem(QWidget):
-    def __init__(self, dish_name, dish_type, restaurant_name, counter_name, dish_id):
+    def __init__(self, dish_name, dish_type, restaurant_name, counter_name, dish_id, pixmap):
         super().__init__()
         self.dish_id = dish_id
         self.dish_name = dish_name
@@ -16,15 +16,15 @@ class DishItem(QWidget):
         self.restaurant_name = restaurant_name
         self.counter_name = counter_name
 
-        self.initUI()
+        self.initUI(pixmap)
 
-    def initUI(self):
+    def initUI(self, pixmap):
         layout = QHBoxLayout()
 
         # 菜品图像
         self.dish_image_label = QLabel(self)
-        # 设置菜品图像，您可以根据实际情况设置菜品图片
-        pixmap = QPixmap('{}/../picture_set/BUAA.jpg')
+        # # 设置菜品图像，您可以根据实际情况设置菜品图片
+        # pixmap = QPixmap('{}/../picture_set/BUAA.jpg')
         self.dish_image_label.setPixmap(pixmap)  # 设置菜品图片
         self.dish_image_label.setFixedSize(128, 128)
         self.dish_image_label.setScaledContents(True)
@@ -78,6 +78,7 @@ class DishItem(QWidget):
         # TODO:根据dish_id删除一个人所收藏的菜
 
 
+# TODO:需要传进来personId
 class DishCollectionUI(QWidget):
     def __init__(self):
         super().__init__()
@@ -102,12 +103,15 @@ class DishCollectionUI(QWidget):
         scroll_area.setWidget(self.dishes_widget)
 
         # TODO:根据人的收藏添置widget
+        # 设置菜品图像，您可以根据实际情况设置菜品图片
+        pixmap = QPixmap('{}/../picture_set/BUAA.jpg')
         for i in range(10):
             dish_item = DishItem(dish_name=f'鱼香肉丝{i + 1}',
                                  dish_type='类型A',
                                  restaurant_name='餐厅A',
                                  counter_name='柜台A',
-                                 dish_id=None)  # TODO 根据dishID布置菜
+                                 dish_id=None,
+                                 pixmap=pixmap)  # TODO 根据dishID布置菜
             self.dishes_layout.addWidget(dish_item)
 
         layout.addWidget(scroll_area)

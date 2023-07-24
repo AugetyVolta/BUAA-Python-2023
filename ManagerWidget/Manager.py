@@ -114,7 +114,7 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
             addDish.show()
         self.resturantWidget.expandAll()
 
-    def addDish_From_AddDish(self, restaurant, counter, dishName):
+    def addDish_From_AddDish(self, restaurant, counter, dishName, imagePath):
         found_items = self.resturantWidget.findItems(restaurant, Qt.MatchExactly)
         if not found_items:
             restaurant_item = QtWidgets.QTreeWidgetItem(self.resturantWidget)

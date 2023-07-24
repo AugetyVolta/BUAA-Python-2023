@@ -14,6 +14,7 @@ from picture_set import pic_rc
 
 
 class DishDetailWindow(AcrylicWindow):
+    # TODO:需要传入菜的id,以及人的Id
     def __init__(self, dish_name, dish_type, restaurant_name, counter_name):
         super().__init__()
         self.setTitleBar(SplitTitleBar(self))
@@ -73,7 +74,7 @@ class DishDetailWindow(AcrylicWindow):
         self.favorite_button.setFixedSize(90, 45)
         self.favorite_button.setStyleSheet(
             "font-size: 20px; "
-            "background-color: #47e0ff; "
+            "background-color: #3ac1ff; "
             "color: white; border: none; "
             "border-radius: 5px; "
             "padding: 10px 20px;")
@@ -82,7 +83,7 @@ class DishDetailWindow(AcrylicWindow):
         self.eaten_button.setFixedSize(90, 45)
         self.eaten_button.setStyleSheet(
             "font-size: 20px; "
-            "background-color: #ffc6c1; "
+            "background-color: #ff9d8c; "
             "color: white; border: none; "
             "border-radius: 5px; "
             "padding: 10px 20px;")
@@ -98,6 +99,27 @@ class DishDetailWindow(AcrylicWindow):
         self.dish_infoAndButton_layout.addWidget(self.dish_image_lable)
         self.dish_infoAndButton_layout.addWidget(dish_info_label)
         self.dish_infoAndButton_layout.addLayout(self.favorite_eaten_layout)
+
+        # 收藏餐厅和收藏柜台按钮
+        self.favorite_restaurant = PushButton('收藏餐厅')
+        self.favorite_counter = PushButton('收藏柜台')
+        self.favorite_restaurant.setStyleSheet(
+            "font-size: 20px; "
+            "background-color: #b0a6ff; "
+            "color: white; border: none; "
+            "border-radius: 5px; "
+            "padding: 5px 10px;")
+        self.favorite_counter.setStyleSheet(
+            "font-size: 20px; "
+            "background-color: #b0a6ff; "
+            "color: white; border: none; "
+            "border-radius: 5px; "
+            "padding: 5px 10px;")
+
+        # 收藏餐厅和收藏柜台按钮的布局
+        self.layout_for_restuarant_counter = QHBoxLayout()
+        self.layout_for_restuarant_counter.addWidget(self.favorite_restaurant)
+        self.layout_for_restuarant_counter.addWidget(self.favorite_counter)
 
         # 创建QScrollArea用于显示评论
         self.scroll_area = ScrollArea()
@@ -137,7 +159,7 @@ class DishDetailWindow(AcrylicWindow):
         layout_for_button = QHBoxLayout()
         layout.addItem(QtWidgets.QSpacerItem(20, 60))
         layout.addLayout(self.dish_infoAndButton_layout)
-        layout.addLayout(self.favorite_eaten_layout)
+        layout.addLayout(self.layout_for_restuarant_counter)
         layout.addWidget(self.comment_label)
         layout.addWidget(self.comment_edit)
         layout_for_button.addWidget(self.submit_button)
@@ -151,6 +173,10 @@ class DishDetailWindow(AcrylicWindow):
         # 连接按钮的点击事件
         self.submit_button.clicked.connect(self.on_submit)
         self.clear_button.clicked.connect(self.on_clear)
+        self.favorite_restaurant.clicked.connect(self.set_restaurant_button)
+        self.favorite_counter.clicked.connect(self.set_counter_button)
+        self.favorite_button.clicked.connect(self.set_favourite_button)
+        self.eaten_button.clicked.connect(self.set_eaten_button)
 
         # 显示暂无评论的提示
         self.no_comment_label = QLabel('暂无评论')
@@ -251,6 +277,23 @@ class DishDetailWindow(AcrylicWindow):
         # 滚动到评论显示框的顶部
         scroll_bar = self.scroll_area.verticalScrollBar()
         scroll_bar.setValue(scroll_bar.minimum())
+
+    # TODO:设置dish界面四个收藏按钮函数
+    # 收藏菜
+    def set_favourite_button(self):
+        pass
+
+    # 吃过
+    def set_eaten_button(self):
+        pass
+
+    # 收藏餐厅
+    def set_restaurant_button(self):
+        pass
+
+    # 收藏柜台
+    def set_counter_button(self):
+        pass
 
     def closeEvent(self, event):
         store_file = open("list", "w+")
