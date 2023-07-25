@@ -1,5 +1,7 @@
 from PIL import Image
 from io import BytesIO
+
+
 class PeopleTb:
     def __init__(self, execute) -> None:
         self.execute = execute
@@ -27,9 +29,12 @@ class PeopleTb:
         else:
             self.execute(
                 f"update people set {field} = {value} where name = '{name}';")
-    
+
     def get(self, name):
-        name = "'" + name +"'"
+        name = "'" + name + "'"
         person = list(self.execute(f'select * from people where name = {name}')[0])
-        person[7] = Image.open(BytesIO(person[7]))
+        if person[7] is not None:
+            person[7] = Image.open(BytesIO(person[7]))
+        else:
+            person[7] = None
         return person

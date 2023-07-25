@@ -1,5 +1,7 @@
 import random
 import sys
+
+from PIL.Image import Image
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QWidget, QDesktopWidget, QMessageBox, QFileDialog, QApplication
 from PyQt5.QtCore import Qt, QDate, QObject, pyqtSignal, QThread
@@ -109,10 +111,12 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
     def setProfilePhoto(self):
         dataBase = DBOperator()
         image_pil = dataBase.get_person(self.account)[7]
-        if image_pil is not None:
+        if image_pil:
             # 将PIL Image转换为QImage
+            image_pil.resize((128, 128))
             image_qt = QImage(image_pil.tobytes(), image_pil.width, image_pil.height, QImage.Format_RGB888)
-            # 创建QPixmap
+            image_qt.scaled(128, 128)
+            # # 创建QPixmap
             pixmap = QPixmap.fromImage(image_qt)
             self.ImageLabel.setPixmap(pixmap.scaled(self.ImageLabel.width(), self.ImageLabel.height()))
             self.ImageLabel.setScaledContents(True)
@@ -135,6 +139,7 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
             # 上传图片路径到云端
             dataBase = DBOperator()
             dataBase.update_person(self.account, 'photo', file_path)
+            self.createSuccessInfoBar('头像上传成功')
 
     def initGenderComBox(self):
         items = ['男', '女']
@@ -223,6 +228,6 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    win = MyUserWidget('pqy')
+    win = MyUserWidget('xyh')
     win.show()
     sys.exit(app.exec_())
