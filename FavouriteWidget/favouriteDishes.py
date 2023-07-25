@@ -2,35 +2,51 @@ import sys
 
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QScrollArea
 from qfluentwidgets import PushButton, ScrollArea, CardWidget
 
+from DataBase.database import DBOperator
+
 
 class DishItem(QWidget):
-    def __init__(self, dish_name, dish_type, restaurant_name, counter_name, dish_id, pixmap, account):
+    def __init__(self, account, dish_id):
         super().__init__()
+        self.counter_name = None
+        self.restaurant_name = None
+        self.dish_type = None
+        self.dish_name = None
         self.dish_id = dish_id
-        self.dish_name = dish_name
-        self.dish_type = dish_type
-        self.restaurant_name = restaurant_name
-        self.counter_name = counter_name
+        self.account = account
+        self.initUI()
 
-        self.initUI(pixmap)
-
-    def initUI(self, pixmap):
+    def initUI(self):
+        # 连接数据库
+        database = DBOperator()
+        dish = database.get_dish(self.dish_id)
         layout = QHBoxLayout()
-
         # 菜品图像
         self.dish_image_label = QLabel(self)
-        # # 设置菜品图像，您可以根据实际情况设置菜品图片
-        # pixmap = QPixmap('{}/../picture_set/BUAA.jpg')
+        image_pil = dish[8]
+        image_pil.resize((128, 128))
+        image_qt = QImage(image_pil.tobytes(), image_pil.width, image_pil.height, QImage.Format_RGB888)
+        image_qt.scaled(128, 128)
+        pixmap = QPixmap.fromImage(image_qt)
         self.dish_image_label.setPixmap(pixmap)  # 设置菜品图片
         self.dish_image_label.setFixedSize(128, 128)
         self.dish_image_label.setScaledContents(True)
         self.dish_image_label.setStyleSheet("border: 1px solid #ccc; border-radius: 5px;")
         layout.addWidget(self.dish_image_label)
 
+        self.dish_name = dish[1]
+        if dish[2] == 4:
+            self.dish_type = '早餐'
+        elif dish[2] == 2:
+            self.dish_type = '正餐'
+        else:
+            self.dish_type = '饮料'
+        self.restaurant_name = dish[6]
+        self.counter_name = dish[5]
         # 菜品信息
         dish_info_label = QLabel(f'菜名：{self.dish_name}\n'
                                  f'类型：{self.dish_type}\n'
@@ -73,18 +89,19 @@ class DishItem(QWidget):
         self.unfavorite_button.clicked.connect(self.on_unfavorite)
 
     def on_unfavorite(self):
+        # 据dish_id删除一个人所收藏的菜
+        database = DBOperator()
+        database.del_fav_dish(self.account, self.dish_id)
         # Emit a signal to inform the parent widget to remove this item
         self.deleteLater()  # Delete the widget itself
-        # TODO:根据dish_id删除一个人所收藏的菜
 
 
-# TODO:需要传进来personId
 class DishCollectionUI(QWidget):
-    def __init__(self):
+    def __init__(self, account):
         super().__init__()
+        self.account = account
         self.setWindowTitle('菜品收藏')
         self.setGeometry(100, 100, 600, 400)
-
         self.initUI()
 
     def initUI(self):
@@ -102,17 +119,10 @@ class DishCollectionUI(QWidget):
         # 将QWidget设置为滚动区域的小部件
         scroll_area.setWidget(self.dishes_widget)
 
-        # TODO:根据人的收藏添置widget
-        # 设置菜品图像，您可以根据实际情况设置菜品图片
-        pixmap = QPixmap('{}/../picture_set/BUAA.jpg')
-        for i in range(10):
-            dish_item = DishItem(dish_name=f'鱼香肉丝{i + 1}',
-                                 dish_type='类型A',
-                                 restaurant_name='餐厅A',
-                                 counter_name='柜台A',
-                                 dish_id=None,
-                                 pixmap=pixmap,
-                                 account=None)  # TODO 根据dishID布置菜
+        # 根据人的收藏添置widget
+        database = DBOperator()
+        for dish_id in database.get_fav_dish(self.account):
+            dish_item = DishItem(dish_id=dish_id, account=self.account)
             self.dishes_layout.addWidget(dish_item)
 
         layout.addWidget(scroll_area)
@@ -121,6 +131,6 @@ class DishCollectionUI(QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = DishCollectionUI()
+    window = DishCollectionUI('pqy')
     window.show()
     sys.exit(app.exec_())

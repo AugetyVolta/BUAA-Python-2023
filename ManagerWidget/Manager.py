@@ -84,6 +84,10 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
             restaurant_item = QtWidgets.QTreeWidgetItem(self.resturantWidget)
             restaurant_item.setText(0, restaurant_name)
             self.addRestaurant_by_String(restaurant_name)
+            graph = str(self.dic)
+            database = DBOperator()
+            dst_graph = '"' + graph + '"'
+            database.execute(f'update globe set total = {dst_graph};')
         self.resturantWidget.expandAll()
 
     def addCounter(self):
@@ -96,6 +100,10 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
                 counter_item = QtWidgets.QTreeWidgetItem(selected_item)
                 counter_item.setText(0, counter_name)
                 self.addCounter_by_String(selected_item.text(0), counter_name)
+                graph = str(self.dic)
+                database = DBOperator()
+                dst_graph = '"' + graph + '"'
+                database.execute(f'update globe set total = {dst_graph};')
         self.resturantWidget.expandAll()
 
     def addDish(self):
@@ -137,6 +145,10 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
         else:
             dish_item = found_items[0]
         self.addDish_by_String(restaurant, counter, dishName)
+        graph = str(self.dic)
+        database = DBOperator()
+        dst_graph = '"' + graph + '"'
+        database.execute(f'update globe set total = {dst_graph};')
         self.resturantWidget.expandAll()
 
     def searchSubItems(self, parent_item, search_text):
@@ -175,6 +187,10 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
                 self.dic.pop(selected_item.text(0))
                 # 递归删除餐馆里所有的菜
                 self.deleteRestaurant(selected_item.text(0))
+            graph = str(self.dic)
+            database = DBOperator()
+            dst_graph = '"' + graph + '"'
+            database.execute(f'update globe set total = {dst_graph};')
 
     # 删除柜台里的所有菜
     def deleteCounter(self, restaurant_name, counter_name):
