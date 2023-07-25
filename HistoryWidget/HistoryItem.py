@@ -46,11 +46,16 @@ class MyHistoryItem(Ui_History_item, QWidget):
         # 设置删除按钮
         self.deleteButton.clicked.connect(self.delete_history)
 
-    def delete_history(self, flag=True):
-        if flag:
-            for item in self.item_list:
-                if item.time == self.time and item.dish_id == self.dish_id:
-                    self.item_list.remove(item)
+    def delete_history(self):
+        for item in self.item_list:
+            if item.time == self.time and item.dish_id == self.dish_id:
+                self.item_list.remove(item)
+        # 根据传入的personId删掉这条历史
+        database = DBOperator()
+        database.del_ates(self.account, self.dish_id, self.time)
+        self.deleteLater()
+
+    def delete(self):
         # 根据传入的personId删掉这条历史
         database = DBOperator()
         database.del_ates(self.account, self.dish_id, self.time)

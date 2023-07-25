@@ -18,6 +18,7 @@ from picture_set import pic_rc
 class MyManager(Ui_ManagerWidget, AcrylicWindow):
     def __init__(self):
         super().__init__()
+        self.addDish = None
         self.dic = None
         self.setupUi(self)
         # 初始化图信息
@@ -119,8 +120,8 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
                 self.addDish_by_String(selected_item.parent().text(0), selected_item.text(0), dish_name)
         else:
             # 如果没有指定餐厅，跳转增加菜的页面
-            addDish = MyAddDish(self)
-            addDish.show()
+            self.addDish = MyAddDish(self)
+            self.addDish.show()
         self.resturantWidget.expandAll()
 
     def addDish_From_AddDish(self, restaurant, counter, dishName, imagePath):

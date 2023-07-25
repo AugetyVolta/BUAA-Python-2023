@@ -1,5 +1,6 @@
 import random
 import sys
+import time
 
 from PIL.Image import Image
 from PyQt5 import QtWidgets
@@ -25,6 +26,19 @@ humorous_sentences = [
 ]
 
 
+class BackendThread(QObject):
+    # 通过类成员对象定义信号
+    update_date = pyqtSignal()
+
+    # 处理业务逻辑
+    def run(self):
+        while 1:
+            # 刷新1-10
+            for i in range(1, 11):
+                self.update_date.emit()
+                time.sleep(10)
+
+
 class MyUserWidget(Ui_MyUserWidget, QWidget):
     def __init__(self, account):
         super().__init__()
@@ -43,6 +57,28 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
         self.initBirthdayComBox()
         # 设置修改个人信息按钮
         self.saveButton.clicked.connect(self.saveChangeInfo)
+        # 初始化线程
+
+    # 初始化线程
+    def initThread(self):
+        # 创建线程
+        self.thread = QThread()
+        self.backend = BackendThread()
+        # 连接信号
+        self.backend.update_date.connect(self.update)
+        self.backend.moveToThread(self.thread)
+        # 开始线程
+        self.thread.started.connect(self.backend.run)
+        self.thread.start()
+
+    # 更新收藏吃过的数量
+    def update(self):
+        database = DBOperator()
+        person = database.get_person(self.account)
+        fav = person[5]
+        ates = person[6]
+        self.favouriteNum.setText(str(fav))
+        self.eatenNum.setText(str(ates))
 
     # 初始化个人信息
     def initUserInfo(self):

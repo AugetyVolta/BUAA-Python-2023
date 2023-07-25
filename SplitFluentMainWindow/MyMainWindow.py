@@ -19,6 +19,7 @@ class MyMainWindow(SplitFluentWindow):
     def __init__(self, account):
         super().__init__()
         # 设置大小
+        self.manager = None
         self.setFixedSize(1090, 680)
         self.navigationInterface.setExpandWidth(120)
         # 当前的账户

@@ -1,7 +1,8 @@
 import sys
+import time
 
 from PyQt5 import QtGui
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QObject, pyqtSignal, QThread
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QWidget, QApplication, QVBoxLayout, QHBoxLayout, QLabel
 from qfluentwidgets import CardWidget, PushButton
@@ -12,9 +13,24 @@ from HistoryWidget.MyHistoryWidget_ui import Ui_MyHistoryWidget
 from HistoryWidget.SearchForHistory import MySearchForHistory
 
 
+class BackendThread(QObject):
+    # 通过类成员对象定义信号
+    update_date = pyqtSignal()
+
+    # 处理业务逻辑
+    def run(self):
+        while 1:
+            # 刷新1-10
+            for i in range(1, 11):
+                self.update_date.emit()
+                time.sleep(5)
+
+
 class MyHistoryWidget(Ui_MyHistoryWidget, QWidget):
     def __init__(self, account):
         super().__init__()
+        self.backend = None
+        self.thread = None
         self.account = account
         self.setupUi(self)
         # 设置一个专门的item_list
@@ -48,8 +64,22 @@ class MyHistoryWidget(Ui_MyHistoryWidget, QWidget):
 
     def clear_items(self):
         for item in self.item_list:
-            item.delete_history(flag=False)
+            item.delete()
         self.item_list.clear()
+
+    def initThread(self):
+        # 创建线程
+        self.thread = QThread()
+        self.backend = BackendThread()
+        # 连接信号
+        self.backend.update_date.connect(self.update)
+        self.backend.moveToThread(self.thread)
+        # 开始线程
+        self.thread.started.connect(self.backend.run)
+        self.thread.start()
+
+    def update(self):
+        pass
 
 
 if __name__ == '__main__':

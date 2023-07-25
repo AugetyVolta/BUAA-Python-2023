@@ -1,7 +1,8 @@
 import sys
+import time
 
 from PyQt5 import QtGui
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QObject, pyqtSignal, QThread
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QScrollArea
 from qfluentwidgets import PushButton, ScrollArea, CardWidget
@@ -10,7 +11,7 @@ from DataBase.database import DBOperator
 
 
 class DishItem(QWidget):
-    def __init__(self, account, dish_id):
+    def __init__(self, account, dish_id, item_list):
         super().__init__()
         self.counter_name = None
         self.restaurant_name = None
@@ -18,6 +19,7 @@ class DishItem(QWidget):
         self.dish_name = None
         self.dish_id = dish_id
         self.account = account
+        self.item_list = item_list
         self.initUI()
 
     def initUI(self):
@@ -89,6 +91,9 @@ class DishItem(QWidget):
         self.unfavorite_button.clicked.connect(self.on_unfavorite)
 
     def on_unfavorite(self):
+        for item in self.item_list:
+            if item.dish_id == self.dish_id:
+                self.item_list.remove(item)
         # 据dish_id删除一个人所收藏的菜
         database = DBOperator()
         database.del_fav_dish(self.account, self.dish_id)
@@ -96,10 +101,24 @@ class DishItem(QWidget):
         self.deleteLater()  # Delete the widget itself
 
 
+class BackendThread(QObject):
+    # 通过类成员对象定义信号
+    update_date = pyqtSignal()
+
+    # 处理业务逻辑
+    def run(self):
+        while 1:
+            # 刷新1-10
+            for i in range(1, 11):
+                self.update_date.emit()
+                time.sleep(5)
+
+
 class DishCollectionUI(QWidget):
     def __init__(self, account):
         super().__init__()
         self.account = account
+        self.item_list = []
         self.setWindowTitle('菜品收藏')
         self.setGeometry(100, 100, 600, 400)
         self.initUI()
@@ -122,11 +141,39 @@ class DishCollectionUI(QWidget):
         # 根据人的收藏添置widget
         database = DBOperator()
         for dish_id in database.get_fav_dish(self.account):
-            dish_item = DishItem(dish_id=dish_id, account=self.account)
+            dish_item = DishItem(dish_id=dish_id,
+                                 account=self.account,
+                                 item_list=self.item_list)
             self.dishes_layout.addWidget(dish_item)
+            self.item_list.append(dish_item)
 
         layout.addWidget(scroll_area)
         self.setLayout(layout)
+        self.initThread()
+
+    def initThread(self):
+        # 创建线程
+        self.thread = QThread()
+        self.backend = BackendThread()
+        # 连接信号
+        self.backend.update_date.connect(self.update)
+        self.backend.moveToThread(self.thread)
+        # 开始线程
+        self.thread.started.connect(self.backend.run)
+        self.thread.start()
+
+    def update(self):
+        database = DBOperator()
+        list_id_new = list(database.get_fav_dish(self.account))
+        list_id_old = [item.dish_id for item in self.item_list]
+        added_ids = [x for x in list_id_new if x not in list_id_old]
+        if len(added_ids) != 0:
+            # 找到新表比老表多出的元素（在新表中存在但在老表中不存在的元素）
+            added_items = [DishItem(dish_id=dish_id, account=self.account, item_list=self.item_list) for dish_id in
+                           added_ids]
+            self.item_list.extend(added_items)
+            for item in added_items:
+                self.dishes_layout.addWidget(item)
 
 
 if __name__ == '__main__':
