@@ -47,7 +47,7 @@ class MyLogin(Ui_LoginWidget, AcrylicWindow):
         self.RegisterButton.clicked.connect(self.go_to_register)
 
     def go_to_mainWindow(self):
-        # TODO:需要检验用用户名密码是否正确
+        # 检验用用户名密码是否正确
         account = self.userName.text()
         password = self.password.text()
         database = DBOperator()

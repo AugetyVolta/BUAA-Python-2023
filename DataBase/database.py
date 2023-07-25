@@ -96,9 +96,19 @@ class DBOperator:
     ########## 收藏表相关函数 ##########
     def add_fav_dish(self, name, dish):
         self.favOp.add(name, 'dish', dish)
+        pre_fav = self.execute(
+            f"select fav from people where name = '{name}';")[0][0]
+
+        self.execute(
+            f"update people set fav = {pre_fav + 1} where name = '{name}';")
 
     def del_fav_dish(self, name, dish):
         self.favOp.delete(name, 'dish', dish)
+        pre_fav = self.execute(
+            f"select fav from people where name = '{name}';")[0][0]
+
+        self.execute(
+            f"update people set fav = {pre_fav - 1} where name = '{name}';")
 
     def get_fav_dish(self, name):
         return self.favOp.get(name, 'dish')

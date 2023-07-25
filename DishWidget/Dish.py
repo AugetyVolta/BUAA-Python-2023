@@ -324,7 +324,7 @@ class DishDetailWindow(AcrylicWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     # 在这里传入菜肴信息
-    window = DishDetailWindow(dish_id=5,
+    window = DishDetailWindow(dish_id=0,
                               account='pqy')
     window.show()
     sys.exit(app.exec_())
