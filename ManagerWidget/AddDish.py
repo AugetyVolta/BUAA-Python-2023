@@ -40,7 +40,7 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
                         """)
         self.center()
         # 设置dishKindBox
-        self.dishKindBox.addItems(['早餐', '中餐', '晚餐', '饮料'])
+        self.dishKindBox.addItems(['早餐', '正餐', '饮料'])
         # 连接按钮
         self.hotButton.toggled.connect(self.onRadioButtonClicked)
         self.coldButton.toggled.connect(self.onRadioButtonClicked)
@@ -54,19 +54,17 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
         # 获取冷热
         if sender.isChecked():
             if sender.text() == '冷':
-                self.feel = 0
+                self.feel = 0b10
             else:
-                self.feel = 1
+                self.feel = 0b01
 
     def getDishKind(self):
         if self.dishKindBox.currentText() == '早餐':
-            return 0b1000
-        elif self.dishKindBox.currentText() == '中餐':
-            return 0b0100
-        elif self.dishKindBox.currentText() == '晚餐':
-            return 0b0010
+            return 0b100
+        elif self.dishKindBox.currentText() == '正餐':
+            return 0b010
         elif self.dishKindBox.currentText() == '饮料':
-            return 0b0001
+            return 0b001
 
     # 五位二进制
     def getFlavour(self):
@@ -94,7 +92,7 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
         # 清空
         self.dishNameEdit.clear()
         self.dishKindBox.clear()
-        self.dishKindBox.addItems(['早餐', '中餐', '晚餐', '饮料'])
+        self.dishKindBox.addItems(['早餐', '正餐', '饮料'])
         self.restaurantEdit.clear()
         self.counterEdit.clear()
         self.coldButton.setChecked(False)

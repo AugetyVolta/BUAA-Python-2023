@@ -8,7 +8,7 @@ from qfluentwidgets import PushButton, ScrollArea, CardWidget
 
 
 class DishItem(QWidget):
-    def __init__(self, dish_name, dish_type, restaurant_name, counter_name, dish_id, pixmap):
+    def __init__(self, dish_name, dish_type, restaurant_name, counter_name, dish_id, pixmap, account):
         super().__init__()
         self.dish_id = dish_id
         self.dish_name = dish_name
@@ -111,7 +111,8 @@ class DishCollectionUI(QWidget):
                                  restaurant_name='餐厅A',
                                  counter_name='柜台A',
                                  dish_id=None,
-                                 pixmap=pixmap)  # TODO 根据dishID布置菜
+                                 pixmap=pixmap,
+                                 account=None)  # TODO 根据dishID布置菜
             self.dishes_layout.addWidget(dish_item)
 
         layout.addWidget(scroll_area)

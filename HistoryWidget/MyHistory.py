@@ -34,7 +34,7 @@ class MyHistoryWidget(Ui_MyHistoryWidget, QWidget):
                                       restaurant_name='餐厅A',
                                       counter_name='柜台A',
                                       history_time='2023-07-23',
-                                      person_id=None,
+                                      account=self.account,
                                       pixmap=None)
             # TODO 根据dishID布置菜
             self.dishes_layout.addWidget(dish_item)

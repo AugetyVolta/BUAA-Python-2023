@@ -15,7 +15,7 @@ from picture_set import pic_rc
 
 class DishDetailWindow(AcrylicWindow):
     # TODO:需要传入菜的id,以及人的Id
-    def __init__(self, dish_name, dish_type, restaurant_name, counter_name):
+    def __init__(self, dish_name, dish_type, restaurant_name, counter_name, account):
         super().__init__()
         self.setTitleBar(SplitTitleBar(self))
         self.titleBar.raise_()
@@ -312,6 +312,7 @@ if __name__ == '__main__':
     window = DishDetailWindow(dish_name='九转大肠',
                               dish_type='中餐',
                               restaurant_name='小胖餐厅',
-                              counter_name='保留原味柜台')
+                              counter_name='保留原味柜台',
+                              account=None)
     window.show()
     sys.exit(app.exec_())

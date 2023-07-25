@@ -1,3 +1,5 @@
+from PIL import Image
+from io import BytesIO
 class PeopleTb:
     def __init__(self, execute) -> None:
         self.execute = execute
@@ -11,15 +13,23 @@ class PeopleTb:
         if len(exist) > 0:
             return False
         self.execute(
-            f"insert into people (name, nick, passwd, sex, birth, fav, ates) values ({name}, '{nick}', '{passwd}', 0, '', 0, 0);")
+            f"insert into people (name, nick, passwd, sex, birth, fav, ates) values ('{name}', '{nick}', '{passwd}', 0, '', 0, 0);")
         return True
 
     def update(self, name, field, value):
         if field in ['nick', 'passwd', 'birth']:
             value = "'" + value + "'"
-        self.execute(
-            f"update people set {field} = {value} where name = '{name}';")
+        if field == 'photo':
+            with open(value, 'rb') as f:
+                value = f.read()
+            query = 'update people set photo = %s where name = %s'
+            self.execute(query, (value, name))
+        else:
+            self.execute(
+                f"update people set {field} = {value} where name = '{name}';")
     
     def get(self, name):
         name = "'" + name +"'"
-        return self.execute(f'select * from people where name = {name}')[0]
+        person = list(self.execute(f'select * from people where name = {name}')[0])
+        person[7] = Image.open(BytesIO(person[7]))
+        return person

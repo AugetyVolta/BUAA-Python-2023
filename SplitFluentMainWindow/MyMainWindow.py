@@ -9,7 +9,6 @@ from qfluentwidgets import SplitFluentWindow, NavigationWidget, NavigationItemPo
 from ManagerWidget.Manager import MyManager
 from picture_set import pic_rc
 from FavouriteWidget.MyFavourite import MyFavouriteWidget
-from Game.MyGame import Tetris
 from HistoryWidget.MyHistory import MyHistoryWidget
 from HomeWidget.MyHomeWidget import MyHomeWidget
 from User.MyUser import MyUserWidget
@@ -43,7 +42,7 @@ class MyMainWindow(SplitFluentWindow):
         # 添加历史记录界面
         self.history = MyHistoryWidget(self.account)
         self.addSubInterface(self.history, FIF.HISTORY, 'History')
-
+        # 添加主题切换按钮
         self.navigationInterface.addItem(
             routeKey='changeTheme',
             icon=FIF.CONSTRACT,
@@ -52,7 +51,7 @@ class MyMainWindow(SplitFluentWindow):
             position=NavigationItemPosition.BOTTOM,
 
         )
-
+        # 如果是管理员设置管理菜肴的界面
         if manager_access:
             self.navigationInterface.addItem(
                 routeKey='manager',
@@ -61,7 +60,6 @@ class MyMainWindow(SplitFluentWindow):
                 onClick=self.open_manager_window,
                 position=NavigationItemPosition.BOTTOM,
             )
-
         # 居中显示
         self.center()
 

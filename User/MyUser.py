@@ -1,11 +1,13 @@
 import random
-
+import sys
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QWidget, QDesktopWidget, QMessageBox, QFileDialog
+from PyQt5.QtWidgets import QWidget, QDesktopWidget, QMessageBox, QFileDialog, QApplication
 from PyQt5.QtCore import Qt, QDate, QObject, pyqtSignal, QThread
 from PyQt5.QtGui import QIcon, QImage, QPixmap, QTransform
 from qfluentwidgets import InfoBar, InfoBarPosition
 
+from DataBase.database import DBOperator
+from picture_set import pic_rc
 from User.MyUserWidget_ui import Ui_MyUserWidget
 
 humorous_sentences = [
@@ -30,6 +32,7 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
         self.setProfilePhoto()
         # 初始化用户信息
         self.initUserInfo()
+        self.initUserEdit()
         # 初始化signature
         self.signatureLable.setText(humorous_sentences[random.randint(0, len(humorous_sentences) - 1)])
         # 初始化性别选框
@@ -46,19 +49,79 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
         self.SegmentedWidget.addItem('userInfo', '个人信息', self.setFirstPage, )
         self.SegmentedWidget.addItem('edit', '编辑', self.setSecondPage, )
         self.SegmentedWidget.setCurrentItem('userInfo')
+        # 设置个人信息,头像,昵称，用户名，性别，生日，收藏数，吃过数
+        # (name,nick, passwd,sex,birth,fav,ates,photo)
+        database = DBOperator()
+        person = database.get_person(self.account)
+        name = person[0]
+        nick = person[1]
+        if person[3] == 0:
+            sex = 'Not edited yet'
+        elif person[3] == 1:
+            sex = '男'
+        else:
+            sex = '女'
+        birth = person[4] if person[4] != '' else 'Not edited yet'
+        fav = person[5]
+        ates = person[6]
+        self.userNameShow.setText(name)
+        self.nickNameShow.setText(nick)
+        self.UserName.setText(nick)
+        self.genderShow.setText(sex)
+        self.birthdayShow.setText(birth)
+        self.favouriteNum.setText(str(fav))
+        self.eatenNum.setText(str(ates))
+        # TODO:设置口味，你的最爱
 
+    def initUserEdit(self):
+        database = DBOperator()
+        person = database.get_person(self.account)
+        name = person[0]
+        nick = person[1]
+        if person[3] == 0:
+            sex = ''
+        elif person[3] == 1:
+            sex = '男'
+        else:
+            sex = '女'
+        if person[4] != '':
+            year, month, day = person[4].split('-')
+        else:
+            year = ''
+            month = ''
+            day = ''
+        self.userNameEdit.setPlaceholderText(name)
+        self.nickNameEdit.setPlaceholderText(nick)
+        self.genderComboBox.setPlaceholderText(sex)
+        self.birthday_year.setPlaceholderText(year)
+        self.birthday_month.setPlaceholderText(month)
+        self.birthday_day.setPlaceholderText(day)
+
+    # 个人信息面是第一页
     def setFirstPage(self):
         self.stackedWidget.setCurrentIndex(0)
 
+    # 编辑个人信息是第二页
     def setSecondPage(self):
         self.stackedWidget.setCurrentIndex(1)
 
     # 设置头像
     def setProfilePhoto(self):
-        pixmap = QPixmap("{}/../picture_set/BUAA_128x128.jpg")
-        self.ImageLabel.setPixmap(pixmap)
-        self.ImageLabel.setScaledContents(True)
-        self.ImageLabel.clicked.connect(self.uploadProfilePhoto)
+        dataBase = DBOperator()
+        image_pil = dataBase.get_person(self.account)[7]
+        if image_pil is not None:
+            # 将PIL Image转换为QImage
+            image_qt = QImage(image_pil.tobytes(), image_pil.width, image_pil.height, QImage.Format_RGB888)
+            # 创建QPixmap
+            pixmap = QPixmap.fromImage(image_qt)
+            self.ImageLabel.setPixmap(pixmap.scaled(self.ImageLabel.width(), self.ImageLabel.height()))
+            self.ImageLabel.setScaledContents(True)
+            self.ImageLabel.clicked.connect(self.uploadProfilePhoto)
+        else:
+            pixmap = QPixmap(":/user.png")
+            self.ImageLabel.setPixmap(pixmap)
+            self.ImageLabel.setScaledContents(True)
+            self.ImageLabel.clicked.connect(self.uploadProfilePhoto)
 
     # 更新头像
     def uploadProfilePhoto(self):
@@ -67,9 +130,11 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
         file_dialog.setNameFilter('Images (*.png *.xpm *.jpg *.bmp)')
         if file_dialog.exec_():
             file_path = file_dialog.selectedFiles()[0]
-            # 在这里执行上传头像的逻辑，这里只是简单地显示选择的图像
             pixmap = QPixmap(file_path)
             self.ImageLabel.setPixmap(pixmap.scaled(self.ImageLabel.width(), self.ImageLabel.height()))
+            # 上传图片路径到云端
+            dataBase = DBOperator()
+            dataBase.update_person(self.account, 'photo', file_path)
 
     def initGenderComBox(self):
         items = ['男', '女']
@@ -84,20 +149,54 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
         self.birthday_day.addItems(items_day)
 
     def saveChangeInfo(self):
-        new_nickname = self.nickNameEdit.text() if self.nickNameEdit.text() != '' else ""
-        new_gender = self.genderComboBox.text() if self.genderComboBox.text() != '' else ""
-        new_birth = self.birthday_year.text() + "-" + self.birthday_month.text() + '-' + self.birthday_day.text() if self.birthday_year.text() != '' else ""
+        dataBase = DBOperator()
+        new_nickname = self.nickNameEdit.text()
+        if self.genderComboBox.text() == '':
+            new_gender = 0
+        elif self.genderComboBox.text() == '男':
+            new_gender = 1
+        else:
+            new_gender = 2
+        new_birth = self.birthday_year.text() + "-" + self.birthday_month.text() + '-' + self.birthday_day.text() \
+            if self.birthday_year.text() != '' else ""
         old_passwd = self.passwordEdit_old.text()
         new_passwd = self.passwordEdit_new.text()
         if old_passwd == '' and new_passwd == '':
-            pass  # 不修改密码
+            # 不修改密码
+            if new_nickname != '':
+                dataBase.update_person(self.account, 'nick', new_nickname)
+                self.nickNameEdit.clear()
+                self.nickNameEdit.setPlaceholderText(new_nickname)
+            if new_gender != 0:
+                dataBase.update_person(self.account, 'sex', new_gender)
+            if new_birth != '':
+                dataBase.update_person(self.account, 'birth', new_birth)
+            # 然后更新用户信息界面
+            self.initUserInfo()
+            # 修改成功标签
+            self.createSuccessInfoBar('修改成功')
         elif old_passwd != '' and new_passwd == '' or old_passwd == '' and new_passwd != '':
             self.createErrorInfoBar('请补全密码信息')
         else:
-            pass
-            # 首先验证原密码是否争取
-            # 然后修改
-        # TODO
+            # 首先验证原密码是否正确
+            truePass = dataBase.get_person(self.account)[2]
+            if truePass == old_passwd:
+                dataBase.update_person(self.account, 'passwd', new_passwd)
+                self.passwordEdit_old.clear()
+                self.passwordEdit_new.clear()
+                if new_nickname != '':
+                    dataBase.update_person(self.account, 'nick', new_nickname)
+                    self.nickNameEdit.clear()
+                    self.nickNameEdit.setPlaceholderText(new_nickname)
+                if new_gender != 0:
+                    dataBase.update_person(self.account, 'sex', new_gender)
+                if new_birth != '':
+                    dataBase.update_person(self.account, 'birth', new_birth)
+                self.createSuccessInfoBar('修改成功')
+                # 然后更新用户信息界面
+                self.initUserInfo()
+            else:
+                self.createErrorInfoBar('原密码错误')
 
     def createErrorInfoBar(self, content):
         InfoBar.error(
@@ -109,3 +208,21 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
             # duration=-1,    # won't disappear automatically
             parent=self
         )
+
+    def createSuccessInfoBar(self, content):
+        # convenient class mothod
+        InfoBar.success(
+            title='成功',
+            content=content,
+            orient=Qt.Horizontal,
+            isClosable=True,
+            position=InfoBarPosition.TOP_RIGHT,
+            parent=self
+        )
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    win = MyUserWidget('pqy')
+    win.show()
+    sys.exit(app.exec_())

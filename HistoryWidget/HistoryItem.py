@@ -4,7 +4,7 @@ from HistoryWidget.History_item_ui import Ui_History_item
 
 
 class MyHistoryItem(Ui_History_item, QWidget):
-    def __init__(self, dish_name, dish_type, restaurant_name, counter_name, history_time, person_id, pixmap):
+    def __init__(self, dish_name, dish_type, restaurant_name, counter_name, history_time, account, pixmap):
         super().__init__()
         self.setupUi(self)
 
