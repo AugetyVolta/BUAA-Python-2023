@@ -21,12 +21,12 @@ class DishesTb:
         self.execute(f'insert into mapper (id, valid) values({dish_id}, 1);')
         with open(img, 'rb') as f:
             image = f.read()
-        query = "insert into dishes (id, name, tp, heat, taste, bar, hall, img) values (%s, %s, %s, %s, %s, %s, %s, %s);"
-        self.execute(query, (dish_id, name, tp, heat, taste, bar, hall, image))
+        query = "insert into dishes (id, name, tp, heat, taste, bar, hall, com, img) values (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+        self.execute(query, (dish_id, name, tp, heat, taste, bar, hall, '', image))
 
     def update(self, dish_id, field, value):
         if field in ['name', 'bar', 'hall', 'com']:
-            value = "'" + value + "'"
+            value = '"' + value + '"'
         if field == 'img':
             with open(value, 'rb') as f:
                 value = f.read()

@@ -47,8 +47,9 @@ class MyHistoryWidget(Ui_MyHistoryWidget, QWidget):
         self.search.show()
 
     def clear_items(self):
+        print(self.item_list)
         for item in self.item_list:
-            item.delete_history()
+            item.delete_history(flag=False)
         self.item_list.clear()
 
 

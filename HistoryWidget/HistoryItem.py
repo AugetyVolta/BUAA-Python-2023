@@ -33,12 +33,12 @@ class MyHistoryItem(Ui_History_item, QWidget):
         self.history_time.setText(time)
         # 设置图片
         image_pil = dish[8]
-        image_pil.resize((128, 128))
+        image_pil.resize((96, 96))
         image_qt = QImage(image_pil.tobytes(), image_pil.width, image_pil.height, QImage.Format_RGB888)
-        image_qt.scaled(128, 128)
+        image_qt.scaled(96, 96)
         pixmap = QPixmap.fromImage(image_qt)
         self.ImageLabel.setPixmap(pixmap)  # 设置菜品图片
-        self.ImageLabel.setFixedSize(128, 128)
+        self.ImageLabel.setFixedSize(96, 96)
         self.ImageLabel.setScaledContents(True)
         self.ImageLabel.setStyleSheet("border: 1px solid #ccc; border-radius: 5px;")
         # 设置固定大小
@@ -46,10 +46,11 @@ class MyHistoryItem(Ui_History_item, QWidget):
         # 设置删除按钮
         self.deleteButton.clicked.connect(self.delete_history)
 
-    def delete_history(self):
-        for item in self.item_list:
-            if item.time == self.time and item.dish_id == self.dish_id:
-                self.item_list.remove(item)
+    def delete_history(self, flag=True):
+        if flag:
+            for item in self.item_list:
+                if item.time == self.time and item.dish_id == self.dish_id:
+                    self.item_list.remove(item)
         # 根据传入的personId删掉这条历史
         database = DBOperator()
         database.del_ates(self.account, self.dish_id, self.time)

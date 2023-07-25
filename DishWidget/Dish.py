@@ -4,19 +4,23 @@ import ast
 
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import QDateTime
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtGui import QPixmap, QIcon, QImage
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QTextEdit, QPushButton, QWidget, \
     QScrollArea, QHBoxLayout, QDesktopWidget
 from qfluentwidgets import TextEdit, CaptionLabel, StrongBodyLabel, PrimaryPushButton, PushButton, BodyLabel, \
     ScrollArea, ImageLabel, SplitTitleBar, SubtitleLabel
 from qframelesswindow import AcrylicWindow
+
+from DataBase.database import DBOperator
 from picture_set import pic_rc
 
 
 class DishDetailWindow(AcrylicWindow):
-    # TODO:需要传入菜的id,以及人的Id
-    def __init__(self, dish_name, dish_type, restaurant_name, counter_name, account):
+    # 需要传入菜的id,以及人的Id
+    def __init__(self, account, dish_id):
         super().__init__()
+        self.account = account
+        self.dish_id = dish_id
         self.setTitleBar(SplitTitleBar(self))
         self.titleBar.raise_()
         self.setWindowIcon(QIcon(":/login.png"))
@@ -29,18 +33,35 @@ class DishDetailWindow(AcrylicWindow):
                                 color: black
                             }
                 """)
-        self.dish_name = dish_name
-        self.dish_type = dish_type
-        self.restaurant_name = restaurant_name
-        self.counter_name = counter_name
-
-        if not os.path.exists("list") or os.path.getsize("list") == 0:
+        database = DBOperator()
+        dish = database.get_dish(self.dish_id)
+        self.dish_name = dish[1]
+        if dish[2] == 4:
+            self.dish_type = '早餐'
+        elif dish[2] == 2:
+            self.dish_type = '正餐'
+        else:
+            self.dish_type = '饮料'
+        self.restaurant_name = dish[6]
+        self.counter_name = dish[5]
+        # 设置图片
+        self.dish_image_label = ImageLabel(None)
+        self.dish_image_label.setGeometry(QtCore.QRect(190, 170, 128, 128))
+        image_pil = dish[8]
+        image_pil.resize((128, 128))
+        image_qt = QImage(image_pil.tobytes(), image_pil.width, image_pil.height, QImage.Format_RGB888)
+        image_qt.scaled(128, 128)
+        pixmap = QPixmap.fromImage(image_qt)
+        self.dish_image_label.setPixmap(pixmap)  # 设置菜品图片
+        self.dish_image_label.setFixedSize(128, 128)
+        self.dish_image_label.setScaledContents(True)
+        # 设置评论
+        if dish[7] == '':
             self.comments = []
         else:
-            f = open("list", "r")
-            self.comments = ast.literal_eval(f.readline())  # 用于存储评论的列表
+            self.comments = ast.literal_eval(dish[7])  # 用于存储评论的列表
         self.reply_to_user = None  # 用于存储被回复用户的信息
-
+        # 初始化
         self.initUI()
 
     def initUI(self):
@@ -48,20 +69,6 @@ class DishDetailWindow(AcrylicWindow):
         self.setGeometry(100, 100, 600, 900)
         self.center()
 
-        # 菜品详情显示区域
-        # 设置菜品图像 必须是128*128的图片
-        self.dish_image_lable = ImageLabel(None)
-        self.dish_image_lable.setGeometry(QtCore.QRect(190, 170, 128, 128))
-        pixmap = QPixmap("../picture_set/tmp/九转大肠.jpg")
-        self.dish_image_lable.setPixmap(pixmap)
-        self.dish_image_lable.setScaledContents(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.dish_image_lable.sizePolicy().hasHeightForWidth())
-        self.dish_image_lable.setSizePolicy(sizePolicy)
-        self.dish_image_lable.setMinimumSize(QtCore.QSize(128, 128))
-        self.dish_image_lable.setMaximumSize(QtCore.QSize(128, 128))
         # 设置菜品详细信息
         dish_info_label = QLabel(f'菜名：{self.dish_name}\n'
                                  f'类型：{self.dish_type}\n'
@@ -96,7 +103,7 @@ class DishDetailWindow(AcrylicWindow):
 
         # 菜品图片，菜品信息，收藏和吃过按钮的布局
         self.dish_infoAndButton_layout = QHBoxLayout()
-        self.dish_infoAndButton_layout.addWidget(self.dish_image_lable)
+        self.dish_infoAndButton_layout.addWidget(self.dish_image_label)
         self.dish_infoAndButton_layout.addWidget(dish_info_label)
         self.dish_infoAndButton_layout.addLayout(self.favorite_eaten_layout)
 
@@ -218,7 +225,7 @@ class DishDetailWindow(AcrylicWindow):
 
     def on_submit(self):
         # 获取用户输入的评论内容
-        username = '匿名用户'  # 这里可以进一步实现用户登录获取用户名
+        username = self.account
         comment_text = self.comment_edit.toPlainText()
 
         # 添加评论到列表
@@ -274,30 +281,38 @@ class DishDetailWindow(AcrylicWindow):
 
                 self.comments_layout.addWidget(comment_label)
 
+            # 更新到服务器
+            database = DBOperator()
+            database.comment(self.dish_id, str(self.comments))
         # 滚动到评论显示框的顶部
         scroll_bar = self.scroll_area.verticalScrollBar()
         scroll_bar.setValue(scroll_bar.minimum())
 
-    # TODO:设置dish界面四个收藏按钮函数
+    # 设置dish界面四个收藏按钮函数
     # 收藏菜
     def set_favourite_button(self):
-        pass
+        database = DBOperator()
+        if self.dish_id not in database.get_fav_dish(self.account):
+            database.add_fav_dish(self.account, self.dish_id)
 
     # 吃过
     def set_eaten_button(self):
-        pass
+        database = DBOperator()
+        database.add_ates(self.account, self.dish_id, QDateTime.currentDateTime().toString("yyyy-MM-dd\nHH:mm:ss"))
 
     # 收藏餐厅
     def set_restaurant_button(self):
-        pass
+        database = DBOperator()
+        dish = database.get_dish(self.dish_id)
+        if dish[6] not in database.get_fav_hall(self.account):
+            database.add_fav_hall(self.account, dish[6])
 
     # 收藏柜台
     def set_counter_button(self):
-        pass
-
-    def closeEvent(self, event):
-        store_file = open("list", "w+")
-        store_file.write(str(self.comments))
+        database = DBOperator()
+        dish = database.get_dish(self.dish_id)
+        if dish[5] not in database.get_fav_bar(self.account):
+            database.add_fav_bar(self.account, dish[5])
 
     def center(self):
         qr = self.frameGeometry()
@@ -309,10 +324,7 @@ class DishDetailWindow(AcrylicWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     # 在这里传入菜肴信息
-    window = DishDetailWindow(dish_name='九转大肠',
-                              dish_type='中餐',
-                              restaurant_name='小胖餐厅',
-                              counter_name='保留原味柜台',
-                              account=None)
+    window = DishDetailWindow(dish_id=5,
+                              account='pqy')
     window.show()
     sys.exit(app.exec_())
