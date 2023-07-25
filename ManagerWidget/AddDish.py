@@ -7,8 +7,8 @@ from PyQt5.QtWidgets import QApplication, QWidget, QFileDialog
 from qfluentwidgets import SplitTitleBar, InfoBar, InfoBarPosition
 from qframelesswindow import AcrylicWindow
 
+from DataBase.database import DBOperator
 from ManagerWidget.AddDishWidget_ui import Ui_AddDishWidget
-# from ManagerWidget.Manager import MyManager
 from picture_set import pic_rc
 
 
@@ -19,10 +19,10 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
         self.setupUi(self)
         # 设置变量
         self.dishName = None
-        self.dishKind = None  # 四位2进制
+        self.dishType = None  # 三位2进制
         self.restaurant = None
         self.counter = None
-        self.feel = None  # 0 1
+        self.feel = None  # 10 01
         self.flavour = None  # 五位2进制
         self.imagePath = None
         self.setTitleBar(SplitTitleBar(self))
@@ -58,7 +58,7 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
             else:
                 self.feel = 0b01
 
-    def getDishKind(self):
+    def getDishType(self):
         if self.dishKindBox.currentText() == '早餐':
             return 0b100
         elif self.dishKindBox.currentText() == '正餐':
@@ -78,17 +78,14 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
 
     def on_commit(self):
         self.dishName = self.dishNameEdit.text()
-        self.dishKind = self.getDishKind()
+        self.dishType = self.getDishType()
         self.restaurant = self.restaurantEdit.text()
         self.counter = self.counterEdit.text()
         self.flavour = self.getFlavour()
-        # TODO 之后需要在这里传入数据库
-        print(self.dishName)
-        print(self.dishKind)
-        print(self.restaurant)
-        print(self.counter)
-        print(self.feel)
-        print(self.flavour)
+        # 传入数据库
+        database = DBOperator()
+        database.add_dish(self.dishName, self.dishType, self.feel, self.flavour, self.counter, self.restaurant,
+                          self.imagePath)
         # 清空
         self.dishNameEdit.clear()
         self.dishKindBox.clear()
@@ -104,6 +101,9 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
         self.CheckBox_5.setChecked(False)
         self.createSuccessInfoBar('添加成功')
         self.MyManager.addDish_From_AddDish(self.restaurant, self.counter, self.dishName, self.imagePath)
+        pixmap = QPixmap(":/美食.png")
+        self.dishImageLabel.setScaledContents(True)
+        self.dishImageLabel.setPixmap(pixmap.scaled(self.dishImageLabel.width(), self.dishImageLabel.height()))
 
     def getDishInfo(self):
         return self.dishInfo
@@ -133,8 +133,7 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
         if file_dialog.exec_():
             file_path = file_dialog.selectedFiles()[0]
             self.imagePath = file_path
-            # 在这里执行上传头像的逻辑，这里只是简单地显示选择的图像
-            # TODO:设置图像上传
+            # 设置本地图片
             pixmap = QPixmap(file_path)
             self.dishImageLabel.setScaledContents(True)
             self.dishImageLabel.setPixmap(pixmap.scaled(self.dishImageLabel.width(), self.dishImageLabel.height()))

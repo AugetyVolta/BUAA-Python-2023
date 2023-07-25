@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import QApplication, QInputDialog, QWidget
 from qfluentwidgets import SplitTitleBar, InfoBar, InfoBarPosition
 from qframelesswindow import AcrylicWindow
 
+from DataBase.database import DBOperator
 from ManagerWidget.AddDish import MyAddDish
 from ManagerWidget.ManagerWindow_ui import Ui_ManagerWidget
 from picture_set import pic_rc
@@ -44,12 +45,12 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
         self.deleteButton.clicked.connect(self.deleteItem)
 
     def init_dish_graph(self):
-        if not os.path.exists("dict") or os.path.getsize("dict") == 0:
+        database = DBOperator()
+        dish_graph = database.execute('select * from globe;')
+        if dish_graph[0][0] == '':
             self.dic = {}
         else:
-            f = open("dict", "r")
-            self.dic = dict(ast.literal_eval(f.readline()))
-            f.close()
+            self.dic = dict(ast.literal_eval(dish_graph[0][0]))
             for key in self.dic.keys():
                 restaurant_item = QtWidgets.QTreeWidgetItem(self.resturantWidget)
                 restaurant_item.setText(0, key)
@@ -143,6 +144,7 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
         return [item for item in found_items if item.parent() == parent_item]
 
     def deleteItem(self):
+        database = DBOperator()
         selected_item = self.resturantWidget.currentItem()
         if selected_item:
             parent_item = selected_item.parent()
@@ -153,20 +155,45 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
                     parent_item.removeChild(selected_item)
                     # 删除大字符串中的菜
                     self.dic[parent_parent_item.text(0)][parent_item.text(0)].remove(selected_item.text(0))
-                    # TODO:删除总的菜单中的菜
-
+                    # 删除总的菜单中的菜
+                    dish_id = database.get_id(selected_item.text(0), parent_item.text(0), parent_parent_item.text(0))
+                    database.del_dish(dish_id)
                 else:  # 说明是柜台
                     parent_item.removeChild(selected_item)
                     # 删除大字符串中的柜台
                     self.dic[parent_item.text(0)].pop(selected_item.text(0))
-                    # TODO 将他的孩子(菜)也一块删除,递归删除
+                    # 将他的孩子(菜)也一块删除,递归删除
+                    try:
+                        self.deleteCounter(parent_item.text(0), selected_item.text(0))
+                    except Exception as e:
+                        print(e)
 
             else:
                 index = self.resturantWidget.indexOfTopLevelItem(selected_item)
                 self.resturantWidget.takeTopLevelItem(index)
                 # 删除大字符串中的餐厅
                 self.dic.pop(selected_item.text(0))
-                # TODO:递归删除餐馆里所有的菜
+                # 递归删除餐馆里所有的菜
+                self.deleteRestaurant(selected_item.text(0))
+
+    # 删除柜台里的所有菜
+    def deleteCounter(self, restaurant_name, counter_name):
+        database = DBOperator()
+        id_list = database.get_all_id()
+        for Id in id_list:
+            dish_counter = database.get_dish(Id)[5]
+            dish_restaurant = database.get_dish(Id)[6]
+            if dish_counter == counter_name and dish_restaurant == restaurant_name:
+                database.del_dish(Id)
+
+    # 删除餐厅里的所有菜
+    def deleteRestaurant(self, restaurant_name):
+        database = DBOperator()
+        id_list = database.get_all_id()
+        for Id in id_list:
+            dish_restaurant = database.get_dish(Id)[6]
+            if dish_restaurant == restaurant_name:
+                database.del_dish(Id)
 
     def center(self):
         desktop = QApplication.desktop().availableGeometry()
@@ -174,8 +201,12 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
         self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
 
     def closeEvent(self, event):
-        f = open('dict', 'w')
-        f.write(str(self.dic))
+        graph = str(self.dic)
+        f = open('dict', 'w+')
+        f.write(graph)
+        database = DBOperator()
+        dst_graph = '"' + graph + '"'
+        database.execute(f'update globe set total = {dst_graph};')
 
 
 if __name__ == '__main__':

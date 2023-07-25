@@ -62,6 +62,10 @@ class DBOperator:
     def get_id(self, dish, bar, hall):
         return self.dishOp.get_id(dish, bar, hall)
 
+    def get_all_id(self):
+        a = self.execute('select id from dishes ;')
+        return [i[0] for i in a]
+
     ########## 已吃表相关函数 ##########
     def get_ates(self, name):
         return self.atesOp.get(name)
