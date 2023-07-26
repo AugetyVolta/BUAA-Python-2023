@@ -7,7 +7,7 @@ from qfluentwidgets import SplitTitleBar, setThemeColor, InfoBarPosition, InfoBa
 from qframelesswindow import AcrylicWindow
 
 from DataBase.database import DBOperator
-from Login.LoginWindow_ui import Ui_LoginWidget
+from login.LoginWindow_ui import Ui_LoginWidget
 from Register.RegisterWindow import MyRegister
 from SplitFluentMainWindow.MyMainWindow import MyMainWindow
 
