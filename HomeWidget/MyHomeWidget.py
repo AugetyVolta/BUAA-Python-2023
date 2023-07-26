@@ -37,7 +37,9 @@ class BackendThread(QObject):
 
 class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
     def __init__(self, account, parent=None):
-        super().__init__(parent=parent)
+        super().__init__()
+        self.dish_roll_item = None
+        self.setupUi(self)
         self.detailed_dish_window = None
         self.backend = None
         self.thread = None
@@ -45,7 +47,16 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         self.account = account
         self.ImageShow_dishId_List = []  # 滚动展示图片
         self.MushEatList_dishId = []  # 必吃榜的菜肴ID
-        self.setupUi(self)
+        self.dishNameShowLabels = [self.dishNameLable_1, self.BodyLabel_2, self.BodyLabel_3, self.BodyLabel_4,
+                                   self.BodyLabel_5, self.BodyLabel_6, self.BodyLabel_7, self.BodyLabel_8,
+                                   self.BodyLabel_9]
+        self.primaryButtons = [self.PrimaryPushButton_1, self.PrimaryPushButton_2, self.PrimaryPushButton_3,
+                               self.PrimaryPushButton_4, self.PrimaryPushButton_5,
+                               self.PrimaryPushButton_6, self.PrimaryPushButton_7, self.PrimaryPushButton_8,
+                               self.PrimaryPushButton_9]
+        self.ImageLabels = [self.ImageLabel_1, self.ImageLabel_2, self.ImageLabel_3, self.ImageLabel_4,
+                            self.ImageLabel_5, self.ImageLabel_6, self.ImageLabel_7, self.ImageLabel_8,
+                            self.ImageLabel_9]
         # 处理have a try
         self.setHaveATry()
         # 处理必吃榜
@@ -89,26 +100,28 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         self.PopUpAniStackedWidget.setCurrentIndex(index)
 
     def initScrollShowPicAndLabel(self):
-        # 设置菜的图片
-        pixmap_1 = QPixmap("{}/../picture_set/Dishes_96x96/haha_96x96.jpg")  # 按指定路径找到图片
-        pixmap_2 = QPixmap("{}/../picture_set/Dishes_96x96/红烧坤_96x96.jpg")  # 按指定路径找到图片
-        pixmap_3 = QPixmap("{}/../picture_set/Dishes_96x96/九转大肠_96x96.jpg")  # 按指定路径找到图片
-        pixmap_4 = QPixmap("{}/../picture_set/Dishes_96x96/红烧肉_96x96.jpg")  # 按指定路径找到图片
-        self.ImageLabel_1.setPixmap(pixmap_1)
-        self.ImageLabel_4.setPixmap(pixmap_2)
-        self.ImageLabel_7.setPixmap(pixmap_3)
-        self.ImageLabel_9.setPixmap(pixmap_4)
-        self.ImageLabel_1.setScaledContents(True)
-        self.ImageLabel_4.setScaledContents(True)
-        self.ImageLabel_7.setScaledContents(True)
-        self.ImageLabel_9.setScaledContents(True)
-        # TODO:根据index设置Label
+        # 根据index设置show 界面
+        database = DBOperator()
+        self.ImageShow_dishId_List = database.personalized_recommendation(self.account)
+        for i in range(9):
+            dish = database.get_dish(self.ImageShow_dishId_List[i])
+            self.dishNameShowLabels[i].setText(dish[1])
+            image_pil = dish[8]
+            image_pil.resize((96, 96))
+            image_qt = QImage(image_pil.tobytes(), image_pil.width, image_pil.height, QImage.Format_RGB888)
+            image_qt.scaled(96, 96)
+            pixmap = QPixmap.fromImage(image_qt)
+            self.ImageLabels[i].setPixmap(pixmap)
+            self.ImageLabels[i].setFixedSize(96, 96)
+            self.ImageLabels[i].setScaledContents(True)
 
     def setDishShowButton_in_scroll(self):
         sender = self.sender()
         senderIndex = int(sender.objectName().split('_')[1]) - 1
-        # TODO:根据ID显示菜肴界面
-        # dishId = self.ImageShow_dishId_List[senderIndex]
+        # 根据ID显示菜肴界面
+        dish_id = self.ImageShow_dishId_List[senderIndex]
+        self.dish_roll_item = DishDetailWindow(account=self.account, dish_id=dish_id)
+        self.dish_roll_item.show()
 
     # 设置have a try
     def setHaveATry(self):
@@ -125,7 +138,7 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
             dish = database.get_dish(self.MushEatList_dishId[i])
             item.setText(dish[1])
             item.setIcon(QIcon(":/number/%d.png" % (i + 1)))
-        # TODO:设置选择条目处理函数
+        # 设置选择条目处理函数
         self.MustEatList.itemSelectionChanged.connect(self.handleMustEatListSelectionChanged)
 
     # 必吃榜条目选择处理函数

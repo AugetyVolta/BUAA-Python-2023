@@ -904,7 +904,7 @@ PillToolButton:disabled:checked {
         <item>
          <widget class="PopUpAniStackedWidget" name="PopUpAniStackedWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="page_3">
            <widget class="CardWidget" name="CardWidget_1">
@@ -920,7 +920,7 @@ PillToolButton:disabled:checked {
              <property name="geometry">
               <rect>
                <x>31</x>
-               <y>1</y>
+               <y>10</y>
                <width>96</width>
                <height>96</height>
               </rect>
@@ -999,7 +999,7 @@ PillToolButton:disabled:checked {
              <property name="geometry">
               <rect>
                <x>31</x>
-               <y>1</y>
+               <y>10</y>
                <width>96</width>
                <height>96</height>
               </rect>
@@ -1078,7 +1078,7 @@ PillToolButton:disabled:checked {
              <property name="geometry">
               <rect>
                <x>31</x>
-               <y>1</y>
+               <y>10</y>
                <width>96</width>
                <height>96</height>
               </rect>
@@ -1159,7 +1159,7 @@ PillToolButton:disabled:checked {
              <property name="geometry">
               <rect>
                <x>31</x>
-               <y>1</y>
+               <y>10</y>
                <width>96</width>
                <height>96</height>
               </rect>
@@ -1241,7 +1241,7 @@ PillToolButton:disabled:checked {
              <property name="geometry">
               <rect>
                <x>31</x>
-               <y>1</y>
+               <y>10</y>
                <width>96</width>
                <height>96</height>
               </rect>
@@ -1323,7 +1323,7 @@ PillToolButton:disabled:checked {
              <property name="geometry">
               <rect>
                <x>31</x>
-               <y>1</y>
+               <y>10</y>
                <width>96</width>
                <height>96</height>
               </rect>
@@ -1404,7 +1404,7 @@ PillToolButton:disabled:checked {
              <property name="geometry">
               <rect>
                <x>31</x>
-               <y>1</y>
+               <y>10</y>
                <width>96</width>
                <height>96</height>
               </rect>
@@ -1483,7 +1483,7 @@ PillToolButton:disabled:checked {
              <property name="geometry">
               <rect>
                <x>31</x>
-               <y>1</y>
+               <y>10</y>
                <width>96</width>
                <height>96</height>
               </rect>
@@ -1562,7 +1562,7 @@ PillToolButton:disabled:checked {
              <property name="geometry">
               <rect>
                <x>31</x>
-               <y>1</y>
+               <y>10</y>
                <width>96</width>
                <height>96</height>
               </rect>
