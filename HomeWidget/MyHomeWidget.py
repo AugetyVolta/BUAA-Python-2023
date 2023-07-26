@@ -57,6 +57,7 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         self.initScrollShow()
         # 设置推荐列表的占满布局
         self.recommendTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        # 设置热门榜单
 
     # 处理界面的上下滚动展示效果
     def initScrollShow(self):
@@ -139,8 +140,11 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
 
     # have a try button处理函数
     def haveATryClick(self):
-        s = str(random.randint(1, 1000))
-        self.MyShowMealLabel.setText(s)
+        database = DBOperator()
+        Id_list = database.recommand()
+        random_id = Id_list[random.randint(0, len(Id_list) - 1)]
+        dish = database.get_dish(random_id)
+        self.MyShowMealLabel.setText(dish[1])
 
     # 设置小游戏
     def setGameButton(self):
