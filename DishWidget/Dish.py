@@ -93,7 +93,7 @@ class DishDetailWindow(AcrylicWindow):
 
     def initUI(self):
         self.setWindowTitle('菜品详情页面')
-        self.setGeometry(100, 100, 600, 900)
+        self.setGeometry(100, 100, 450, 750)
         self.center()
 
         # 设置菜品详细信息
@@ -101,26 +101,26 @@ class DishDetailWindow(AcrylicWindow):
                                  f'类型：{self.dish_type}\n'
                                  f'餐厅：{self.restaurant_name}\n'
                                  f'柜台：{self.counter_name}')
-        dish_info_label.setStyleSheet("font-size: 24px;")
+        dish_info_label.setStyleSheet("font-size: 20px;")
 
         # 收藏和吃过的按钮
         self.favorite_button = PushButton('收藏')
-        self.favorite_button.setFixedSize(90, 45)
+        self.favorite_button.setFixedSize(70, 35)
         self.favorite_button.setStyleSheet(
-            "font-size: 20px; "
+            "font-size: 16px; "
             "background-color: #3ac1ff; "
             "color: white; border: none; "
             "border-radius: 5px; "
-            "padding: 10px 20px;")
+            "padding: 7px 15px;")
 
         self.eaten_button = PushButton('吃过')
-        self.eaten_button.setFixedSize(90, 45)
+        self.eaten_button.setFixedSize(70, 35)
         self.eaten_button.setStyleSheet(
-            "font-size: 20px; "
+            "font-size: 16px; "
             "background-color: #ff9d8c; "
             "color: white; border: none; "
             "border-radius: 5px; "
-            "padding: 10px 20px;")
+            "padding: 7px 15px;")
 
         # 收藏和吃过按钮布局
         self.favorite_eaten_layout = QVBoxLayout()
@@ -138,13 +138,13 @@ class DishDetailWindow(AcrylicWindow):
         self.favorite_restaurant = PushButton('收藏餐厅')
         self.favorite_counter = PushButton('收藏柜台')
         self.favorite_restaurant.setStyleSheet(
-            "font-size: 20px; "
+            "font-size: 16px; "
             "background-color: #b0a6ff; "
             "color: white; border: none; "
             "border-radius: 5px; "
             "padding: 5px 10px;")
         self.favorite_counter.setStyleSheet(
-            "font-size: 20px; "
+            "font-size: 16px; "
             "background-color: #b0a6ff; "
             "color: white; border: none; "
             "border-radius: 5px; "
@@ -169,24 +169,24 @@ class DishDetailWindow(AcrylicWindow):
 
         # 评论区域
         self.comment_label = BodyLabel('评论：')
-        self.comment_label.setStyleSheet("font-size: 24px;")
+        self.comment_label.setStyleSheet("font-size: 20px;")
         self.comment_edit = TextEdit()
         self.comment_edit.setPlaceholderText('在这里输入您的评论...')
-        self.comment_edit.setStyleSheet("font-size: 20px;")
+        self.comment_edit.setStyleSheet("font-size: 16px;")
         self.submit_button = PushButton('提交评论')
         self.submit_button.setStyleSheet(
-            "font-size: 20px; "
+            "font-size: 16px; "
             "background-color: #5baf4c; "
             "color: white; border: none; "
             "border-radius: 5px; "
-            "padding: 10px 20px;")
+            "padding: 5px 10px;")
         self.clear_button = PushButton('清空评论')
         self.clear_button.setStyleSheet(
-            "font-size: 20px; "
+            "font-size: 16px; "
             "background-color: #f44336; "
             "color: white; border: none; "
             "border-radius: 5px; "
-            "padding: 10px 20px;")
+            "padding: 5px 10px;")
 
         # 安排布局
         layout = QVBoxLayout()
@@ -403,7 +403,6 @@ class DishDetailWindow(AcrylicWindow):
         self.backend.flag = False
         # time.sleep(1)
         self.thread.quit()
-
 
 
 if __name__ == '__main__':
