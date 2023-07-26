@@ -117,7 +117,7 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
 
     def setMustEatList(self):
         database = DBOperator()
-        self.MushEatList_dishId = database.recommand()
+        self.MushEatList_dishId = database.recommend()
         # 需要之后设置必吃榜单
         # 必吃榜设置排名数字Icon
         for i in range(self.MustEatList.count()):
@@ -142,7 +142,7 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
     # have a try button处理函数
     def haveATryClick(self):
         database = DBOperator()
-        Id_list = database.recommand()
+        Id_list = database.recommend()
         random_id = Id_list[random.randint(0, len(Id_list) - 1)]
         dish = database.get_dish(random_id)
         self.MyShowMealLabel.setText(dish[1])

@@ -4,7 +4,10 @@ from DataBase.ates import AtesTb
 from DataBase.dishes import DishesTb
 from DataBase.fav import FavTb
 from DataBase.people import PeopleTb
-from DataBase.utils import get_recommandation, search_by_name, search_by_adj
+from DataBase.utils import get_recommendation, search_by_name, search_by_adj
+
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 class DBOperator:
@@ -134,11 +137,70 @@ class DBOperator:
     ###################################
 
     ########## 其他函数 ##########
-    def recommand(self):
+    def recommend(self):
         dishes = self.execute('select * from dishes;')
         ate_record = self.execute('select * from ates;')
         fav_record = self.execute('select * from fav_dish;')
-        return get_recommandation(ate_record, fav_record, dishes)
+        return get_recommendation(ate_record, fav_record, dishes)
+
+    def get_person_weight(self, name):
+        ates = [i[0] for i in self.get_ates(name)]
+        ate_dish = [self.get_dish(dish_id) for dish_id in ates]
+        ate_weight = np.array([0.0, 0, 0, 0, 0, 0, 0])
+        for dish in ate_dish:
+            taste = dish[4]
+            heat = dish[3]
+            ate_weight += np.array(
+                [(heat >> 1) & 1, heat & 1, (taste >> 4) & 1, (taste >> 3) & 1, (taste >> 2) & 1, (taste >> 1) & 1,
+                 taste & 1])
+        ate_weight /= float(len(ates) + 0.000001)
+        fav = self.get_fav_dish(name)
+        fav_weight = np.array([0.0, 0, 0, 0, 0, 0, 0])
+        fav_dish = [self.get_dish(dish_id) for dish_id in fav]
+        for dish in fav_dish:
+            taste = dish[4]
+            heat = dish[3]
+            fav_weight += np.array(
+                [(heat >> 1) & 1, heat & 1, (taste >> 4) & 1, (taste >> 3) & 1, (taste >> 2) & 1, (taste >> 1) & 1,
+                 taste & 1])
+        fav_weight /= float(len(fav) + 0.000001)
+        return (fav_weight + ate_weight) / 2
+
+    def content_based_recommendation(self, weight, num):
+        similarity_scores = {}
+        for dish in self.execute('select * from dishes;'):
+            taste = dish[4]
+            heat = dish[3]
+            temp = np.array(
+                [(heat >> 1) & 1, heat & 1, (taste >> 4) & 1, (taste >> 3) & 1, (taste >> 2) & 1, (taste >> 1) & 1,
+                 taste & 1])
+            similarity_scores[dish[0]] = cosine_similarity([weight], [temp])[0][0]
+        recommended_dishes = sorted(similarity_scores.items(), key=lambda x: x[1], reverse=True)
+        return [i for i, _ in recommended_dishes][:num]
+
+    def collaborative_filtering_recommendation(self, weight, tar_name):
+        similar_person = {}
+        ates = [i[0] for i in self.get_ates(tar_name)]
+        names = [person[0] for person in self.execute('select name from people;')]
+        for name in names:
+            if name != tar_name:
+                similar_person[name] = cosine_similarity([weight], [self.get_person_weight(name)])[0][0]
+        recommend_people = [i[0] for i in sorted(similar_person.items(), key=lambda x: x[1], reverse=False)]
+        res = []
+        for name in recommend_people:
+            other_ates = [i[0] for i in self.get_ates(name)]
+            for dish_id in other_ates:
+                if len(res) > 2:
+                    break
+                if dish_id not in ates:
+                    res.append(dish_id)
+        return res
+
+    def personalized_recommendation(self, name):
+        weight = self.get_person_weight(name)
+        rec1 = self.collaborative_filtering_recommendation(weight, name)
+        rec2 = self.content_based_recommendation(weight, 9 - len(rec1))
+        return rec2 + rec1
 
     def search(self, k):
         d = self.execute('select * from dishes;')

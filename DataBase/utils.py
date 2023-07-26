@@ -16,14 +16,16 @@ def get_most_fav(records, dishes):
     return cnt
 
 
-def get_recommandation(ate, fav, dishes):
+def get_recommendation(ate, fav, dishes):
     eaten_weight = get_most_eaten(ate, dishes)
     fav_weight = get_most_fav(fav, dishes)
     ew_sum = sum(eaten_weight.values())
+    ew_avg = ew_sum / len(eaten_weight)
     fw_sum = sum(fav_weight.values())
+    fw_avg = fw_sum / len(fav_weight)
     cnt = dict()
     for dish_id, ew in eaten_weight.items():
-        cnt[dish_id] = ew / (ew_sum + 0.00001) + fav_weight[dish_id] / (fw_sum + 0.00001)
+        cnt[dish_id] = (ew - ew_avg) / (ew_sum + 0.00001) + (fav_weight[dish_id] - fw_avg) / (fw_sum + 0.00001)
     info = [(dish_id, times) for dish_id, times in cnt.items()]
     info.sort(key=lambda x: x[1], reverse=True)
     return [i[0] for i in info]
