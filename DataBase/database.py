@@ -1,3 +1,6 @@
+import time
+from collections import defaultdict
+
 import pymysql
 
 from DataBase.ates import AtesTb
@@ -201,6 +204,25 @@ class DBOperator:
         rec1 = self.collaborative_filtering_recommendation(weight, name)
         rec2 = self.content_based_recommendation(weight, 9 - len(rec1))
         return rec2 + rec1
+
+    def get_popularity(self, num):
+        records = [i[1:] for i in self.execute('select * from ates;')]
+        popularity_dict = defaultdict(lambda: [0, 0])
+        current_time = time.time()
+        decay_factor = 0.0005
+        for record in records:
+            dish_id, dining_time = record
+        dining_time = dining_time.replace('\n', ' ')
+        popularity_dict[dish_id][0] += 1
+        dining_timestamp = int(time.mktime(time.strptime(dining_time, "%Y-%m-%d %H:%M:%S")))
+        time_difference = current_time - dining_timestamp
+        time_weight = pow(decay_factor, time_difference / 1000)
+        popularity_dict[dish_id][1] += time_weight
+        popularity_result = {}
+        for dish_id, (dining_count, time_weight_sum) in popularity_dict.items():
+            popularity_score = dining_count * time_weight_sum
+        popularity_result[dish_id] = popularity_score
+        return sorted(popularity_result.items(), key=lambda x: x[1], reverse=True)[:num]
 
     def search(self, k):
         d = self.execute('select * from dishes;')
