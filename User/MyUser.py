@@ -58,6 +58,7 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
         # 设置修改个人信息按钮
         self.saveButton.clicked.connect(self.saveChangeInfo)
         # 初始化线程
+        self.initThread()
 
     # 初始化线程
     def initThread(self):
