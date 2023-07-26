@@ -38,6 +38,7 @@ class BackendThread(QObject):
 class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
     def __init__(self, account, parent=None):
         super().__init__(parent=parent)
+        self.detailed_dish_window = None
         self.backend = None
         self.thread = None
         self.playGame = None
@@ -168,16 +169,6 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
-
-    # 关闭时弹窗提醒
-    def closeEvent(self, event):
-        reply = QMessageBox().question(self, 'Message',
-                                       "Are you sure to quit?", QMessageBox.Yes |
-                                       QMessageBox.No, QMessageBox.No)
-        if reply == QMessageBox.Yes:
-            event.accept()
-        else:
-            event.ignore()
 
 
 if __name__ == '__main__':

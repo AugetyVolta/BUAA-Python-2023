@@ -24,13 +24,20 @@ class BackendThread(QObject):
     # 通过类成员对象定义信号
     update_date = pyqtSignal()
 
+    def __init__(self):
+        super().__init__()
+        self.flag = True
+
     # 处理业务逻辑
     def run(self):
-        while 1:
+        while self.flag:
             # 刷新1-10
             for i in range(1, 11):
-                self.update_date.emit()
-                time.sleep(1)
+                if self.flag:
+                    self.update_date.emit()
+                    time.sleep(1)
+                else:
+                    break
 
 
 class DishDetailWindow(AcrylicWindow):
@@ -391,6 +398,12 @@ class DishDetailWindow(AcrylicWindow):
         # 根据时间字段对列表进行排序，从近到远
         merged_list_no_duplicates.sort(key=lambda x: datetime.strptime(x['time'], '%Y-%m-%d %H:%M:%S'), reverse=True)
         return merged_list_no_duplicates
+
+    def closeEvent(self, event):
+        self.backend.flag = False
+        # time.sleep(1)
+        self.thread.quit()
+
 
 
 if __name__ == '__main__':
