@@ -8,6 +8,9 @@ from PyQt5.QtWidgets import QWidget, QDesktopWidget, QMessageBox, QHeaderView, Q
 from PyQt5.QtCore import Qt, QDate, QObject, pyqtSignal, QThread
 from PyQt5.QtGui import QIcon, QImage, QPixmap, QTransform
 from qfluentwidgets import FluentIcon as FIF
+
+from DataBase.database import DBOperator
+from DishWidget.Dish import DishDetailWindow
 from Game.MyGame import Tetris
 from HomeWidget.MyHomeWidget_ui import Ui_MyHomeWidget_ui
 from picture_set import pic_rc
@@ -33,11 +36,12 @@ class BackendThread(QObject):
 
 
 class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, account, parent=None):
         super().__init__(parent=parent)
         self.backend = None
         self.thread = None
         self.playGame = None
+        self.account = account
         self.ImageShow_dishId_List = []  # 滚动展示图片
         self.MushEatList_dishId = []  # 必吃榜的菜肴ID
         self.setupUi(self)
@@ -110,20 +114,28 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         self.tryButton.clicked.connect(self.haveATryClick)
 
     def setMustEatList(self):
+        database = DBOperator()
+        self.MushEatList_dishId = database.recommand()
+        # 需要之后设置必吃榜单
         # 必吃榜设置排名数字Icon
         for i in range(self.MustEatList.count()):
             item: QtWidgets.QListWidgetItem = self.MustEatList.item(i)
-            item.setStatusTip("name")
+            dish = database.get_dish(self.MushEatList_dishId[i])
+            item.setText(dish[1])
             item.setIcon(QIcon(":/number/%d.png" % (i + 1)))
-        # TODO:需要之后设置必吃榜单
-
         # TODO:设置选择条目处理函数
         self.MustEatList.itemSelectionChanged.connect(self.handleMustEatListSelectionChanged)
 
     # 必吃榜条目选择处理函数
     def handleMustEatListSelectionChanged(self):
-        currentItem = self.MustEatList.currentItem()
-        print(currentItem.text())
+        # 当前的Index
+        try:
+            currentIndex = self.MustEatList.currentRow()
+            dish_id = self.MushEatList_dishId[currentIndex]
+            self.detailed_dish_window = DishDetailWindow(dish_id=dish_id, account=self.account)
+            self.detailed_dish_window.show()
+        except Exception as e:
+            print(e)
 
     # have a try button处理函数
     def haveATryClick(self):
@@ -166,6 +178,6 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    win = MyHomeWidget()
+    win = MyHomeWidget('pqy')
     win.show()
     sys.exit(app.exec_())

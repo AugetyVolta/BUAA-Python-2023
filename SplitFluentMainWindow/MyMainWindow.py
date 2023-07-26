@@ -31,7 +31,7 @@ class MyMainWindow(SplitFluentWindow):
         self.setWindowTitle("The Taste Of BUAA")
         self.setWindowIcon(QIcon(":/login.png"))
         # 添加主界面
-        self.u = MyHomeWidget()
+        self.u = MyHomeWidget(self.account)
         self.addSubInterface(self.u, FIF.HOME, 'Home')
         # 添加用户界面
         self.userWidget = MyUserWidget(self.account)

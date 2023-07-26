@@ -26,7 +26,7 @@ def get_recommandation(ate, fav, dishes):
         cnt[dish_id] = ew / (ew_sum + 0.00001) + fav_weight[dish_id] / (fw_sum + 0.00001)
     info = [(dish_id, times) for dish_id, times in cnt.items()]
     info.sort(key=lambda x: x[1], reverse=True)
-    return info
+    return [i[0] for i in info]
 
 
 def search_by_name(name, dishes):
