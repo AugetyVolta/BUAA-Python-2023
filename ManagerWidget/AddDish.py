@@ -24,7 +24,7 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
         self.counter = None
         self.feel = None  # 10 01
         self.flavour = None  # 五位2进制
-        self.imagePath = None
+        self.imagePath = '{}/../picture_set/美食.png'
         self.setTitleBar(SplitTitleBar(self))
         self.titleBar.raise_()
         self.setWindowTitle('菜品添加')
