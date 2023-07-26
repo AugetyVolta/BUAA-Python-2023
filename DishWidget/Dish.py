@@ -327,4 +327,10 @@ if __name__ == '__main__':
     window = DishDetailWindow(dish_id=0,
                               account='pqy')
     window.show()
+    window1 = DishDetailWindow(dish_id=5,
+                               account='pqy')
+    window1.show()
+    window2 = DishDetailWindow(dish_id=6,
+                               account='pqy')
+    window2.show()
     sys.exit(app.exec_())

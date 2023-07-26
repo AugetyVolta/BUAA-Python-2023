@@ -57,6 +57,7 @@ class MyHistoryWidget(Ui_MyHistoryWidget, QWidget):
 
         self.searchButton.clicked.connect(self.search_items)
         self.clearButton.clicked.connect(self.clear_items)
+        self.initThread()
 
     def search_items(self):
         self.search = MySearchForHistory(self.item_list)
@@ -79,7 +80,18 @@ class MyHistoryWidget(Ui_MyHistoryWidget, QWidget):
         self.thread.start()
 
     def update(self):
-        pass
+        database = DBOperator()
+        list_old = [[item.dish_id, item.time] for item in self.item_list]
+        list_new = [[dish_id, time] for dish_id, time in database.get_ates(self.account)]
+        add_elements = [x for x in list_new if x not in list_old]
+        if len(add_elements) != 0:
+            add_items = [MyHistoryItem(dish_id=dish_id,
+                                       time=time,
+                                       account=self.account,
+                                       item_list=self.item_list) for [dish_id, time] in add_elements]
+            self.item_list.extend(add_items)
+            for item in add_items:
+                self.dishes_layout.addWidget(item)
 
 
 if __name__ == '__main__':

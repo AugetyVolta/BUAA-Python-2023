@@ -16,8 +16,7 @@ class MySearchForHistory(Ui_SearchWidget, QWidget):
 
     def show_search_result(self):
         # 清空上次记录
-        for i in range(self.TableWidget.rowCount()):
-            self.TableWidget.removeRow(i)
+        self.TableWidget.setRowCount(0)
         try:
             search_content = self.SearchLineEdit.text()
             if search_content != '':
