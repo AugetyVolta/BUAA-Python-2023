@@ -1,9 +1,12 @@
+from datetime import datetime
 import os
 import sys
 import ast
+import threading
+import time
 
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtCore import QDateTime
+from PyQt5.QtCore import QDateTime, QObject, pyqtSignal, QThread
 from PyQt5.QtGui import QPixmap, QIcon, QImage
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QTextEdit, QPushButton, QWidget, \
     QScrollArea, QHBoxLayout, QDesktopWidget
@@ -13,6 +16,21 @@ from qframelesswindow import AcrylicWindow
 
 from DataBase.database import DBOperator
 from picture_set import pic_rc
+
+lock = threading.Lock()
+
+
+class BackendThread(QObject):
+    # 通过类成员对象定义信号
+    update_date = pyqtSignal()
+
+    # 处理业务逻辑
+    def run(self):
+        while 1:
+            # 刷新1-10
+            for i in range(1, 11):
+                self.update_date.emit()
+                time.sleep(1)
 
 
 class DishDetailWindow(AcrylicWindow):
@@ -63,6 +81,8 @@ class DishDetailWindow(AcrylicWindow):
         self.reply_to_user = None  # 用于存储被回复用户的信息
         # 初始化
         self.initUI()
+        # 初始化线程
+        self.initThread()
 
     def initUI(self):
         self.setWindowTitle('菜品详情页面')
@@ -193,7 +213,7 @@ class DishDetailWindow(AcrylicWindow):
         self.comments_layout.addWidget(self.no_comment_label)
 
         # 如果原来有评论就更新评论
-        self.update_comments()
+        self.update_comments(submit=False)
 
         self.setStyleSheet("""
                     QPushButton {
@@ -228,13 +248,26 @@ class DishDetailWindow(AcrylicWindow):
         username = self.account
         comment_text = self.comment_edit.toPlainText()
 
+        # 获得锁
+        lock.acquire()
+
         # 添加评论到列表
         current_time = QDateTime.currentDateTime().toString("yyyy-MM-dd HH:mm:ss")
         self.comments.insert(0, {'username': username, 'comment': comment_text, 'time': current_time,
                                  'reply_to': self.reply_to_user})  # 将新评论插入到列表的第一个位置
+        # 和远端连接并合并
+        database = DBOperator()
+        dish = database.get_dish(self.dish_id)
+        if dish[7] == '':
+            new_comments = []
+        else:
+            new_comments = ast.literal_eval(dish[7])
+        self.comments = self.merge_and_remove_duplicates(new_comments, self.comments)
 
         # 刷新评论区域
-        self.update_comments()
+        self.update_comments(submit=True)
+        # 释放锁
+        lock.release()
 
         # 清空输入框
         self.comment_edit.clear()
@@ -256,7 +289,7 @@ class DishDetailWindow(AcrylicWindow):
         self.comment_edit.setPlaceholderText(f'回复 {reply_user}:')
         self.comment_edit.setFocus()
 
-    def update_comments(self):
+    def update_comments(self, submit):
         # 清空评论区域内容
         for i in reversed(range(self.comments_layout.count())):
             self.comments_layout.itemAt(i).widget().setParent(None)
@@ -280,10 +313,10 @@ class DishDetailWindow(AcrylicWindow):
                 comment_label.mousePressEvent = lambda event, u=comment['username']: self.reply_to_comment(u)
 
                 self.comments_layout.addWidget(comment_label)
-
-            # 更新到服务器
-            database = DBOperator()
-            database.comment(self.dish_id, str(self.comments))
+            if submit:
+                # 更新到服务器
+                database = DBOperator()
+                database.comment(self.dish_id, str(self.comments))
         # 滚动到评论显示框的顶部
         scroll_bar = self.scroll_area.verticalScrollBar()
         scroll_bar.setValue(scroll_bar.minimum())
@@ -320,6 +353,45 @@ class DishDetailWindow(AcrylicWindow):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
+    def initThread(self):
+        # 创建线程
+        self.thread = QThread()
+        self.backend = BackendThread()
+        # 连接信号
+        self.backend.update_date.connect(self.update)
+        self.backend.moveToThread(self.thread)
+        # 开始线程
+        self.thread.started.connect(self.backend.run)
+        self.thread.start()
+
+    def update(self):
+        lock.acquire()
+        database = DBOperator()
+        dish = database.get_dish(self.dish_id)
+        if dish[7] == '':
+            new_comments = []
+        else:
+            new_comments = ast.literal_eval(dish[7])
+        self.comments = self.merge_and_remove_duplicates(new_comments, self.comments)
+        self.update_comments(submit=True)
+        lock.release()
+
+    def merge_and_remove_duplicates(self, list1, list2):
+        # 将两个列表合并
+        merged_list = list1 + list2
+
+        # 合并并去重字典
+        merged_dict = {}
+        for d in merged_list:
+            key = (d['username'], d['comment'], d['time'], d['reply_to'])
+            merged_dict[key] = d
+
+        # 将合并后的字典转换回列表
+        merged_list_no_duplicates = list(merged_dict.values())
+        # 根据时间字段对列表进行排序，从近到远
+        merged_list_no_duplicates.sort(key=lambda x: datetime.strptime(x['time'], '%Y-%m-%d %H:%M:%S'), reverse=True)
+        return merged_list_no_duplicates
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
@@ -327,10 +399,4 @@ if __name__ == '__main__':
     window = DishDetailWindow(dish_id=0,
                               account='pqy')
     window.show()
-    window1 = DishDetailWindow(dish_id=5,
-                               account='pqy')
-    window1.show()
-    window2 = DishDetailWindow(dish_id=6,
-                               account='pqy')
-    window2.show()
     sys.exit(app.exec_())
