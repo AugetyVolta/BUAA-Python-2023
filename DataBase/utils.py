@@ -3,7 +3,10 @@ def get_most_eaten(records, dishes):
     for dish in dishes:
         cnt[dish[0]] = 0
     for _, dish_id, _ in records:
-        cnt[dish_id] += 1
+        if dish_id not in cnt:
+            cnt[dish_id] = 1
+        else:
+            cnt[dish_id] += 1
     return cnt
 
 
@@ -12,7 +15,10 @@ def get_most_fav(records, dishes):
     for dish in dishes:
         cnt[dish[0]] = 0
     for _, dish_id in records:
-        cnt[dish_id] += 1
+        if dish_id not in cnt:
+            cnt[dish_id] = 1
+        else:
+            cnt[dish_id] += 1
     return cnt
 
 

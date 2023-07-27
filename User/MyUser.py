@@ -80,6 +80,8 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
         ates = person[6]
         self.favouriteNum.setText(str(fav))
         self.eatenNum.setText(str(ates))
+        # 更新个人口味
+        self.setPersonalFlavour()
 
     # 初始化个人信息
     def initUserInfo(self):
