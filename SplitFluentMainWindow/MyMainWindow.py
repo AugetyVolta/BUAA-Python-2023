@@ -56,7 +56,7 @@ class MyMainWindow(SplitFluentWindow):
         if manager_access:
             self.navigationInterface.addItem(
                 routeKey='manager',
-                icon=FIF.LEAF,
+                icon=FIF.EDIT,
                 text='manager',
                 onClick=self.open_manager_window,
                 position=NavigationItemPosition.BOTTOM,
