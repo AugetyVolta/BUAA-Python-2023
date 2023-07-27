@@ -185,7 +185,7 @@ class Ui_MyHomeWidget_ui(object):
 "    outline: none;\n"
 "}\n"
 "#tryButton {    \n"
-"    font: 15pt \"Terminal\";\n"
+"    font: 15pt \"微软雅黑\";\n"
 "    color:rgb(170, 255, 255)\n"
 "}\n"
 "\n"
@@ -468,7 +468,7 @@ class Ui_MyHomeWidget_ui(object):
         self.verticalLayout_2.addWidget(self.tryButton)
         self.MyShowMealLabel = DisplayLabel(self.MyHaveATryWidget)
         self.MyShowMealLabel.setStyleSheet("#MyShowMealLabel{\n"
-"    font: 16pt \"Terminal\";\n"
+"    font: 16pt \"微软雅黑\";\n"
 "}")
         self.MyShowMealLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.MyShowMealLabel.setObjectName("MyShowMealLabel")
@@ -642,7 +642,7 @@ class Ui_MyHomeWidget_ui(object):
         self.ImageLabel_4.setMinimumSize(QtCore.QSize(96, 96))
         self.ImageLabel_4.setMaximumSize(QtCore.QSize(96, 96))
         self.ImageLabel_4.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.ImageLabel_4.setStyleSheet("background-image: url(:/haha_96x96.jpg);")
+        # self.ImageLabel_4.setStyleSheet("background-image: url(:/haha_96x96.jpg);")
         self.ImageLabel_4.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.ImageLabel_4.setAlignment(QtCore.Qt.AlignCenter)
         self.ImageLabel_4.setObjectName("ImageLabel_4")
@@ -667,7 +667,7 @@ class Ui_MyHomeWidget_ui(object):
         self.ImageLabel_5.setMinimumSize(QtCore.QSize(96, 96))
         self.ImageLabel_5.setMaximumSize(QtCore.QSize(96, 96))
         self.ImageLabel_5.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.ImageLabel_5.setStyleSheet("image: url(:/haha_96x96.jpg);")
+        # self.ImageLabel_5.setStyleSheet("image: url(:/haha_96x96.jpg);")
         self.ImageLabel_5.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.ImageLabel_5.setAlignment(QtCore.Qt.AlignCenter)
         self.ImageLabel_5.setObjectName("ImageLabel_5")
@@ -828,22 +828,22 @@ class Ui_MyHomeWidget_ui(object):
         item = self.recommendTable.horizontalHeaderItem(3)
         item.setText(_translate("MyHomeWidget_ui", "热度💖"))
         self.dishNameLable_1.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PrimaryPushButton_1.setText(_translate("MyHomeWidget_ui", "看看去"))
+        self.PrimaryPushButton_1.setText(_translate("MyHomeWidget_ui", "去看看"))
         self.BodyLabel_2.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PrimaryPushButton_2.setText(_translate("MyHomeWidget_ui", "看看去"))
+        self.PrimaryPushButton_2.setText(_translate("MyHomeWidget_ui", "去看看"))
         self.BodyLabel_3.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PrimaryPushButton_3.setText(_translate("MyHomeWidget_ui", "看看去"))
+        self.PrimaryPushButton_3.setText(_translate("MyHomeWidget_ui", "去看看"))
         self.BodyLabel_4.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PrimaryPushButton_4.setText(_translate("MyHomeWidget_ui", "看看去"))
+        self.PrimaryPushButton_4.setText(_translate("MyHomeWidget_ui", "去看看"))
         self.BodyLabel_5.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PrimaryPushButton_5.setText(_translate("MyHomeWidget_ui", "看看去"))
+        self.PrimaryPushButton_5.setText(_translate("MyHomeWidget_ui", "去看看"))
         self.BodyLabel_6.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PrimaryPushButton_6.setText(_translate("MyHomeWidget_ui", "看看去"))
+        self.PrimaryPushButton_6.setText(_translate("MyHomeWidget_ui", "去看看"))
         self.BodyLabel_7.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PrimaryPushButton_7.setText(_translate("MyHomeWidget_ui", "看看去"))
+        self.PrimaryPushButton_7.setText(_translate("MyHomeWidget_ui", "去看看"))
         self.BodyLabel_8.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PrimaryPushButton_8.setText(_translate("MyHomeWidget_ui", "看看去"))
+        self.PrimaryPushButton_8.setText(_translate("MyHomeWidget_ui", "去看看"))
         self.BodyLabel_9.setText(_translate("MyHomeWidget_ui", "麻辣香锅"))
-        self.PrimaryPushButton_9.setText(_translate("MyHomeWidget_ui", "看看去"))
+        self.PrimaryPushButton_9.setText(_translate("MyHomeWidget_ui", "去看看"))
 from qfluentwidgets import BodyLabel, CalendarPicker, CardWidget, DisplayLabel, ImageLabel, ListWidget, PopUpAniStackedWidget, PrimaryPushButton, SearchLineEdit, SubtitleLabel, TableWidget, TitleLabel, ToolButton
 from picture_set import pic_rc
