@@ -168,12 +168,24 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
     # 设置热门榜单
     def setHotList(self):
         database = DBOperator()
-        dish_id_weight = database.get_popularity(20)
+        dish_id_weight = database.get_popularity(50)
         # 清空recommendList
         self.recommendTable.setRowCount(0)
+        i = 0
         for dish_id, weight in dish_id_weight:
             dish = database.get_dish(dish_id)
-            self.addTableRow([dish[1], dish[6], dish[5], str(weight)])
+            if i < len(dish_id_weight) * 0.2:
+                heart_flag = '💖💖💖💖💖'
+            elif i < len(dish_id_weight) * 0.4:
+                heart_flag = '💖💖💖💖️'
+            elif i < len(dish_id_weight) * 0.6:
+                heart_flag = '💖💖💖'
+            elif i < len(dish_id_weight) * 0.8:
+                heart_flag = '💖💖'
+            else:
+                heart_flag = '💖️'
+            self.addTableRow([dish[1], dish[6], dish[5], heart_flag])
+            i += 1
 
     # 增加新行
     def addTableRow(self, data):

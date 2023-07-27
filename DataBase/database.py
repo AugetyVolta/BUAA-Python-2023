@@ -287,6 +287,8 @@ class DBOperator:
         temp = search_by_name(k, d)
         if len(temp) == 0 and k in self.mapping:
             temp = search_by_adj(k, d, self.mapping)
+        if len(temp) == 0:
+            return [i[0] for i in self.get_popularity(50)]
         return temp
 
     #############################
