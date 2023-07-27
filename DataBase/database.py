@@ -1,3 +1,4 @@
+import datetime
 import time
 from collections import defaultdict
 
@@ -169,11 +170,26 @@ class DBOperator:
         fav_weight /= float(len(fav) + 0.000001)
         return (fav_weight + ate_weight) / 2
 
+    def get_time_need(self):
+        now = datetime.datetime.now().time()
+        time_flag1 = datetime.time(0, 0)
+        time_flag2 = datetime.time(10, 0)
+
+        if now >= time_flag1 and now < time_flag2:
+            return 0b101
+        else:
+            return 0b011
+
     def content_based_recommendation(self, weight, num):
+        time_flag = self.get_time_need()
         similarity_scores = {}
         for dish in self.execute('select * from dishes;'):
             taste = dish[4]
             heat = dish[3]
+            tp = dish[2]
+            if tp & time_flag == 0:
+                similarity_scores[dish[0]] = 0
+                continue
             temp = np.array(
                 [(heat >> 1) & 1, heat & 1, (taste >> 4) & 1, (taste >> 3) & 1, (taste >> 2) & 1, (taste >> 1) & 1,
                  taste & 1])
@@ -182,6 +198,7 @@ class DBOperator:
         return [i for i, _ in recommended_dishes][:num]
 
     def collaborative_filtering_recommendation(self, weight, tar_name):
+        time_flag = self.get_time_need()
         similar_person = {}
         ates = [i[0] for i in self.get_ates(tar_name)]
         names = [person[0] for person in self.execute('select name from people;')]
@@ -193,35 +210,43 @@ class DBOperator:
         for name in recommend_people:
             other_ates = [i[0] for i in self.get_ates(name)]
             for dish_id in other_ates:
+                tp = self.get_dish(dish_id)[2]
                 if len(res) > 2:
                     break
-                if dish_id not in ates:
+                if dish_id not in ates and dish_id not in res and (time_flag & tp != 0):
                     res.append(dish_id)
         return res
 
     def personalized_recommendation(self, name):
         weight = self.get_person_weight(name)
         rec1 = self.collaborative_filtering_recommendation(weight, name)
-        rec2 = self.content_based_recommendation(weight, 9 - len(rec1))
-        return rec2 + rec1
+        rec2 = self.content_based_recommendation(weight, 100)
+        for dish_id in rec2:
+            if len(rec1) >= 9:
+                break
+            if dish_id not in rec1:
+                rec1.append(dish_id)
+        return rec1
 
     def get_popularity(self, num):
+        ids = [dish[0] for dish in self.execute('select * from dishes;')]
         records = [i[1:] for i in self.execute('select * from ates;')]
-        popularity_dict = defaultdict(lambda: [0, 0])
+        popularity_dict = dict()
+        for id in ids:
+            popularity_dict[id] = [0, 0]
         current_time = time.time()
-        decay_factor = 0.0005
-        for record in records:
-            dish_id, dining_time = record
-        dining_time = dining_time.replace('\n', ' ')
-        popularity_dict[dish_id][0] += 1
-        dining_timestamp = int(time.mktime(time.strptime(dining_time, "%Y-%m-%d %H:%M:%S")))
-        time_difference = current_time - dining_timestamp
-        time_weight = pow(decay_factor, time_difference / 1000)
-        popularity_dict[dish_id][1] += time_weight
+        decay_factor = 0.05
+        for dish_id, dining_time in records:
+            dining_time = dining_time.replace('\n', ' ')
+            popularity_dict[dish_id][0] += 1
+            dining_timestamp = int(time.mktime(time.strptime(dining_time, "%Y-%m-%d %H:%M:%S")))
+            time_difference = current_time - dining_timestamp
+            time_weight = pow(decay_factor, time_difference / 1000)
+            popularity_dict[dish_id][1] += time_weight
         popularity_result = {}
         for dish_id, (dining_count, time_weight_sum) in popularity_dict.items():
             popularity_score = dining_count * time_weight_sum
-        popularity_result[dish_id] = popularity_score
+            popularity_result[dish_id] = popularity_score
         return sorted(popularity_result.items(), key=lambda x: x[1], reverse=True)[:num]
 
     def search(self, k):
@@ -230,4 +255,10 @@ class DBOperator:
         if len(temp) == 0 and k in self.mapping:
             temp = search_by_adj(k, d, self.mapping)
         return temp
+
     #############################
+
+    def get_softmax_weight(self, name):
+        taste_weight = self.get_person_weight(name)[2:]
+        exp_x = np.exp(taste_weight - np.max(taste_weight))
+        return (exp_x / np.sum(exp_x)).tolist()

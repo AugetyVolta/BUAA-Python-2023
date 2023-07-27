@@ -110,7 +110,9 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
         self.birthdayShow.setText(birth)
         self.favouriteNum.setText(str(fav))
         self.eatenNum.setText(str(ates))
-        # TODO:设置口味，你的最爱
+        # 设置口味，你的最爱
+        self.setPersonalFlavour()
+        self.setMyFavourite()
 
     def initUserEdit(self):
         database = DBOperator()
@@ -261,6 +263,28 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
             position=InfoBarPosition.TOP_RIGHT,
             parent=self
         )
+
+    def setPersonalFlavour(self):
+        database = DBOperator()
+        flavours = database.get_softmax_weight(self.account)
+        self.ProgressRing_1.setValue(int(flavours[0] * 100))
+        self.ProgressRing_1.setTextVisible(True)
+        self.ProgressRing_2.setValue(int(flavours[1] * 100))
+        self.ProgressRing_2.setTextVisible(True)
+        self.ProgressRing_3.setValue(int(flavours[2] * 100))
+        self.ProgressRing_3.setTextVisible(True)
+        self.ProgressRing_4.setValue(int(flavours[3] * 100))
+        self.ProgressRing_4.setTextVisible(True)
+        self.ProgressRing_5.setValue(int(flavours[4] * 100))
+        self.ProgressRing_5.setTextVisible(True)
+
+    def setMyFavourite(self):
+        self.FavouriteList.clear()
+        database = DBOperator()
+        dish_id_list = database.content_based_recommendation(database.get_person_weight(self.account), 15)
+        for dish_id in dish_id_list:
+            dish = database.get_dish(dish_id)
+            self.FavouriteList.addItem(dish[1])
 
 
 if __name__ == '__main__':

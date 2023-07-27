@@ -4,7 +4,7 @@ import sys
 import time
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QWidget, QDesktopWidget, QMessageBox, QHeaderView, QApplication
+from PyQt5.QtWidgets import QWidget, QDesktopWidget, QMessageBox, QHeaderView, QApplication, QTableWidgetItem
 from PyQt5.QtCore import Qt, QDate, QObject, pyqtSignal, QThread
 from PyQt5.QtGui import QIcon, QImage, QPixmap, QTransform
 from qfluentwidgets import FluentIcon as FIF
@@ -32,7 +32,7 @@ class BackendThread(QObject):
             # 刷新展示页面1-3页
             for i in range(3):
                 self.update_date.emit(i)
-                time.sleep(3)
+                time.sleep(5)
 
 
 class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
@@ -70,6 +70,7 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         # 设置推荐列表的占满布局
         self.recommendTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         # 设置热门榜单
+        self.setHotList()
 
     # 处理界面的上下滚动展示效果
     def initScrollShow(self):
@@ -159,6 +160,25 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         random_id = Id_list[random.randint(0, len(Id_list) - 1)]
         dish = database.get_dish(random_id)
         self.MyShowMealLabel.setText(dish[1])
+
+    # 设置热门榜单
+    def setHotList(self):
+        database = DBOperator()
+        dish_id_weight = database.get_popularity(20)
+        # 清空recommendList
+        self.recommendTable.setRowCount(0)
+        for dish_id, weight in dish_id_weight:
+            dish = database.get_dish(dish_id)
+            self.addTableRow([dish[1], dish[6], dish[5], str(weight)])
+
+    # 增加新行
+    def addTableRow(self, data):
+        row_count = self.recommendTable.rowCount()
+        self.recommendTable.insertRow(row_count)
+        for col, value in enumerate(data):
+            item = QTableWidgetItem(value)
+            item.setTextAlignment(Qt.AlignCenter)
+            self.recommendTable.setItem(row_count, col, item)
 
     # 设置小游戏
     def setGameButton(self):
