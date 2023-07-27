@@ -39,7 +39,7 @@ def search_by_adj(adj, dishes, mapping: dict):
     k = mapping[adj]
     fits = []
     for dish in dishes:
-        fixed_attr = dish[4] | (dish[3] << 5) | (dish[2] << 6)
+        fixed_attr = dish[4] | (dish[3] << 5) | (dish[2] << 7)
         if fixed_attr & k > 0:
             fits.append(dish[0])
     return fits

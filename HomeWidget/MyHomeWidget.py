@@ -13,6 +13,7 @@ from DataBase.database import DBOperator
 from DishWidget.Dish import DishDetailWindow
 from Game.MyGame import Tetris
 from HomeWidget.MyHomeWidget_ui import Ui_MyHomeWidget_ui
+from HomeWidget.SearchForDish import MySearchForDish
 from picture_set import pic_rc
 
 
@@ -38,6 +39,7 @@ class BackendThread(QObject):
 class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
     def __init__(self, account, parent=None):
         super().__init__()
+        self.searchWindow = None
         self.dish_roll_item = None
         self.setupUi(self)
         self.detailed_dish_window = None
@@ -71,6 +73,8 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         self.recommendTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         # 设置热门榜单
         self.setHotList()
+        # 设置搜索按钮触发
+        self.MySearchLineEdit.searchButton.clicked.connect(self.Search)
 
     # 处理界面的上下滚动展示效果
     def initScrollShow(self):
@@ -179,6 +183,12 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
             item = QTableWidgetItem(value)
             item.setTextAlignment(Qt.AlignCenter)
             self.recommendTable.setItem(row_count, col, item)
+
+    def Search(self):
+        search_content = self.MySearchLineEdit.text()
+        self.MySearchLineEdit.clear()
+        self.searchWindow = MySearchForDish(self.account, search_content)
+        self.searchWindow.show()
 
     # 设置小游戏
     def setGameButton(self):
