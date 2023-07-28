@@ -19,11 +19,11 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
         self.setupUi(self)
         # 设置变量
         self.dishName = None
-        self.dishType = None  # 三位2进制
+        self.dishType = 0b010  # 三位2进制
         self.restaurant = None
         self.counter = None
-        self.feel = None  # 10 01
-        self.flavour = None  # 五位2进制
+        self.feel = 0b01  # 10 01
+        self.flavour = 0b00001  # 五位2进制
         self.imagePath = '{}/../picture_set/美食.png'
         self.setTitleBar(SplitTitleBar(self))
         self.titleBar.raise_()
