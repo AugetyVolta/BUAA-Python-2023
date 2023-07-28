@@ -242,8 +242,9 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
     def Search(self):
         search_content = self.MySearchLineEdit.text()
         self.MySearchLineEdit.clear()
-        self.searchWindow = MySearchForDish(self.account, search_content)
-        self.searchWindow.show()
+        searchWindow = MySearchForDish(self.account, search_content)
+        self.objectBase.append(searchWindow)
+        searchWindow.show()
 
     # 设置小游戏
     def setGameButton(self):

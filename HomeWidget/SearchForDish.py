@@ -4,6 +4,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget, QHeaderView, QTableWidgetItem, QApplication
 
 from DataBase.database import DBOperator
+from DishWidget.Dish import DishDetailWindow
 from SearchWidget.SearchWidget_ui import Ui_SearchWidget
 from picture_set import pic_rc
 
@@ -13,6 +14,8 @@ class MySearchForDish(Ui_SearchWidget, QWidget):
         super().__init__()
         self.setupUi(self)
         self.account = account
+        self.objectBase = []  # 对象仓库
+        self.search_dishId_List = []  # 搜索结果Id表
         self.setWindowTitle('搜索')
         self.setWindowIcon(QIcon(':/login.png'))
         self.TableWidget.removeColumn(3)
@@ -25,9 +28,11 @@ class MySearchForDish(Ui_SearchWidget, QWidget):
         if search_content != '':
             database = DBOperator()
             dish_id_list = database.search(search_content)
+            self.search_dishId_List = dish_id_list
             for dish_id in dish_id_list:
                 dish = database.get_dish(dish_id)
                 self.addTableRow([dish[1], dish[6], dish[5]])
+        self.TableWidget.itemSelectionChanged.connect(self.handleSearchSelectionChanged)
 
     def show_search_result(self):
         # 清空上次记录
@@ -36,6 +41,7 @@ class MySearchForDish(Ui_SearchWidget, QWidget):
         if search_content != '':
             database = DBOperator()
             dish_id_list = database.search(search_content)
+            self.search_dishId_List = dish_id_list
             for dish_id in dish_id_list:
                 dish = database.get_dish(dish_id)
                 self.addTableRow([dish[1], dish[6], dish[5]])
@@ -46,6 +52,14 @@ class MySearchForDish(Ui_SearchWidget, QWidget):
         for col, value in enumerate(data):
             item = QTableWidgetItem(value)
             self.TableWidget.setItem(row_count, col, item)
+
+    # 条目处理函数
+    def handleSearchSelectionChanged(self):
+        currentIndex = self.TableWidget.currentRow()
+        dish_id = self.search_dishId_List[currentIndex]
+        search_item_window = DishDetailWindow(dish_id=dish_id, account=self.account)
+        self.objectBase.append(search_item_window)
+        search_item_window.show()
 
 
 if __name__ == '__main__':
