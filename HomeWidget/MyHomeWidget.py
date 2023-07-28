@@ -24,16 +24,31 @@ def getTodayDate():
 
 
 class BackendThread(QObject):
-    # 通过类成员对象定义信号
+    # 滚动roll效果
     update_date = pyqtSignal(int)
+    # 更新必吃榜 5min更新一次
+    update_must_list = pyqtSignal()
+    # 更新滚动推荐 30min更新一次
+    update_roll = pyqtSignal()
+    # 更新热门榜单 1h更新一次
+    update_hot_list = pyqtSignal()
 
     # 处理业务逻辑
     def run(self):
+        timer = 0
         while 1:
             # 刷新展示页面1-3页
             for i in range(3):
                 self.update_date.emit(i)
                 time.sleep(5)
+                timer += 1
+                if (timer % 60) == 0:
+                    self.update_must_list.emit()
+                if (timer % 360) == 0:
+                    self.update_roll.emit()
+                if (timer % 720) == 0:
+                    self.update_hot_list.emit()
+                    timer = 0
 
 
 class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
@@ -47,8 +62,10 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         self.thread = None
         self.playGame = None
         self.account = account
+        self.objectBase = []  # 用来放对象
         self.ImageShow_dishId_List = []  # 滚动展示图片
         self.MushEatList_dishId = []  # 必吃榜的菜肴ID
+        self.HotList_dishId = []  # 热门榜单的菜肴ID
         self.dishNameShowLabels = [self.dishNameLable_1, self.BodyLabel_2, self.BodyLabel_3, self.BodyLabel_4,
                                    self.BodyLabel_5, self.BodyLabel_6, self.BodyLabel_7, self.BodyLabel_8,
                                    self.BodyLabel_9]
@@ -75,6 +92,8 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         self.setHotList()
         # 设置搜索按钮触发
         self.MySearchLineEdit.searchButton.clicked.connect(self.Search)
+        # 设置热榜的条目选择函数
+        self.recommendTable.itemSelectionChanged.connect(self.handleHotListSelectionChanged)
 
     # 处理界面的上下滚动展示效果
     def initScrollShow(self):
@@ -95,6 +114,9 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         self.backend = BackendThread()
         # 连接信号
         self.backend.update_date.connect(self.handleScrollShowIndex)
+        self.backend.update_must_list.connect(self.updateMustEatList)
+        self.backend.update_roll.connect(self.initScrollShowPicAndLabel)
+        self.backend.update_hot_list.connect(self.setHotList)
         self.backend.moveToThread(self.thread)
         # 开始线程
         self.thread.started.connect(self.backend.run)
@@ -104,6 +126,7 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
     def handleScrollShowIndex(self, index):
         self.PopUpAniStackedWidget.setCurrentIndex(index)
 
+    # 初始化滚动界面
     def initScrollShowPicAndLabel(self):
         # 根据index设置show 界面
         database = DBOperator()
@@ -120,19 +143,24 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
             self.ImageLabels[i].setFixedSize(96, 96)
             self.ImageLabels[i].setScaledContents(True)
 
+    # 每一个按键的触发函数
     def setDishShowButton_in_scroll(self):
         sender = self.sender()
         senderIndex = int(sender.objectName().split('_')[1]) - 1
         # 根据ID显示菜肴界面
         dish_id = self.ImageShow_dishId_List[senderIndex]
-        self.dish_roll_item = DishDetailWindow(account=self.account, dish_id=dish_id)
-        self.dish_roll_item.show()
+        dish_roll_item = DishDetailWindow(account=self.account, dish_id=dish_id)
+        self.objectBase.append(dish_roll_item)
+        dish_roll_item.show()
+        # self.dish_roll_item = DishDetailWindow(account=self.account, dish_id=dish_id)
+        # self.dish_roll_item.show()
 
     # 设置have a try
     def setHaveATry(self):
         self.MyHaveATryLabel.setAlignment(Qt.AlignCenter)
         self.tryButton.clicked.connect(self.haveATryClick)
 
+    # 设置必吃榜
     def setMustEatList(self):
         database = DBOperator()
         self.MushEatList_dishId = database.recommend()
@@ -152,8 +180,11 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         try:
             currentIndex = self.MustEatList.currentRow()
             dish_id = self.MushEatList_dishId[currentIndex]
-            self.detailed_dish_window = DishDetailWindow(dish_id=dish_id, account=self.account)
-            self.detailed_dish_window.show()
+            detailed_dish_window = DishDetailWindow(dish_id=dish_id, account=self.account)
+            self.objectBase.append(detailed_dish_window)
+            detailed_dish_window.show()
+            # self.detailed_dish_window = DishDetailWindow(dish_id=dish_id, account=self.account)
+            # self.detailed_dish_window.show()
         except Exception as e:
             print(e)
 
@@ -171,6 +202,8 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         dish_id_weight = database.get_popularity(50)
         # 清空recommendList
         self.recommendTable.setRowCount(0)
+        # 清空HotList_dishId
+        self.HotList_dishId.clear()
         i = 0
         for dish_id, weight in dish_id_weight:
             dish = database.get_dish(dish_id)
@@ -185,9 +218,18 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
             else:
                 heart_flag = '💖️'
             self.addTableRow([dish[1], dish[6], dish[5], heart_flag])
+            self.HotList_dishId.append(dish_id)
             i += 1
 
-    # 增加新行
+    # 热榜条目点击函数
+    def handleHotListSelectionChanged(self):
+        currentIndex = self.recommendTable.currentRow()
+        dish_id = self.HotList_dishId[currentIndex]
+        hotList_window = DishDetailWindow(dish_id=dish_id, account=self.account)
+        self.objectBase.append(hotList_window)
+        hotList_window.show()
+
+    # Table增加行函数
     def addTableRow(self, data):
         row_count = self.recommendTable.rowCount()
         self.recommendTable.insertRow(row_count)
@@ -196,6 +238,7 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
             item.setTextAlignment(Qt.AlignCenter)
             self.recommendTable.setItem(row_count, col, item)
 
+    # 搜索函数
     def Search(self):
         search_content = self.MySearchLineEdit.text()
         self.MySearchLineEdit.clear()
@@ -224,6 +267,17 @@ class MyHomeWidget(Ui_MyHomeWidget_ui, QWidget):
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
+
+    # 更新必吃榜单
+    def updateMustEatList(self):
+        database = DBOperator()
+        self.MushEatList_dishId = database.recommend()
+        # 必吃榜设置排名数字Icon
+        for i in range(self.MustEatList.count()):
+            item: QtWidgets.QListWidgetItem = self.MustEatList.item(i)
+            dish = database.get_dish(self.MushEatList_dishId[i])
+            item.setText(dish[1])
+            item.setIcon(QIcon(":/number/%d.png" % (i + 1)))
 
 
 if __name__ == '__main__':
