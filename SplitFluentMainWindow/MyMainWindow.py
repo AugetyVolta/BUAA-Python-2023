@@ -24,7 +24,7 @@ class MyMainWindow(SplitFluentWindow):
         self.navigationInterface.setExpandWidth(120)
         # 当前的账户
         self.account = account
-        self.ManagerAccount = ['pqy', 'zby', 'hyk', 'ygf']  # 管理员账户
+        self.ManagerAccount = ['pqy', 'zby', 'hyk', 'ygf', 'manager']  # 管理员账户
         manager_access = (self.account in self.ManagerAccount)
         # 设置最初的主题
         self.curTheme = Theme.LIGHT

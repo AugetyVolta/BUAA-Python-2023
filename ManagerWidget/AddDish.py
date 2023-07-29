@@ -78,9 +78,12 @@ class MyAddDish(Ui_AddDishWidget, AcrylicWindow):
 
     def on_commit(self):
         self.dishName = self.dishNameEdit.text()
+        self.dishName = self.dishName.replace('\n', '')
         self.dishType = self.getDishType()
         self.restaurant = self.restaurantEdit.text()
+        self.restaurant = self.restaurant.replace('\n', '')
         self.counter = self.counterEdit.text()
+        self.counter = self.counter.replace('\n', '')
         self.flavour = self.getFlavour()
         # 传入数据库
         database = DBOperator()
