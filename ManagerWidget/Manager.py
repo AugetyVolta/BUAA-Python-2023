@@ -51,7 +51,7 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
         if dish_graph[0][0] == '':
             self.dic = {}
         else:
-            self.dic = dict(eval(dish_graph[0][0]))
+            self.dic = dict(ast.literal_eval(dish_graph[0][0]))
             for key in self.dic.keys():
                 restaurant_item = QtWidgets.QTreeWidgetItem(self.resturantWidget)
                 restaurant_item.setText(0, key)
