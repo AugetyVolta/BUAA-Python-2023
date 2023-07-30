@@ -38,7 +38,7 @@ def get_recommendation(ate, fav, dishes):
 
 
 def search_by_name(name, dishes):
-    return [dish[0] for dish in dishes if name in dish[1]]
+    return [dish[0] for dish in dishes if name in dish[1] or name in dish[5] or name in dish[6]]
 
 
 def search_by_adj(adj, dishes, mapping: dict):
