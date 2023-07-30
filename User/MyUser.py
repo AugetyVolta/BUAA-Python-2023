@@ -283,7 +283,8 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
     def setMyFavourite(self):
         self.FavouriteList.clear()
         database = DBOperator()
-        dish_id_list = database.content_based_recommendation(database.get_person_weight(self.account), 15)
+        # dish_id_list = database.content_based_recommendation(database.get_person_weight(self.account), 15)
+        dish_id_list = database.recommend(self.account)[:15]
         for dish_id in dish_id_list:
             dish = database.get_dish(dish_id)
             self.FavouriteList.addItem(dish[1])

@@ -174,10 +174,13 @@ class DBOperator:
     ###################################
 
     ########## 其他函数 ##########
-    def recommend(self):
+    def recommend(self, name=None):
         dishes = self.execute('select * from dishes;')
         ate_record = self.execute('select * from ates;')
         fav_record = self.execute('select * from fav_dish;')
+        if name is not None:
+            ate_record = [i for i in ate_record if i[0] == name]
+            fav_record = [i for i in fav_record if i[0] == name]
         return get_recommendation(ate_record, fav_record, dishes)
 
     def get_person_weight(self, name):
