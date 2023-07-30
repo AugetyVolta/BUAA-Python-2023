@@ -7,6 +7,7 @@ from qfluentwidgets import SplitFluentWindow, NavigationWidget, NavigationItemPo
     NavigationAvatarWidget, setTheme
 
 from ManagerWidget.Manager import MyManager
+from UserDishWidget.myUser import MyUser
 from picture_set import pic_rc
 from FavouriteWidget.MyFavourite import MyFavouriteWidget
 from HistoryWidget.MyHistory import MyHistoryWidget
@@ -19,6 +20,7 @@ class MyMainWindow(SplitFluentWindow):
     def __init__(self, account):
         super().__init__()
         # 设置大小
+        self.user = None
         self.manager = None
         self.setFixedSize(1090, 680)
         self.navigationInterface.setExpandWidth(120)
@@ -61,12 +63,24 @@ class MyMainWindow(SplitFluentWindow):
                 onClick=self.open_manager_window,
                 position=NavigationItemPosition.BOTTOM,
             )
+        else:
+            self.navigationInterface.addItem(
+                routeKey='dishes',
+                icon=FIF.BOOK_SHELF,
+                text='Dishes',
+                onClick=self.open_user_window,
+                position=NavigationItemPosition.BOTTOM,
+            )
         # 居中显示
         self.center()
 
     def open_manager_window(self):
         self.manager = MyManager()
         self.manager.show()
+
+    def open_user_window(self):
+        self.user = MyUser(account=self.account)
+        self.user.show()
 
     # 切换主题
     def changeTheme(self):
@@ -97,6 +111,6 @@ class MyMainWindow(SplitFluentWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    win = MyMainWindow('pqy')
+    win = MyMainWindow('user_X')
     win.show()
     sys.exit(app.exec_())

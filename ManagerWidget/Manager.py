@@ -226,6 +226,17 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
         dst_graph = '"' + graph + '"'
         database.execute(f'update globe set total = {dst_graph};')
 
+
+    # def test(self):
+    #     database = DBOperator()
+    #     id_list = database.get_all_id()
+    #     self.dic = {}
+    #     for Id in id_list:
+    #         dish = database.get_dish(Id)
+    #         self.addDish_From_AddDish(dish[6], dish[5], dish[1], None)
+
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     manager = MyManager()
