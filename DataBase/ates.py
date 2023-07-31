@@ -21,3 +21,6 @@ class AtesTb:
     def get(self, name):
         temp = self.execute(f"select * from ates where name = '{name}';")
         return [i[1:] for i in temp]
+    
+    def update (self, name, dish_id, old_time, new_time):
+        self.execute(f"update ates set time = '{new_time}' where name = '{name}' and id = {dish_id} and time = '{old_time}';")

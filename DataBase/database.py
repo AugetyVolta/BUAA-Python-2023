@@ -115,6 +115,9 @@ class DBOperator:
 
     def del_ates(self, name, dish_id, time):
         self.atesOp.delete(name, dish_id, time)
+    
+    def update_ates(self, name, dish_id, old_time, new_time):
+        self.atesOp.update(name, dish_id, old_time, new_time)
 
     ###################################
 
