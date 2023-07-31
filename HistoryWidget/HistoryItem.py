@@ -71,9 +71,9 @@ class MyHistoryItem(Ui_History_item, QWidget):
             database = DBOperator()
             tmp = time.split(' ')
             time = tmp[0] + '\n' + tmp[1]
+            self.time = time
             self.history_time.setText(time)
             database.update_ates(self.account, self.dish_id, old, time)
-
 
 
 if __name__ == '__main__':
