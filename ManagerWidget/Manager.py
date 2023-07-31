@@ -157,42 +157,41 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
         return [item for item in found_items if item.parent() == parent_item]
 
     def deleteItem(self):
-        pass
-        # database = DBOperator()
-        # selected_item = self.resturantWidget.currentItem()
-        # if selected_item:
-        #     parent_item = selected_item.parent()
-        #     if parent_item:
-        #         parent_parent_item = parent_item.parent()
-        #         if parent_parent_item:  # 说明就是直接是菜
-        #             # 删除treeWidget中的项
-        #             parent_item.removeChild(selected_item)
-        #             # 删除大字符串中的菜
-        #             self.dic[parent_parent_item.text(0)][parent_item.text(0)].remove(selected_item.text(0))
-        #             # 删除总的菜单中的菜
-        #             dish_id = database.get_id(selected_item.text(0), parent_item.text(0), parent_parent_item.text(0))
-        #             database.del_dish(dish_id)
-        #         else:  # 说明是柜台
-        #             parent_item.removeChild(selected_item)
-        #             # 删除大字符串中的柜台
-        #             self.dic[parent_item.text(0)].pop(selected_item.text(0))
-        #             # 将他的孩子(菜)也一块删除,递归删除
-        #             try:
-        #                 self.deleteCounter(parent_item.text(0), selected_item.text(0))
-        #             except Exception as e:
-        #                 print(e)
-        #
-        #     else:
-        #         index = self.resturantWidget.indexOfTopLevelItem(selected_item)
-        #         self.resturantWidget.takeTopLevelItem(index)
-        #         # 删除大字符串中的餐厅
-        #         self.dic.pop(selected_item.text(0))
-        #         # 递归删除餐馆里所有的菜
-        #         self.deleteRestaurant(selected_item.text(0))
-        #     graph = str(self.dic)
-        #     database = DBOperator()
-        #     dst_graph = '"' + graph + '"'
-        #     database.execute(f'update globe set total = {dst_graph};')
+        database = DBOperator()
+        selected_item = self.resturantWidget.currentItem()
+        if selected_item:
+            parent_item = selected_item.parent()
+            if parent_item:
+                parent_parent_item = parent_item.parent()
+                if parent_parent_item:  # 说明就是直接是菜
+                    # 删除treeWidget中的项
+                    parent_item.removeChild(selected_item)
+                    # 删除大字符串中的菜
+                    self.dic[parent_parent_item.text(0)][parent_item.text(0)].remove(selected_item.text(0))
+                    # 删除总的菜单中的菜
+                    dish_id = database.get_id(selected_item.text(0), parent_item.text(0), parent_parent_item.text(0))
+                    database.del_dish(dish_id)
+                else:  # 说明是柜台
+                    parent_item.removeChild(selected_item)
+                    # 删除大字符串中的柜台
+                    self.dic[parent_item.text(0)].pop(selected_item.text(0))
+                    # 将他的孩子(菜)也一块删除,递归删除
+                    try:
+                        self.deleteCounter(parent_item.text(0), selected_item.text(0))
+                    except Exception as e:
+                        print(e)
+
+            else:
+                index = self.resturantWidget.indexOfTopLevelItem(selected_item)
+                self.resturantWidget.takeTopLevelItem(index)
+                # 删除大字符串中的餐厅
+                self.dic.pop(selected_item.text(0))
+                # 递归删除餐馆里所有的菜
+                self.deleteRestaurant(selected_item.text(0))
+            graph = str(self.dic)
+            database = DBOperator()
+            dst_graph = '"' + graph + '"'
+            database.execute(f'update globe set total = {dst_graph};')
 
     # 删除柜台里的所有菜
     def deleteCounter(self, restaurant_name, counter_name):
