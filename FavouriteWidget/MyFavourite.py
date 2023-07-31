@@ -104,7 +104,7 @@ class MyFavouriteWidget(Ui_MyFavoriteWidget, QWidget):
             # 从person的信息中删除并写回
             self.counterList.remove(selected_item.text())
 
-    # 妈的，一个列表加入另一个列表使用extend，不是append
+    # 一个列表加入另一个列表使用extend，不是append
     def update(self):
         database = DBOperator()
         new_list = database.get_fav_hall(self.account)
