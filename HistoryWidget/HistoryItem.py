@@ -69,7 +69,7 @@ class MyHistoryItem(Ui_History_item, QWidget):
         )
         if time and ok:
             database = DBOperator()
-            tmp = time.split(' ')
+            tmp = time.split('\n')
             time = tmp[0] + '\n' + tmp[1]
             self.time = time
             self.history_time.setText(time)
