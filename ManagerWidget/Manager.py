@@ -110,18 +110,18 @@ class MyManager(Ui_ManagerWidget, AcrylicWindow):
     def addDish(self):
         selected_item = self.resturantWidget.currentItem()
         # 如果制定了餐厅
-        if selected_item and selected_item.parent():
-            dish_name, ok = QInputDialog.getText(
-                self.ManagerWidget, "Add Dish", "Enter the name of the dish:"
-            )
-            if ok and dish_name:
-                dish_item = QtWidgets.QTreeWidgetItem(selected_item)
-                dish_item.setText(0, dish_name)
-                self.addDish_by_String(selected_item.parent().text(0), selected_item.text(0), dish_name)
-        else:
-            # 如果没有指定餐厅，跳转增加菜的页面
-            self.addDishWidget = MyAddDish(self)
-            self.addDishWidget.show()
+        # if selected_item and selected_item.parent():
+        #     dish_name, ok = QInputDialog.getText(
+        #         self.ManagerWidget, "Add Dish", "Enter the name of the dish:"
+        #     )
+        #     if ok and dish_name:
+        #         dish_item = QtWidgets.QTreeWidgetItem(selected_item)
+        #         dish_item.setText(0, dish_name)
+        #         self.addDish_by_String(selected_item.parent().text(0), selected_item.text(0), dish_name)
+        # else:
+        # 如果没有指定餐厅，跳转增加菜的页面
+        self.addDishWidget = MyAddDish(self)
+        self.addDishWidget.show()
         self.resturantWidget.expandAll()
 
     def addDish_From_AddDish(self, restaurant, counter, dishName, imagePath):
