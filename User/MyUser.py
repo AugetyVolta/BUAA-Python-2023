@@ -238,9 +238,9 @@ class MyUserWidget(Ui_MyUserWidget, QWidget):
                     dataBase.update_person(self.account, 'sex', new_gender)
                 if new_birth != '':
                     dataBase.update_person(self.account, 'birth', new_birth)
-                self.createSuccessInfoBar('修改成功')
                 # 然后更新用户信息界面
                 self.initUserInfo()
+                self.createSuccessInfoBar('修改成功')
             else:
                 self.createErrorInfoBar('原密码错误')
 

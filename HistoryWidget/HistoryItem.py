@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5.QtGui import QImage, QPixmap
-from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtWidgets import QWidget, QApplication, QInputDialog
 
 from DataBase.database import DBOperator
 from HistoryWidget.History_item_ui import Ui_History_item
@@ -45,6 +45,7 @@ class MyHistoryItem(Ui_History_item, QWidget):
         self.setFixedSize(820, 135)
         # 设置删除按钮
         self.deleteButton.clicked.connect(self.delete_history)
+        self.history_time.mousePressEvent = self.on_item_click
 
     def delete_history(self):
         for item in self.item_list:
@@ -60,6 +61,19 @@ class MyHistoryItem(Ui_History_item, QWidget):
         database = DBOperator()
         database.del_ates(self.account, self.dish_id, self.time)
         self.deleteLater()
+
+    def on_item_click(self, evnet):
+        old = self.history_time.text()
+        time, ok = QInputDialog.getText(
+            self, "Change Time", "Enter the new time(yyyy-MM-dd HH:mm:ss):", text=old
+        )
+        if time and ok:
+            database = DBOperator()
+            tmp = time.split(' ')
+            time = tmp[0] + '\n' + tmp[1]
+            self.history_time.setText(time)
+            database.update_ates(self.account, self.dish_id, old, time)
+
 
 
 if __name__ == '__main__':

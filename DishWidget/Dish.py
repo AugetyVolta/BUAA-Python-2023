@@ -6,12 +6,12 @@ import threading
 import time
 
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtCore import QDateTime, QObject, pyqtSignal, QThread
+from PyQt5.QtCore import QDateTime, QObject, pyqtSignal, QThread, Qt
 from PyQt5.QtGui import QPixmap, QIcon, QImage
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QTextEdit, QPushButton, QWidget, \
     QScrollArea, QHBoxLayout, QDesktopWidget
 from qfluentwidgets import TextEdit, CaptionLabel, StrongBodyLabel, PrimaryPushButton, PushButton, BodyLabel, \
-    ScrollArea, ImageLabel, SplitTitleBar, SubtitleLabel
+    ScrollArea, ImageLabel, SplitTitleBar, SubtitleLabel, InfoBar, InfoBarPosition
 from qframelesswindow import AcrylicWindow
 
 from DataBase.database import DBOperator
@@ -334,11 +334,13 @@ class DishDetailWindow(AcrylicWindow):
         database = DBOperator()
         if self.dish_id not in database.get_fav_dish(self.account):
             database.add_fav_dish(self.account, self.dish_id)
+            self.createSuccessInfoBar('收藏成功')
 
     # 吃过
     def set_eaten_button(self):
         database = DBOperator()
         database.add_ates(self.account, self.dish_id, QDateTime.currentDateTime().toString("yyyy-MM-dd\nHH:mm:ss"))
+        self.createSuccessInfoBar('添加历史记录成功')
 
     # 收藏餐厅
     def set_restaurant_button(self):
@@ -346,6 +348,7 @@ class DishDetailWindow(AcrylicWindow):
         dish = database.get_dish(self.dish_id)
         if dish[6] not in database.get_fav_hall(self.account):
             database.add_fav_hall(self.account, dish[6])
+        self.createSuccessInfoBar('收藏成功')
 
     # 收藏柜台
     def set_counter_button(self):
@@ -353,6 +356,7 @@ class DishDetailWindow(AcrylicWindow):
         dish = database.get_dish(self.dish_id)
         if dish[5] not in database.get_fav_bar(self.account):
             database.add_fav_bar(self.account, dish[5])
+        self.createSuccessInfoBar('收藏成功')
 
     def center(self):
         qr = self.frameGeometry()
@@ -403,6 +407,17 @@ class DishDetailWindow(AcrylicWindow):
         self.backend.flag = False
         # time.sleep(1)
         self.thread.quit()
+
+    def createSuccessInfoBar(self, content):
+        # convenient class mothod
+        InfoBar.success(
+            title='成功',
+            content=content,
+            orient=Qt.Horizontal,
+            isClosable=True,
+            position=InfoBarPosition.TOP_RIGHT,
+            parent=self
+        )
 
 
 if __name__ == '__main__':
