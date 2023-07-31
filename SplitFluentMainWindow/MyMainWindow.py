@@ -4,7 +4,7 @@ import qfluentwidgets
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox, QDesktopWidget, QApplication
 from qfluentwidgets import SplitFluentWindow, NavigationWidget, NavigationItemPosition, Theme, NavigationDisplayMode, \
-    NavigationAvatarWidget, setTheme
+    NavigationAvatarWidget, setTheme, Flyout, InfoBarIcon, TeachingTip, TeachingTipTailPosition
 
 from ManagerWidget.Manager import MyManager
 from UserDishWidget.myUser import MyUser
@@ -47,10 +47,10 @@ class MyMainWindow(SplitFluentWindow):
         self.addSubInterface(self.history, FIF.HISTORY, 'History')
         # 添加主题切换按钮
         self.navigationInterface.addItem(
-            routeKey='changeTheme',
+            routeKey='click',
             icon=FIF.CONSTRACT,
-            text='Theme',
-            onClick=self.changeTheme,
+            text='Click',
+            onClick=self.createFlyout,
             position=NavigationItemPosition.BOTTOM,
 
         )
@@ -90,6 +90,17 @@ class MyMainWindow(SplitFluentWindow):
         else:
             setTheme(Theme.LIGHT)
             self.curTheme = Theme.LIGHT
+
+    def createFlyout(self):
+        TeachingTip.create(
+            icon=QIcon(':/笑脸.png'),
+            title='Just Smile',
+            content="Have a nice day!",
+            target=self.u,
+            parent=self,
+            isClosable=True,
+            tailPosition=TeachingTipTailPosition.BOTTOM_LEFT,
+        )
 
     # 窗口居中显示
     def center(self):

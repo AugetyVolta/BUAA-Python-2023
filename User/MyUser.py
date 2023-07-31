@@ -36,7 +36,7 @@ class BackendThread(QObject):
             # 刷新1-10
             for i in range(1, 11):
                 self.update_date.emit()
-                time.sleep(10)
+                time.sleep(600)
 
 
 class MyUserWidget(Ui_MyUserWidget, QWidget):
